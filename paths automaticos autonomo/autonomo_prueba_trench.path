@@ -1,0 +1,67 @@
+{
+    "_version": "1",
+    "groups": [
+        {
+            "name": "autonomo_pelotas_trench",
+            "paths": [
+                {
+                    "constraints": [
+                    ],
+                    "endangle": 0,
+                    "endangledelay": 0,
+                    "endvelocity": 0,
+                    "flags": [
+                    ],
+                    "maxacceleration": 180,
+                    "maxjerk": 1800,
+                    "maxvelocity": 180,
+                    "name": "ir_trench",
+                    "points": [
+                        {
+                            "heading": 0,
+                            "x": 127.06009615384616,
+                            "y": 223.86778846153845
+                        },
+                        {
+                            "heading": 0,
+                            "x": 188.9,
+                            "y": 288.4
+                        }
+                    ],
+                    "startangle": 0,
+                    "startangledelay": 0,
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endangle": 0,
+                    "endangledelay": 0,
+                    "endvelocity": 0,
+                    "flags": [
+                    ],
+                    "maxacceleration": 180,
+                    "maxjerk": 1800,
+                    "maxvelocity": 180,
+                    "name": "tomar_4_pelotas",
+                    "points": [
+                        {
+                            "heading": 0,
+                            "x": 188.9,
+                            "y": 288.4
+                        },
+                        {
+                            "heading": 0,
+                            "x": 368.4070512820513,
+                            "y": 278.32211538461536
+                        }
+                    ],
+                    "startangle": 0,
+                    "startangledelay": 0,
+                    "startvelocity": 0
+                }
+            ]
+        }
+    ],
+    "outdir": "C:/Users/Rafa/Desktop"
+}
