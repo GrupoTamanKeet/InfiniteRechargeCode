@@ -38,7 +38,7 @@ public class Control {
     public static double readJoystickAxis(int axis) {
         return (ControlPiloto.getRawAxis(axis));
     }
-
+    
     // -----------------------------------------------------
     // __ __ ____
     // \ \ / / | _ \

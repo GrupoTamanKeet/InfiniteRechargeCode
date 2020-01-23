@@ -16,6 +16,7 @@ public class Constantes {
 
     public static final float controlMaximaVelocidadDeGiro = .8f;
 
+
     // gyro stuff -------------------------------------------------------------------------------------------------------------------------
 
     public static double anguloTotalRobot;
@@ -30,10 +31,12 @@ public class Constantes {
 //     \_____\___/|_| |_|\___/_/\_\_|\___/|_| |_|\___||___/ |_|  \_\___/|_.__/ \___/ \__|          
     
 
-    public static final int PosicionMotorDriveDerecha1 = 1;
-    public static final int PosicionMotorDriveDerecha2 = 2;
+    public static final int PosicionMotorDriveDerecha1 = 4;
+    public static final int PosicionMotorDriveDerecha2 = 1;
     public static final int PosicionMotorDriveIzquierda1 = 3;
-    public static final int PosicionMotorDriveIzquierda2 = 4;
+    public static final int PosicionMotorDriveIzquierda2 = 2;
+    
+    public static final int ConexionPosicionIntake = 5;
 
 //-----------------------------------------------------
 //      _____            _             _            
@@ -67,6 +70,7 @@ public static final int XB_B_A = 1;
 public static final int XB_B_B = 2;
 public static final int XB_B_X = 3;
 public static final int XB_B_Y = 4;
+// botón de torreta
 
 public static final int XB_B_LB = 5;
 public static final int XB_B_RB = 6;

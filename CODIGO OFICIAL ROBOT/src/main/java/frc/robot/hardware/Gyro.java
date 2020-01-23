@@ -14,11 +14,11 @@ public class Gyro{
     giroscopio = new ADXRS450_Gyro();
   }
   //reiniciar giroscopio
-  public void reiniciarGyro() {
+  public void reiniciar() {
     giroscopio.reset();
   }
 
-  public void leerGiroscopio(){ // toma la lectura del Giroscopio 
+  public void leer(){ // toma la lectura del Giroscopio 
 
       Constantes.anguloTotalRobot = giroscopio.getAngle(); // toma la cantidad de grados que ha cambiado el gyro (nota puede pasar de 360)
   
@@ -37,7 +37,7 @@ public class Gyro{
   }
 
   private void regresarAAngulo(int deseado){ // funcion para poder girar el robot de forma automatica a una posicion en grados
-      leerGiroscopio();
+      leer();
       int offset = 180-deseado; // convertimos los grados a 180 para asegurarnos que tome el camino mas rapido (que si esta en 359 y queremos que entre a 0, no se de toda la vuelta)
       deseado = 180;
       int margenDeError = 5; // desde cuando inicia a frenar
@@ -47,7 +47,7 @@ public class Gyro{
       error = (deseado -  Constantes.anguloRobot); // el error se calcula para saber cuanto nos tenemos que acercar
   
       while (error > margenDeError || error < -margenDeError){
-        leerGiroscopio();
+        leer();
         Constantes.anguloRobot = Constantes.anguloRobot + offset;
         if (Constantes.anguloRobot > 360) Constantes.anguloRobot = Constantes.anguloRobot - 360;
         error = (deseado - Constantes.anguloRobot);

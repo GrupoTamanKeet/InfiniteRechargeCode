@@ -23,10 +23,10 @@ public class DriveTrain {
     private static double movimientoAdelanteX;
     private static double movimientoAdelanteY; // private double movimientoAdelanteZ;
 
-    public DriveTrain() {
+    public DriveTrain(Control Control) {
         MotorDerecha1 = new WPI_TalonSRX(Constantes.PosicionMotorDriveDerecha1);
         MotorDerecha2 = new WPI_TalonSRX(Constantes.PosicionMotorDriveDerecha2);
-        MotorIzquierda1 = new WPI_TalonSRX(Constantes.PosicionMotorDriveIzquierda2);
+        MotorIzquierda1 = new WPI_TalonSRX(Constantes.PosicionMotorDriveIzquierda1);
         MotorIzquierda2 = new WPI_TalonSRX(Constantes.PosicionMotorDriveIzquierda2);
 
         MotoresDriveIzquierda = new SpeedControllerGroup(MotorIzquierda1, MotorIzquierda2);
@@ -38,13 +38,12 @@ public class DriveTrain {
     public static void moverseConXbox() { // funcion principal del movimiento del chasis
 
         // inputs del control para movimiento
-        movimientoAdelanteY = Control.readXboxAxis(Constantes.controlAdelante)
-                - Control.readXboxAxis(Constantes.controlAtras); // toma el valor para ir hacia adelante o hacia atras
+        movimientoAdelanteY = Control.readXboxAxis(Constantes.XB_RT)
+                - Control.readXboxAxis(Constantes.XB_LT); // toma el valor para ir hacia adelante o hacia atras
 
-        movimientoAdelanteX = Control.readXboxAxis(Constantes.controlGirar) * movimientoAdelanteY
-                * Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el
-                                                      // robot y que sirva mejor
-                + Control.readXboxAxis(Constantes.controlGirarRaw); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
+        movimientoAdelanteX = Control.readXboxAxis(Constantes.XB_LJ_X) * movimientoAdelanteY
+                * Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el robot y que sirva mejor
+                + Control.readXboxAxis(Constantes.XB_RJ_X); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
                 // nota que esta separada en 2 lineas, pero en verdad es solamente 1
     
         if (Control.readXboxButtons(Constantes.controlDrift)){ // controla el drift del drive, para que pueda dar vueltas mas cerradas

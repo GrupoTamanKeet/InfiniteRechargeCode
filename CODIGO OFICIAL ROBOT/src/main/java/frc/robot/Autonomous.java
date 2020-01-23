@@ -2,7 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.hardware.Gyro;
 import frc.robot.subsystems.DriveTrain;
 
 //Basic movemetns for the autonomous robot

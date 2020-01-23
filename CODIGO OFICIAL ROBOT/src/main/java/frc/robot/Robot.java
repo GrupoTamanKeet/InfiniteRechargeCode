@@ -7,22 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.util.Color;
-import frc.robot.hardware.Constantes;
+import frc.robot.hardware.Control;
 import frc.robot.hardware.Gyro;
 import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.SpeedController;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
@@ -46,25 +36,12 @@ public class Robot extends TimedRobot {
   //encoders de ambas líneas de motores
   private Encoder EncoderMotoresDerecha;
   private Encoder EncoderMotoresIzquierda;
-
-  //variables de posicion de los encoders
-  
-
-  //PID
-  //Los pase a una clase 
-
   /*
   * variables extras----------------------------------------------------------
   */
 
-  // valores de joysticks
 
-
-
-
-
-
-  //-----------------------------------------------------------------------------------------------------------------------
+    DriveTrain robot;
 
   /**
    * -----------------------------------------------------------------INIT
@@ -76,6 +53,9 @@ public class Robot extends TimedRobot {
     //declaración de encoders
     EncoderMotoresDerecha = new Encoder(0,1);
     EncoderMotoresIzquierda = new Encoder(2,3);
+
+    Control driverControl = new Control();
+    robot = new DriveTrain(driverControl);
 
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
@@ -156,7 +136,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // Aqui el codigo donde vamos a poner toda la estructura del robot
 
-    DriveTrain.moverseConXbox(); // mueve el robot, control durante teleop  
+    robot.moverseConXbox(); // mueve el robot, control durante teleop  
   }
 
   /**
