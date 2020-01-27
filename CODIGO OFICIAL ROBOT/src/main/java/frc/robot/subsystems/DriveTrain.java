@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.hardware.Constantes;
 import frc.robot.hardware.Control;
 
@@ -27,6 +28,9 @@ public class DriveTrain {
     //encoders de ambas líneas de motores
   private Encoder EncoderMotoresDerecha;
   private Encoder EncoderMotoresIzquierda;
+  private double EncoderDerechoPos;
+  private double EncoderIzquierdoPos; 
+  private double EncoderPromDrive;
 
     public DriveTrain(Control Control) {
       MotorDerecha1 = new WPI_TalonSRX(Constantes.PosicionMotorDriveDerecha1);
@@ -96,7 +100,37 @@ public class DriveTrain {
     }
 
     public void moverseAPos(float pos){
+      reiniciarEncodersDrivetrain();
+      posicionDrivetrain();
+      float margenDeError = 0.03f; // margen de error que tiene en metros
+      double vel;
+      double error;
+      error = (pos -  EncoderPromDrive); // el error se calcula para saber cuanto nos tenemos que acercar
 
+      while (error > margenDeError || error < -margenDeError){
+        posicionDrivetrain();
+        error = (pos - EncoderPromDrive);
+        vel = error * .0001; // normalizacion para frenar mientras este lo mas cerca
+        if (vel < 0.4 && vel > -0.4){
+          if (vel < 0) vel = -0.4; // pone un minimo a la velocidad, para asegurarnos de que llegue
+          else vel = 0.4;
+        }
+
+        MovimientoBaseCompleto.arcadeDrive(vel, 0); //lo convertimos de mate a movimiento
+      }
+    }
+    private void posicionDrivetrain(){
+      EncoderDerechoPos = EncoderMotoresDerecha.getDistance();
+      EncoderIzquierdoPos = -EncoderMotoresIzquierda.getDistance();
+      EncoderPromDrive = (EncoderDerechoPos + EncoderIzquierdoPos) / 2; // promedio de los encoders de ambas ruedas para poder sacar mejoeres medidas
+      SmartDashboard.putNumber("PosicionDrivetrainDerecha", EncoderDerechoPos);
+      SmartDashboard.putNumber("PosicionDrivetrainIzquierda", EncoderIzquierdoPos);
+      SmartDashboard.putNumber("PosicionDrivetrainPromedio", EncoderPromDrive);
+    }
+
+    private void reiniciarEncodersDrivetrain(){
+      EncoderMotoresIzquierda.reset();
+      EncoderMotoresDerecha.reset();
     }
 
 }
