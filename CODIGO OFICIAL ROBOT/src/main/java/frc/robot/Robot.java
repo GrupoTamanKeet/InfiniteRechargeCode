@@ -8,57 +8,38 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
+import frc.robot.hardware.Constantes;
 import frc.robot.hardware.Control;
 import frc.robot.hardware.Gyro;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
+
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.Encoder;
 
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
+
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+  Control controles;
+  DriveTrain dTrain;
+  Intake intake;
+  Elevator elevador;
 
   //sensor de color
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 SensorColor = new ColorSensorV3(i2cPort);
 
-  //variables de tankdrive
-  
-
-  //giroscopio
-
-  public Gyro giroscopio;
-  //Clase
-           
-
-  
-  /*
-  * variables extras----------------------------------------------------------
-  */
-
-
-    DriveTrain robot;
-
-  /**
-   * -----------------------------------------------------------------INIT
-   */
 
   @Override
   public void robotInit() {
-    giroscopio = new Gyro();
-    //declaración de encoders
-    
-
-    Control driverControl = new Control();
-    robot = new DriveTrain(driverControl);
-
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-    // calibracion de encoders para medir en metros
-    
   }
 
   /**
@@ -73,17 +54,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
   }
 
-  /**
-   * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString line to get the auto name from the text box below the Gyro
-   *
-   * <p>You can add additional auto modes by adding additional comparisons to
-   * the switch structure below with additional strings. If using the
-   * SendableChooser make sure to add them to the chooser code above as well.
-   */
 
    /*
     //  ______           __                                                                 
@@ -99,20 +69,19 @@ public class Robot extends TimedRobot {
 
     m_autoSelected = m_chooser.getSelected();
     
+    // cosas de if selected has esto con nombres de cosas, si esta dentro de un loop
 
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
 
   }
 
-  /**
-   * This function is called periodically during autonomous.
-   */
   @Override
   public void autonomousPeriodic() {
     switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
+        //si esta diseñado con loop externo aqui
         break;
       case kDefaultAuto:
       default:
@@ -133,6 +102,18 @@ public class Robot extends TimedRobot {
     // Aqui el codigo donde vamos a poner toda la estructura del robot
 
     DriveTrain.moverseConXbox(); // mueve el robot, control durante teleop
+
+    if (Control.readXboxButtons(Constantes.XB_B_A)) intake.activarIntake();
+    else intake.desactivarIntake();
+
+    if (Control.readXboxButtons(Constantes.XB_B_B)) intake.activarAcercar();
+    else intake.desactivarAcercar();
+
+    if (Control.readXboxButtons(Constantes.XB_B_X)) elevador.activarEntregar();
+    else elevador.desactivarEntregar();
+
+    if (Control.readXboxButtons(Constantes.XB_B_Y)) elevador.activarSubir();
+    else elevador.desactivarSubir();
   }
 
   /**

@@ -37,6 +37,10 @@ public class Constantes {
     public static final int PosicionMotorDriveIzquierda2 = 2;
     
     public static final int ConexionPosicionIntake = 5;
+    public static final int ConexionPosicionAcercar = 6;
+
+    public static final int ConexionPosicionSubir = 7;
+    public static final int ConexionPosicionEntregar = 8;
 
 //-----------------------------------------------------
 //      _____            _             _            
