@@ -15,12 +15,11 @@ public class Intake{
     }
     
     public void activarTorreta(){
-        if ( Control.readXboxButtons(Constantes.XB_B_B)) {
-            MotorIntake.set(ControlMode.PercentOutput,1);
-        }
-        else {
-            MotorIntake.set(ControlMode.PercentOutput,0);
-        }
+        MotorIntake.set(ControlMode.PercentOutput,1);
+    }
+    
+    public void desactivarTorreta(){
+        MotorIntake.set(ControlMode.PercentOutput,0);
     }
 }
 

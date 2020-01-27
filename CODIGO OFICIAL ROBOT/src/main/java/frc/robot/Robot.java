@@ -33,9 +33,7 @@ public class Robot extends TimedRobot {
   //Clase
            
 
-  //encoders de ambas líneas de motores
-  private Encoder EncoderMotoresDerecha;
-  private Encoder EncoderMotoresIzquierda;
+  
   /*
   * variables extras----------------------------------------------------------
   */
@@ -51,8 +49,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     giroscopio = new Gyro();
     //declaración de encoders
-    EncoderMotoresDerecha = new Encoder(0,1);
-    EncoderMotoresIzquierda = new Encoder(2,3);
+    
 
     Control driverControl = new Control();
     robot = new DriveTrain(driverControl);
@@ -61,8 +58,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     // calibracion de encoders para medir en metros
-    EncoderMotoresDerecha.setDistancePerPulse(4./10000.);
-    EncoderMotoresIzquierda.setDistancePerPulse(4./10000.);
+    
   }
 
   /**
@@ -136,7 +132,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // Aqui el codigo donde vamos a poner toda la estructura del robot
 
-    robot.moverseConXbox(); // mueve el robot, control durante teleop  
+    DriveTrain.moverseConXbox(); // mueve el robot, control durante teleop
   }
 
   /**
