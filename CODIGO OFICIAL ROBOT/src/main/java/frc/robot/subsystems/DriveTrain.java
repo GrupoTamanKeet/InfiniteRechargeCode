@@ -43,7 +43,7 @@ public class DriveTrain {
       EncoderMotoresDerecha = new Encoder(0,1);
       EncoderMotoresIzquierda = new Encoder(2,3);
 
-      EncoderMotoresDerecha.setDistancePerPulse(4./10000.);
+      EncoderMotoresDerecha.setDistancePerPulse(4./10000.); //sensibilidad
       EncoderMotoresIzquierda.setDistancePerPulse(4./10000.);
     }
 
