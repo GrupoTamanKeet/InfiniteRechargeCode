@@ -4,7 +4,7 @@ Bienvenidos a nuestro repositorio para la temporada 2020. Aquí subiremos, proba
 
 # To-do list
 Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo: \n  
-// Crear pid de drivetrain -Alex (, Jorge) si alguien les ayudo.
+Crear pid de drivetrain -Alex, colaborador (si alguien les ayudo).
 
      Urge:
           Convertir el gyro a analogico
@@ -28,7 +28,10 @@ Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo
      Implementaciones no necesarias:
           Hacer que el drivetrain sea field oriented
 # Lineamientos del código
-Al inicio de la clase, escriban su nombre (Quién está editando)
-Comenten las funciones los métodos
-Si utilizan un botón, pongan en constantes/Controles/ControlDeseado para qué se está utilizando
+Al inicio de la clase, escriban su nombre (Quién está editando).
+
+Comenten las funciones los métodos.
+
+Si utilizan un botón, pongan en constantes/Controles/ControlDeseado para qué se está utilizando.
+
 NO dupliquen objetos
