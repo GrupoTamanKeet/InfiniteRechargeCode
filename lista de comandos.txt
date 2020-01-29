@@ -1,0 +1,122 @@
+TO DO LIST
+// porfavor una vez que lo hagan comentenlo con su nombre, por ejemplo 
+// crear pid de drivetrain -Alex (, Jorje) si alguien les ayudo
+// asi es como "pasare" lista
+     convertir el gyro a analogico
+     arregalr problema con el elevador
+     pasar el drivetrain de talones a spark max
+     pasar variables de ids a ids correctos
+     crear el MoveDisk.java
+     hacer que el drivetrain sea field oriented 
+     crear un diccionario de metodos para programacion del robot "ver con jorge detalles"
+
+     terminar imlementacion de camara
+          crear codigo de la camara
+          crear filtros de colores para solamente ver el verde 
+          sacar lineas de los strips para mejor alineacion
+
+          programar camara para solamente mandar valores al codigo
+
+          asegurar que el movedisk lo lea
+
+     crear elevador inteligente [falta que electronica ponga los botones]
+     hacer que el intake interno Acercar sirva de forma automatica [faltan botones]
+     probar ciertas variables
+     // divertirse - Todos
+
+
+Robot.java:
+
+es donde se maneja todo, esta el teleop(un loop mientras este activo), init(inicializacion del codigo) y initAutonomus(donde inicia el autonomo)
+
+
+hardware:
+
+     ColorSensor.java:
+
+     Constantes.java:
+          no es un objeto como tal, tiene varias cosas como posision del gyro, botones y otras cosas para hacer cambios mas faciles 
+
+     Control.java:
+          readJoystickButtons(int id)
+               lee un control de los joysticks, entra un ID (encontrado en variables) y regresa un boolean
+          
+          readJoystickAxis(int axis)
+               lee el axis del joystick de control tipo piloto, existen 4 XYZ y potencimetro. Regresa un valor double del -1 al 1 (0 siendo sin ser movido)
+
+          readJoystickButtons(int id)
+               lee el control Xbox para botones presionados, entra un ID (encontrado en variables) y regresa un boolean
+          
+          readJoystickAxis(int axis)
+               lee el axis del xontrol de Xbox [puede ser ya sea los triggers o cualquiera de sus joysticks], existen 6 XY del izquiero, XY del derecho y los 2 bumpers [regresan solo de 0 a 1]. Regresa un valor double del -1 al 1 (0 siendo sin ser movido)
+
+          // falta todavia soporte para la botonera y el Dpad (las cosas de arriba, abajo y eso)
+
+     Gyro.java:
+          reiniciar()
+               reinicia los valores del gyro a 0 (nota que siempre sera a 0, sin importar el angulo en el que esta e iniciara a contar desde ahi)
+
+          leer()
+               toma la lectura actual del gyro, saca 3 variables que se guardan en costantes, 
+                    anguloTotalRobot; toma el angulo total del inicio, puede pasar los 360 grados, e incluso podria llegar a los 1000000000
+                    anguloRobot; normaliza el angulo del robot, de 0 a 359, para hacer matematica mas sencilla con ella
+                    vueltas; el numero de vueltas que ha dado el robot. no se para que serviria, pero ahi esta 
+               De la misma forma, va publicar los valores en el smart dashboard.
+          
+          regresarAAngulo(int deseado)
+               utiliza un sistema tipo PID para poder regresar a un angulo deseado [ingresado desde el int en la funcion] tiene un rango del 0 al 359, usar mas podria romper al robot.
+
+     PID de llantas derecha e izquierda no estan en uso, y dudamos que se usen en el futuro, pero si le encuentran uso, pues denle caña
+
+
+subsystems:
+     DriveTrain.java:
+          moverseConXbox()
+               mueve el robot con el control de Xbox y usa arcade drive [o se mueve estilo rocket league]
+          
+          tankdriveConXbox()
+               mueve el robot con el control de Xbox pero a diferencia de arcade drive, el usuario tiene control completo del movimiento de cada lado
+          
+          moverseConPiloto()
+               mueve el robot con el JoystickEstiloPiloto no cambia mucho a como sirve el del Xbox excepto que es con otro control...
+
+          moverseAPos(float pos)
+               toma una pocicion y se mueve a ella, utiliza el sistema PID y en teoria se mueve en metros // calibracion en proceso
+
+          posicionDrivetrain()
+               lee los encoders de las llantas, y regresa 3 valores guardados internamente en DriveTrain
+                    EncoderDerechoPos saca la variable del encoder derecho 
+                    EncoderIzquierdoPos saca la variable del encoder izquierdo 
+                    EncoderPromDrive toma el promedio de ambas variables
+               tambien publica valores en SmartDashboard
+          
+          reiniciarEncodersDrivetrain()
+               reinicia los encoders del drivetrain
+
+     Elevador.java:
+          activarSubir(){
+               activa el elevador [para dar las pelotas al disparador]
+  
+          desactivarSubir()){
+               desactiva el elevador [para dar las pelotas al disparador]
+  
+          activarEntregar(){
+               activa "la panza" XD
+  
+          desactivarEntregar(){
+               desactiva "la panza" XD
+
+     Intake.java:
+          activarIntake()
+               activa el intake [el tragabolas]
+  
+          desactivarIntake()
+               desactiva el intake [el tragabolas]
+  
+          activarAcercar()
+               activa el motor para acercar las bolas a la panza
+  
+          desactivarAcercar()
+               activa el motor para acercar las bolas a la panza
+          
+     falta añadir el resto a las operaciones, actualemente no tienen nada que hacer

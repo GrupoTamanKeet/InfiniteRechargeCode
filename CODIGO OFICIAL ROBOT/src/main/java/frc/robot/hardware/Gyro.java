@@ -10,7 +10,7 @@ public class Gyro{
   // id del gyro y cosas 
   public static ADXRS450_Gyro giroscopio;
 
-  public Gyro(){
+  public Gyro(){ // falta importar arcade drive
     giroscopio = new ADXRS450_Gyro();
   }
   //reiniciar giroscopio
