@@ -3,9 +3,10 @@ Official code of team 3933 for the 2020 INFINITE RECHARGE season.
 Bienvenidos a nuestro repositorio para la temporada 2020. Aquí subiremos, probaremos y administraremos el código de la temporada. Recuerden pueden hacer los branchs que quieran, pero, sólo pueden hacer commit con permiso de mentor :)
 
 # To-do list
-Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo:  
+Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo: \n  
 // Crear pid de drivetrain -Alex (, Jorge) si alguien les ayudo.
 
+     Urge:
           Convertir el gyro a analogico
           Arreglar problema con el elevador,  ??
           Pasar el drivetrain de talones a spark max
@@ -26,3 +27,8 @@ Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo
           Crear un diccionario de metodos para programacion del robot "ver con jorge detalles"
      Implementaciones no necesarias:
           Hacer que el drivetrain sea field oriented
+# Lineamientos del código
+Al inicio de la clase, escriban su nombre (Quién está editando)
+Comenten las funciones los métodos
+Si utilizan un botón, pongan en constantes/Controles/ControlDeseado para qué se está utilizando
+NO dupliquen objetos
