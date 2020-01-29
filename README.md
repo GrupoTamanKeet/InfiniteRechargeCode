@@ -7,7 +7,7 @@ Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo
 // Crear pid de drivetrain -Alex (, Jorge) si alguien les ayudo.
 
           Convertir el gyro a analogico
-          Arreglar problema con el elevador, //Consiste en:
+          Arreglar problema con el elevador,  ??
           Pasar el drivetrain de talones a spark max
           Pasar variables de ids a ids correctos
           Crear el MoveDisk.java //Disco de colores
@@ -18,8 +18,9 @@ Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo
                Programar camara para solamente mandar valores al codigo
           Crear elevador inteligente [falta que electronica ponga los botones]
           Hacer que el intake interno
-          Hacer que sirva de forma automatica [faltan botones]
-          Probar ciertas variables?
+          Hacer que sirva de forma automatica [faltan botones] ??
+          Implementar un ReverseIntake
+          Probar ciertas variables ??
           DIVERTIRSE -Todos
 
           Crear un diccionario de metodos para programacion del robot "ver con jorge detalles"
