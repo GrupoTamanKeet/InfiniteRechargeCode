@@ -18,7 +18,7 @@ public class Elevator{
           MotorSubir.set(ControlMode.PercentOutput,1);
       }
   
-      public void desactivarSubir()){
+      public void desactivarSubir(){
           MotorSubir.set(ControlMode.PercentOutput,0);
       }
   
