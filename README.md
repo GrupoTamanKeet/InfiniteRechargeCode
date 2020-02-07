@@ -30,6 +30,12 @@ Crear pid de drivetrain -Alex, colaborador (si alguien les ayudo).
 # Lineamientos del código
 Al inicio de la clase, escriban su nombre (Quién está editando).
 
+Nombres de clases con mayúsculas
+
+Nombres de paquetes con minúsculas
+
+Llamen a los métodos por un nombre
+
 Comenten las funciones los métodos.
 
 Si utilizan un botón, pongan en constantes/Controles/ControlDeseado para qué se está utilizando.
