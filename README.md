@@ -34,7 +34,7 @@ Nombres de clases con mayúsculas
 
 Nombres de paquetes con minúsculas
 
-Llamen a los métodos por un nombre
+Llamen a los métodos por un verbo
 
 Comenten las funciones los métodos.
 
