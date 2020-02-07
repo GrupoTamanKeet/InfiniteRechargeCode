@@ -44,3 +44,29 @@ NO dupliquen objetos
 
 # Recordatorios:
 Robot.java es el sistema general. Ahí se van a construir todos los subsistemas.
+Puedes poner métodos dentro de otros métodos.
+llamas a los objetos y les asignas un nombre utilizando un .
+Para que el objeto haga un método, los unes con un "." (punto).
+Nombras los objetos y luego les asignan sus métodos
+Llamar constructor:
+Clase NombreDelObjeto = new Clase() asignado en robot.java del objeto- y parámetro (lo que dice el método+ llamas a subsistemas.subsistema) 
+
+Dentro de parámetros puedes poner objetos para que dependa del otro.
+Nuestro robot tienen subsistemas.
+Para controlar la sensibilidad puedes:
+
+     Multiplicar por una constante menor a uno.
+     O elevar al cuadrado la sensibilidad.
+     Se hace para no descontrolar al robot .
+
+Método de Robotinit
+
+     Checklist de lo que necesita el robot para iniciar
+     Aquí deben construir TODOS los subsistemas:
+
+
+
+
+void no te regresa nada
+static si quieres que la instancia  del objeto sea la misma
+
