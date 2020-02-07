@@ -41,3 +41,6 @@ Comenten las funciones los métodos.
 Si utilizan un botón, pongan en constantes/Controles/ControlDeseado para qué se está utilizando.
 
 NO dupliquen objetos
+
+# Recordatorios:
+Robot.java es el sistema general. Ahí se van a construir todos los subsistemas.
