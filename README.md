@@ -7,7 +7,6 @@ Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo
 Crear pid de drivetrain -Alex, colaborador (si alguien les ayudo).
 
      Urge:
-          Convertir el gyro a analogico
           Arreglar problema con el elevador,  ??
           Pasar el drivetrain de talones a spark max
           Pasar variables de ids a ids correctos
