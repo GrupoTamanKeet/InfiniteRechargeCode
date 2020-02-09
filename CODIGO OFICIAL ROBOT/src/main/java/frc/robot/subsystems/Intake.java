@@ -3,33 +3,32 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.hardware.Constantes;
-import frc.robot.hardware.Control;
+import frc.robot.hardware.Controles;
 
 public class Intake{
     static WPI_TalonSRX MotorIntake;
     static WPI_TalonSRX MotorAcercar;
-    Control ctrl;
+    Controles ctrl;
 
-    public Intake(Control ControlRobot) {
+    public Intake() {
         MotorIntake = new WPI_TalonSRX(Constantes.ConexionPosicionIntake);
         MotorAcercar = new WPI_TalonSRX(Constantes.ConexionPosicionAcercar);
-        this.ctrl = ControlRobot;
     }
     
     public void activarIntake(){
-        MotorIntake.set(ControlMode.PercentOutput,1);
+        
     }
 
     public void desactivarIntake(){
-        MotorIntake.set(ControlMode.PercentOutput,0);
+        
     }
 
     public void activarAcercar(){
-        MotorIntake.set(ControlMode.PercentOutput,1);
+        
     }
 
     public void desactivarAcercar(){
-        MotorIntake.set(ControlMode.PercentOutput,0);
+        
     }
 }
 

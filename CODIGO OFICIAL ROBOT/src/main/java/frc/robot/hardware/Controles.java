@@ -2,7 +2,7 @@ package frc.robot.hardware;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class Control {
+public class Controles {
 
     private static Joystick ControlXbox;
     private static Joystick ControlPiloto;
@@ -15,7 +15,7 @@ public class Control {
     // _| |_| | | | | (__| | (_| | | |/ / (_| | (__| | (_) | | | |
     // |_____|_| |_|_|\___|_|\__,_|_|_/___\__,_|\___|_|\___/|_| |_|
 
-    public Control() {
+    public Controles() {
         ControlXbox = new Joystick(Constantes.puertoXbox);
         ControlPiloto = new Joystick(Constantes.puertoJoystick);
         Botonera = new Joystick(Constantes.puertoBottonera);
@@ -31,11 +31,11 @@ public class Control {
     // __/ |
     // |___/
 
-    public static boolean readJoystickButtons(int id) {
+    public boolean readJoystickButtons(int id) {
         return (ControlPiloto.getRawButton(id));
     }
 
-    public static double readJoystickAxis(int axis) {
+    public double readJoystickAxis(int axis) {
         return (ControlPiloto.getRawAxis(axis));
     }
     
@@ -46,11 +46,11 @@ public class Control {
     // > < |______| | _ < / _ \ \/ /
     // / . \ | |_) | (_) > <
     // /_/ \_\ |____/ \___/_/\_\
-    public static boolean readXboxButtons(int id) {
+    public boolean readXboxButtons(int id) {
         return (ControlXbox.getRawButton(id));
     }
 
-    public static double readXboxAxis(int axis){
+    public double readXboxAxis(int axis){
         return(ControlXbox.getRawAxis(axis));
     }
 }

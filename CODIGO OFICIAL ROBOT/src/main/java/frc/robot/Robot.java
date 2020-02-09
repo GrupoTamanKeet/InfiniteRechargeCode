@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 import frc.robot.hardware.Constantes;
-import frc.robot.hardware.Control;
+import frc.robot.hardware.Controles;
 import frc.robot.hardware.Gyro;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  Control controles;
+  public static Controles control;
   DriveTrain dTrain;
   Intake intake;
   Elevator elevador;
@@ -40,6 +40,9 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+
+    control = new Controles();
+
   }
 
   /**
@@ -85,7 +88,6 @@ public class Robot extends TimedRobot {
         break;
       case kDefaultAuto:
       default:
-        
         break; // Técnicamente es inneceseario
     }
   }
@@ -103,17 +105,6 @@ public class Robot extends TimedRobot {
 
     DriveTrain.moverseConXbox(); // mueve el robot, control durante teleop
 
-    if (Control.readXboxButtons(Constantes.XB_B_A)) intake.activarIntake();
-    else intake.desactivarIntake();
-
-    if (Control.readXboxButtons(Constantes.XB_B_B)) intake.activarAcercar();
-    else intake.desactivarAcercar();
-
-    if (Control.readXboxButtons(Constantes.XB_B_X)) elevador.activarEntregar();
-    else elevador.desactivarEntregar();
-
-    if (Control.readXboxButtons(Constantes.XB_B_Y)) elevador.activarSubir();
-    else elevador.desactivarSubir();
   }
 
   /**

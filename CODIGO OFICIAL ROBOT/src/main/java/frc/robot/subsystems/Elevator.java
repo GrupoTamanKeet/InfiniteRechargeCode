@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.hardware.Constantes;
-import frc.robot.hardware.Control;
+import frc.robot.hardware.Controles;
 
 public class Elevator{
      static WPI_TalonSRX MotorSubir;

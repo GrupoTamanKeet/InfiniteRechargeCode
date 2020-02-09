@@ -2,16 +2,13 @@
  //imports
  import edu.wpi.first.wpilibj.SpeedControllerGroup;
  import edu.wpi.first.wpilibj.controller.PIDController;
- import com.revrobotics.CANEncoder;
+import frc.robot.subsystems.DriveTSpark;
+
+import com.revrobotics.CANEncoder;
  import com.revrobotics.CANSparkMax;
  import edu.wpi.first.wpilibj.Timer;
 
- //imports de codigo
- import frc.robot.subsystems.drivetrain;
-
-public class autonomo{
- 
- private drivetrain localDrivetrain;
+public class AutonomoR{
 
  private SpeedControllerGroup drivetrainDerecha;
  private SpeedControllerGroup drivetrainIzquierda;
@@ -27,12 +24,14 @@ public class autonomo{
  private CANSparkMax motorDerecha1, motorDerecha2;
  private CANSparkMax motorIzquierda1, motorIzquierda2;
 
+ DriveTSpark localDrivetrain;
+
  private Timer tiempo;
 
 
- public void initDeAutonomo(){
+ public void AutonomoR(){
 
-     localDrivetrain = new drivetrain();
+     localDrivetrain = new DriveTSpark();
 
      motorDerecha1 = localDrivetrain.motorDrivetrain1;
      motorDerecha2 = localDrivetrain.motorDrivetrain2;

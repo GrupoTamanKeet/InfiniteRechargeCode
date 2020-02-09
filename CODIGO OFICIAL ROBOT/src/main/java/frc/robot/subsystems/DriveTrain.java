@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
-import frc.robot.hardware.Control;
 
 public class DriveTrain { 
     //mandar a Sofi
@@ -32,7 +32,8 @@ public class DriveTrain {
   private double EncoderIzquierdoPos; 
   private double EncoderPromDrive;
 
-    public DriveTrain(Control Control) {
+    public DriveTrain() {
+      //En el Ponny, las conecciones son: 2,3,4,1
       MotorDerecha1 = new WPI_TalonSRX(Constantes.PosicionMotorDriveDerecha1);
       MotorDerecha2 = new WPI_TalonSRX(Constantes.PosicionMotorDriveDerecha2);
       MotorIzquierda1 = new WPI_TalonSRX(Constantes.PosicionMotorDriveIzquierda1);
@@ -54,15 +55,15 @@ public class DriveTrain {
     public static void moverseConXbox() { // funcion principal del movimiento del chasis
 
         // inputs del control para movimiento
-        movimientoAdelanteY = Control.readXboxAxis(Constantes.XB_RT)
-                - Control.readXboxAxis(Constantes.XB_LT); // toma el valor para ir hacia adelante o hacia atras
+        movimientoAdelanteY = Robot.control.readXboxAxis(Constantes.XB_RT)
+                - Robot.control.readXboxAxis(Constantes.XB_LT); // toma el valor para ir hacia adelante o hacia atras
 
-        movimientoAdelanteX = Control.readXboxAxis(Constantes.XB_LJ_X) * movimientoAdelanteY
+        movimientoAdelanteX = Robot.control.readXboxAxis(Constantes.XB_LJ_X) * movimientoAdelanteY
                 * Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el robot y que sirva mejor
-                + Control.readXboxAxis(Constantes.XB_RJ_X); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
+                + Robot.control.readXboxAxis(Constantes.XB_RJ_X); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
                 // nota que esta separada en 2 lineas, pero en verdad es solamente 1
     
-        if (Control.readXboxButtons(Constantes.controlDrift)){ // controla el drift del drive, para que pueda dar vueltas mas cerradas
+        if (Robot.control.readXboxButtons(Constantes.controlDrift)){ // controla el drift del drive, para que pueda dar vueltas mas cerradas
           movimientoAdelanteX = movimientoAdelanteX * Constantes.controlSensivilidadDrift;
         }
     
@@ -75,19 +76,19 @@ public class DriveTrain {
     }
 
     public void tankdriveConXbox(){
-        MovimientoBaseCompleto.tankDrive(-Control.readXboxAxis(1), -Control.readXboxAxis(5));
+        MovimientoBaseCompleto.tankDrive(-Robot.control.readXboxAxis(1), -Robot.control.readXboxAxis(5));
     }
 
     public void moverseConPiloto(){ // funcion principal del movimiento del chasis 
 
         // inputs del control para movimiento
-        movimientoAdelanteY = Control.readJoystickAxis(Constantes.LG_YJ); // toma el valor para ir hacia adelante o hacia atras 
+        movimientoAdelanteY = Robot.control.readJoystickAxis(Constantes.LG_YJ); // toma el valor para ir hacia adelante o hacia atras 
     
-        movimientoAdelanteX = Control.readJoystickAxis(Constantes.LG_XJ)*movimientoAdelanteY*Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el robot y que sirva mejor
-                + Control.readJoystickAxis(Constantes.LG_ZJ); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
+        movimientoAdelanteX = Robot.control.readJoystickAxis(Constantes.LG_XJ)*movimientoAdelanteY*Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el robot y que sirva mejor
+                + Robot.control.readJoystickAxis(Constantes.LG_ZJ); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
                 // nota que esta separada en 2 lineas, pero en verdad es solamente 1
     
-        if (Control.readJoystickButtons(Constantes.controlDrift)){ // controla el drift del drive, para que pueda dar vueltas mas cerradas
+        if (Robot.control.readJoystickButtons(Constantes.controlDrift)){ // controla el drift del drive, para que pueda dar vueltas mas cerradas
           movimientoAdelanteX = movimientoAdelanteX * Constantes.controlSensivilidadDrift;
         }
     

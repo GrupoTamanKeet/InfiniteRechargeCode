@@ -6,48 +6,57 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Robot;
+import frc.robot.hardware.Constantes;
 
-//imports de código
-import frc.robot.subsystems.controles;
+public class DriveTSpark {
 
-public class drivetrain{
+    //variables públicas
+    public static CANSparkMax motorDrivetrain1, motorDrivetrain2, motorDrivetrain3, motorDrivetrain4;
+    public SpeedControllerGroup motoresDerecha, motoresIzquierda;
+    public static DifferentialDrive driveTrain;
 
-//variables públicas
-public CANSparkMax motorDrivetrain1, motorDrivetrain2, motorDrivetrain3, motorDrivetrain4;
-public SpeedControllerGroup motoresDerecha, motoresIzquierda;
-public DifferentialDrive driveTrain;
+    private static double movimientoAdelanteX;
+    private static double movimientoAdelanteY;
 
-//variables privadas
-private Joystick controlChasis;
+    //variables privadas
 
+    public void DriveTSpark(){
 
-//objetos de importaciones de otros códigos
-private controles localControles;
+        motorDrivetrain1 = new CANSparkMax(1,MotorType.kBrushless);
+        motorDrivetrain2 = new CANSparkMax(2,MotorType.kBrushless);
+        motorDrivetrain3 = new CANSparkMax(3,MotorType.kBrushless);
+        motorDrivetrain4 = new CANSparkMax(4,MotorType.kBrushless);
 
-public void iniciarMotoresDrivetrain(){
+        motorDrivetrain2.setInverted(true);
+        motorDrivetrain4.setInverted(true);
 
-    motorDrivetrain1 = new CANSparkMax(1,MotorType.kBrushless);
-    motorDrivetrain2 = new CANSparkMax(2,MotorType.kBrushless);
-    motorDrivetrain3 = new CANSparkMax(3,MotorType.kBrushless);
-    motorDrivetrain4 = new CANSparkMax(4,MotorType.kBrushless);
+        motoresDerecha = new SpeedControllerGroup(motorDrivetrain1, motorDrivetrain2);
+        motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
 
-    motorDrivetrain2.setInverted(true);
-    motorDrivetrain4.setInverted(true);
+        driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
 
-    motoresDerecha = new SpeedControllerGroup(motorDrivetrain1, motorDrivetrain2);
-    motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
-
-    driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
-
-    controlChasis = localControles.controlChasis;
-
-}
+    }
 
 
-public void moverDrivetrain(){
+    public void moverseConPiloto(){ // funcion principal del movimiento del chasis 
 
-    driveTrain.arcadeDrive(controlChasis.getRawAxis(2)  * controlChasis.getRawAxis(1) * 1.5, controlChasis.getRawAxis(1));
+        // inputs del control para movimiento
+        movimientoAdelanteY = Robot.control.readJoystickAxis(Constantes.LG_YJ); // toma el valor para ir hacia adelante o hacia atras 
 
-}
+        movimientoAdelanteX = Robot.control.readJoystickAxis(Constantes.LG_XJ)*movimientoAdelanteY*Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el robot y que sirva mejor
+                + Robot.control.readJoystickAxis(Constantes.LG_ZJ); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
+                // nota que esta separada en 2 lineas, pero en verdad es solamente 1
 
+        if (Robot.control.readJoystickButtons(Constantes.controlDrift)){ // controla el drift del drive, para que pueda dar vueltas mas cerradas
+        movimientoAdelanteX = movimientoAdelanteX * Constantes.controlSensivilidadDrift;
+        }
+
+        if (movimientoAdelanteX > Constantes.controlMaximaVelocidadDeGiro || movimientoAdelanteX < -Constantes.controlMaximaVelocidadDeGiro) { // si va muy rapido, se desconfigura el gyroscopio, asi que no queremos eso 
+        if (movimientoAdelanteX < 0) movimientoAdelanteX = -Constantes.controlMaximaVelocidadDeGiro;
+        else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
+        }
+
+        driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
+    }
 }
