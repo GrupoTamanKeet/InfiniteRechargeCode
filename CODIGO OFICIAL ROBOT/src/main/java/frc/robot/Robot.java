@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
-import frc.robot.hardware.Constantes;
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.Gyro;
 import frc.robot.subsystems.DriveTrain;
@@ -16,7 +15,6 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 
 import com.revrobotics.ColorSensorV3;
-import edu.wpi.first.wpilibj.Encoder;
 
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";

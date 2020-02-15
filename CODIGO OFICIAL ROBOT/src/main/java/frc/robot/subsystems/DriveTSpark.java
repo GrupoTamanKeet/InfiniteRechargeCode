@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 //imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
@@ -21,7 +20,7 @@ public class DriveTSpark {
 
     //variables privadas
 
-    public void DriveTSpark(){
+    public DriveTSpark(){
 
         motorDrivetrain1 = new CANSparkMax(1,MotorType.kBrushless);
         motorDrivetrain2 = new CANSparkMax(2,MotorType.kBrushless);
