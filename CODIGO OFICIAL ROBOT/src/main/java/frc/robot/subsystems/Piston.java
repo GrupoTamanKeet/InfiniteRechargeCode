@@ -12,7 +12,7 @@ public class Piston{
     int moduleNumber = 00;
     public Piston(){
         piston1 = new Solenoid(forwardChannel);
-        piston2 = new Solenoid(forwardChannel)
+        piston2 = new Solenoid(forwardChannel);
 
     }
     public static void abrirPiston(){
