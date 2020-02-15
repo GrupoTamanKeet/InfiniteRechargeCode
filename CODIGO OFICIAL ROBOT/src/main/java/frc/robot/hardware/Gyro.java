@@ -36,7 +36,7 @@ public class Gyro{
       SmartDashboard.putNumber("vueltas", Constantes.vueltasDelRobot);  
   }
 
-  private void regresarAAngulo(int deseado){ // funcion para poder girar el robot de forma automatica a una posicion en grados
+  private void regresarAngulo(int deseado){ // funcion para poder girar el robot de forma automatica a una posicion en grados
       leer();
       int offset = 180-deseado; // convertimos los grados a 180 para asegurarnos que tome el camino mas rapido (que si esta en 359 y queremos que entre a 0, no se de toda la vuelta)
       deseado = 180;
