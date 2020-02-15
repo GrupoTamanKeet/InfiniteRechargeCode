@@ -26,7 +26,7 @@ public class Piston{
         if (Robot.control.readXboxButtons(Constantes.XB_B_Y) == true){
             abrirPiston();
         }
-        if ((Robot.control.readXboxButtons(Constantes.XB_B_Start) == true) && (Robot.control.readXboxButtons(Constantes.XB_B_Y)){
+        if ((Robot.control.readXboxButtons(Constantes.XB_B_Start) == true) && (Robot.control.readXboxButtons(Constantes.XB_B_Y))){
             cerrarPiston();
         }
     }
