@@ -8,7 +8,6 @@ Crear pid de drivetrain -Alex, colaborador (si alguien les ayudo).
 
      Urge:
           Arreglar problema con el elevador,  ??
-          Pasar el drivetrain de talones a spark max
           Pasar variables de ids a ids correctos
           Crear el MoveDisk.java //Disco de colores
           Terminar imlementacion de camara
@@ -17,13 +16,10 @@ Crear pid de drivetrain -Alex, colaborador (si alguien les ayudo).
                Pasar lineas de los strips para mejor alineacion
                Programar camara para solamente mandar valores al codigo
           Crear elevador inteligente [falta que electronica ponga los botones]
-          Hacer que el intake interno
-          Hacer que sirva de forma automatica [faltan botones] ??
-          Implementar un ReverseIntake
-          Probar ciertas variables ??
+          Hacer que el intake interno sirva de forma automatica [faltan botones]
           DIVERTIRSE -Todos
+          Autonomos
 
-          Crear un diccionario de metodos para programacion del robot "ver con jorge detalles"
      Implementaciones no necesarias:
           Hacer que el drivetrain sea field oriented
 # Lineamientos del código
