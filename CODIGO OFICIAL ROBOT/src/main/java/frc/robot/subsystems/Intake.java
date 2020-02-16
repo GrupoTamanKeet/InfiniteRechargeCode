@@ -40,21 +40,38 @@ public class Intake{
         MotorEntregar.setVoltage(0);
     }
     
-    public void funcionar(){
-        if (Robot.control.readJoystickButtons(Constantes.LG_B11)) {
-            activarIntake();
-        }else if (Robot.control.readJoystickButtons(Constantes.LG_B11) && Robot.control.readJoystickButtons(Constantes.LG_B_Reverse)){
-            reverseIntake();
-        }else{
-            desactivarIntake();
-        }
+    private void dejarEnIntake(){
+        //Pelota en el limbo
+        //Boton 9
+    }
 
-        if (Robot.control.readJoystickButtons(Constantes.LG_B10)){
-            activarAcercar();
-        }else if (Robot.control.readJoystickButtons(Constantes.LG_B10) && Robot.control.readJoystickButtons(Constantes.LG_B_Reverse)){
-            reverseAcercar();
+    private void secuenciaIntake(){
+        //meter y Acercar 
+        activarIntake();
+        activarAcercar();
+
+    }
+
+    public void funcionar(){
+        
+        if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
+            secuenciaIntake();
         }else{
-            desactivarAcercar();
-        }
+            if (Robot.control.readJoystickButtons(Constantes.LG_B2)) {
+                activarIntake();
+            }else if (Robot.control.readJoystickButtons(Constantes.LG_B2) && Robot.control.readJoystickButtons(Constantes.LG_B_Reverse)){
+                reverseIntake();
+            }else{
+                desactivarIntake();
+            }
+    
+            if (Robot.control.readJoystickButtons(Constantes.LG_B8)){
+                activarAcercar();
+            }else if (Robot.control.readJoystickButtons(Constantes.LG_B8) && Robot.control.readJoystickButtons(Constantes.LG_B_Reverse)){
+                reverseAcercar();
+            }else{
+                desactivarAcercar();
+            }
+        }  
     }
 }

@@ -49,6 +49,8 @@ public class Constantes {
     public static final int MotorDeslizadorLineal = 0;
     public static final int MotorJalar = 0;
 
+    public static final int ConexionCompresor = 0;
+
 //-----------------------------------------------------
 //      _____            _             _            
 //     / ____|          | |           | |           
@@ -120,15 +122,21 @@ public static final int LG_Slider = 3;
 
 
 //Verifica en DriveTSpark, Elevador, Torreta, e Intake cada boton
-public static final int LG_B_Reverse = 1; //DEFINIR UNO
-public static final int LG_B7 = 7;
-public static final int LG_B8 = 8;
-public static final int LG_B9 = 9;
+public static final int LG_B_Reverse = 11; //DEFINIR UNO
+
+public static final int LG_B1 = 1; //Disparar
+public static final int LG_B2 = 2; // Intake
+public static final int LG_B3 = 3;
+public static final int LG_B4 = 4;
+public static final int LG_B5 = 5; //Secuencia disparar
+public static final int LG_B6 = 6; //Secuencia intake
+public static final int LG_B7 = 7; //Preparar disparo
+public static final int LG_B8 = 8; // Acercar
+public static final int LG_B9 = 9; //Intake en el limno
 public static final int LG_B10 = 10;
-public static final int LG_B11 = 11;
-public static final int LG_B12 = 12;
-public static final int LG_B2 = 0;
-public static final int LG_B3 = 0;
+public static final int LG_B11 = 11; //NO se puede ocupar
+public static final int LG_B12 = 12; //Destravarse
+
 
 
 

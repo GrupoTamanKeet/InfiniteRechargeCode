@@ -73,8 +73,15 @@ public class Torreta  {
         MotorDisparar.setVoltage(0);
     }
 
+    private void secuenciaDisparar(){
+        //Activar acercar y subir
+        //Mover el robot
+        //Boton 5
+        Robot.dTrain.destravarse();
+    }
+
     public void funcionar(){
-            if (Robot.control.readJoystickButtons(Constantes.LG_B2)){
+            if (Robot.control.readJoystickButtons(Constantes.LG_B7)){
                 readyToShoot=!readyToShoot;
             }
 
@@ -84,14 +91,19 @@ public class Torreta  {
                 desactivarDisparo();
             }
 
-            if(Robot.control.readJoystickButtons(Constantes.LG_B3)){
+            if(Robot.control.readJoystickButtons(Constantes.LG_B6)){
                 subirPelota();
             }else{
                 desactivarSubirPelota();
             }
 
+            if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
+                Robot.dTrain.destravarse();
+            }
+
             acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
             acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
+
     }
 
 }

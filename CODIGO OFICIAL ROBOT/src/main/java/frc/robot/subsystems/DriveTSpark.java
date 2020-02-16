@@ -57,13 +57,9 @@ public class DriveTSpark {
           if (movimientoAdelanteX < 0) movimientoAdelanteX = -Constantes.controlMaximaVelocidadDeGiro;
           else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
         }
-
-        if (Robot.control.readJoystickButtons(Constantes.LG_B10)){
-          destravarse();
-        }else{
-          driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
-        }
         
+        driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
+
     }
 
     public void moverseConPiloto(){ // funcion opcional del movimiento del chasis 
@@ -84,15 +80,11 @@ public class DriveTSpark {
         else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
         }
 
-        if (Robot.control.readJoystickButtons(Constantes.LG_B10)){
-          destravarse();
-        }else{
-          driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
-        }
+        driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
 
     }
 
-    private static void destravarse(){
+    public void destravarse(){
         int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
         if (miliseconds%2==0){
           driveTrain.arcadeDrive(0, 0.2);
