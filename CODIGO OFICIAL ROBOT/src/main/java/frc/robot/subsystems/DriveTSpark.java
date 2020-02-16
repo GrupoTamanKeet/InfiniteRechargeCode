@@ -37,7 +37,8 @@ public class DriveTSpark {
 
     }
 
-    public static void moverseConXbox() { // funcion principal del movimiento del chasis
+    //Se va a ocupar esta función para el driveTrain
+    public void moverseConXbox() { // funcion principal del movimiento del chasis
 
         // inputs del control para movimiento
         movimientoAdelanteY = -Robot.control.readXboxAxis(Constantes.XB_RT)
@@ -57,10 +58,15 @@ public class DriveTSpark {
           else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
         }
 
-        driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
+        if (Robot.control.readJoystickButtons(Constantes.LG_B10)){
+          destravarse();
+        }else{
+          driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
+        }
+        
     }
 
-    public void moverseConPiloto(){ // funcion principal del movimiento del chasis 
+    public void moverseConPiloto(){ // funcion opcional del movimiento del chasis 
 
         // inputs del control para movimiento
         movimientoAdelanteY = Robot.control.readJoystickAxis(Constantes.LG_YJ); // toma el valor para ir hacia adelante o hacia atras 
@@ -78,6 +84,20 @@ public class DriveTSpark {
         else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
         }
 
-        driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
+        if (Robot.control.readJoystickButtons(Constantes.LG_B10)){
+          destravarse();
+        }else{
+          driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
+        }
+
+    }
+
+    private static void destravarse(){
+        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
+        if (miliseconds%2==0){
+          driveTrain.arcadeDrive(0, 0.2);
+        }else{
+          driveTrain.arcadeDrive(0, -0.2);
+        }
     }
 }

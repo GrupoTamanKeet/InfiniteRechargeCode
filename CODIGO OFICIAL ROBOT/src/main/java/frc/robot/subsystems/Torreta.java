@@ -1,36 +1,97 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 
 
 public class Torreta  {
  
-    public static WPI_TalonSRX MotorTorreta;
-    public static boolean LanzarPelota;
+    private static WPI_TalonSRX MotorDisparar;
+    private static WPI_TalonSRX MotorSusana;
+    private static WPI_TalonSRX MotorAngulo;
+    private static WPI_TalonSRX MotorSubir;
 
+    private static boolean readyToShoot = false;
 
     public Torreta(){
-      
-        MotorTorreta = new WPI_TalonSRX(Constantes.ConexionPosicionSubir);
-        
-        MotorTorreta.setInverted(true);
-       
+        MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
+        MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
+        MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
+        MotorSubir = new WPI_TalonSRX(Constantes.ConexionMotorSubir);
+        MotorDisparar.setInverted(true);
+    }
+
+    private void acomodarSusana(double Speed){
+        if(Speed==0){
+            desactivarSusana();
+        }
+        MotorSusana.set(ControlMode.PercentOutput,Speed);
+    }
+
+    private void acomodarSusanaAutimaticamente(){
+        System.out.println("Aun no se hace");
+    }
+    
+    private void desactivarSusana(){
+        MotorSusana.stopMotor();
+        MotorSusana.setVoltage(0);
+    }
+
+
+    private void acomodarAngulo(double Speed){
+        if(Speed==0){
+            desactivarAngulo();
+        }
+        MotorSusana.set(ControlMode.PercentOutput,Speed);
+    }
+
+    private void acomodarAnguloAutimaticamente(){
+        System.out.println("Aun no se hace");
+    }
+    
+    private void desactivarAngulo(){
+        MotorAngulo.stopMotor();
+        MotorAngulo.setVoltage(0);
+    }
+
+    private void subirPelota(){
+        MotorSubir.set(ControlMode.PercentOutput, 0.4);
 
     }
-    public void LanzarPelota(){
-        LanzarPelota = Robot.control.readXboxButtons(Constantes.XB_B_A);
-            if (LanzarPelota==true){
-                MotorTorreta.set(ControlMode.PercentOutput,.6);
-            }
-            else {
-             MotorTorreta.stopMotor();    
+    private void desactivarSubirPelota(){
+        MotorSubir.stopMotor();
+        MotorSubir.setVoltage(0);
+    }
+
+    private void prepararDisparo(){
+        MotorDisparar.set(ControlMode.PercentOutput, 1);
+    }
+    
+    private void desactivarDisparo(){
+        MotorDisparar.stopMotor();
+        MotorDisparar.setVoltage(0);
+    }
+
+    public void funcionar(){
+            if (Robot.control.readJoystickButtons(Constantes.LG_B2)){
+                readyToShoot=!readyToShoot;
             }
 
+            if(readyToShoot){
+                prepararDisparo();
+            }else{
+                desactivarDisparo();
+            }
 
+            if(Robot.control.readJoystickButtons(Constantes.LG_B3)){
+                subirPelota();
+            }else{
+                desactivarSubirPelota();
+            }
+
+            acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
+            acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
     }
 
 }

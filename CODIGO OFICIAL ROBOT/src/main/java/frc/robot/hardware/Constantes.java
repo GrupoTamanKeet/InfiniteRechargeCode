@@ -30,17 +30,24 @@ public class Constantes {
 //    | |___| (_) | | | |  __/>  <| | (_) | | | |  __/\__ \ | | \ \ (_) | |_) | (_) | |_ 
 //     \_____\___/|_| |_|\___/_/\_\_|\___/|_| |_|\___||___/ |_|  \_\___/|_.__/ \___/ \__|          
     
-
+    //DriveTrain
     public static final int PosicionMotorDriveDerecha1 = 4;
     public static final int PosicionMotorDriveDerecha2 = 1;
     public static final int PosicionMotorDriveIzquierda1 = 3;
     public static final int PosicionMotorDriveIzquierda2 = 2;
-    
-    public static final int ConexionPosicionIntake = 5;
-    public static final int ConexionPosicionAcercar = 6;
+    //Intake
+    public static final int ConexionMotorIntake = 5;
+    public static final int ConexionMotorAcercar = 6;
+    //Torreta
+    public static final int ConexionMotorSubir = 7;
+    public static final int ConexionPosicionEntregar = 8; //Es el mismo que acercar???
+    public static final int ConexionMotorAngulo = 0;
+    public static final int ConexionMotorSusana = 0;
+    public static final int ConexionMotorTorreta = 0;
 
-    public static final int ConexionPosicionSubir = 7;
-    public static final int ConexionPosicionEntregar = 8;
+    //Colcarse
+    public static final int MotorDeslizadorLineal = 0;
+    public static final int MotorJalar = 0;
 
 //-----------------------------------------------------
 //      _____            _             _            
@@ -110,6 +117,20 @@ public static final int LG_XJ = 0;
 public static final int LG_YJ = 1;
 public static final int LG_ZJ = 2;
 public static final int LG_Slider = 3;
+
+
+//Verifica en DriveTSpark, Elevador, Torreta, e Intake cada boton
+public static final int LG_B_Reverse = 1; //DEFINIR UNO
+public static final int LG_B7 = 7;
+public static final int LG_B8 = 8;
+public static final int LG_B9 = 9;
+public static final int LG_B10 = 10;
+public static final int LG_B11 = 11;
+public static final int LG_B12 = 12;
+public static final int LG_B2 = 0;
+public static final int LG_B3 = 0;
+
+
 
 
 

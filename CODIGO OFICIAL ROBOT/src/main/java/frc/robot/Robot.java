@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.Gyro;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.DriveTSpark;
+import frc.robot.subsystems.Elevador;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Torreta;
 
 import com.revrobotics.ColorSensorV3;
 
@@ -24,9 +25,11 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public static Controles control;
-  DriveTrain dTrain;
-  Intake intake;
-  Elevator elevador;
+  public static DriveTSpark dTrain;
+  public static Intake intake;
+  public static Elevador elevador;
+  public static Torreta torreta;
+
 
   //sensor de color
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
@@ -38,8 +41,12 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-
+    
+    dTrain = new DriveTSpark();
+    intake = new Intake();
     control = new Controles();
+    elevador = new Elevador();
+    torreta = new Torreta();
 
   }
 
@@ -101,8 +108,10 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // Aqui el codigo donde vamos a poner toda la estructura del robot
 
-    DriveTrain.moverseConXbox(); // mueve el robot, control durante teleop
-
+    dTrain.moverseConXbox(); // mueve el robot, control durante teleop
+    intake.funcionar();
+    elevador.funcionar();
+    torreta.funcionar();
   }
 
   /**
