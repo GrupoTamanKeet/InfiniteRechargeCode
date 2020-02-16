@@ -11,6 +11,7 @@ public class Torreta  {
     private static WPI_TalonSRX MotorSusana;
     private static WPI_TalonSRX MotorAngulo;
     private static WPI_TalonSRX MotorSubir;
+    static WPI_TalonSRX MotorEntregar;
 
     private static boolean readyToShoot = false;
 
@@ -19,7 +20,9 @@ public class Torreta  {
         MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
         MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
         MotorSubir = new WPI_TalonSRX(Constantes.ConexionMotorSubir);
-        MotorDisparar.setInverted(true);
+        MotorEntregar = new WPI_TalonSRX(Constantes.ConexionMotorAcercar);
+        MotorDisparar.setInverted(false);
+        MotorAngulo.setInverted(true);
     }
 
     private void acomodarSusana(double Speed){
@@ -38,12 +41,24 @@ public class Torreta  {
         MotorSusana.setVoltage(0);
     }
 
+    private void activarAcercar(){
+        MotorEntregar.set(ControlMode.PercentOutput, 0.5);
+    }
+
+    private void reverseAcercar(){
+        MotorEntregar.set(ControlMode.PercentOutput, -0.5);
+    }
+
+    private void desactivarAcercar(){
+        MotorEntregar.stopMotor();
+        MotorEntregar.setVoltage(0);
+    }
 
     private void acomodarAngulo(double Speed){
         if(Speed==0){
             desactivarAngulo();
         }
-        MotorSusana.set(ControlMode.PercentOutput,Speed);
+        MotorAngulo.set(ControlMode.PercentOutput,Speed);
     }
 
     private void acomodarAnguloAutimaticamente(){
@@ -65,6 +80,8 @@ public class Torreta  {
     }
 
     private void prepararDisparo(){
+        //agregar subir
+        //diferencia entre verde y subir
         MotorDisparar.set(ControlMode.PercentOutput, 1);
     }
     
@@ -81,17 +98,14 @@ public class Torreta  {
     }
 
     public void funcionar(){
-            if (Robot.control.readJoystickButtons(Constantes.LG_B7)){
-                readyToShoot=!readyToShoot;
-            }
 
-            if(readyToShoot){
+            if(Robot.control.readJoystickAxis(Constantes.LG_Slider)==-1){
                 prepararDisparo();
             }else{
                 desactivarDisparo();
             }
 
-            if(Robot.control.readJoystickButtons(Constantes.LG_B6)){
+            if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
                 subirPelota();
             }else{
                 desactivarSubirPelota();
@@ -99,6 +113,14 @@ public class Torreta  {
 
             if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
                 Robot.dTrain.destravarse();
+            }
+
+            if (Robot.control.readJoystickButtons(Constantes.LG_B1)){
+                activarAcercar();
+            }else if (Robot.control.readJoystickButtons(Constantes.LG_B1) && Robot.control.readJoystickButtons(Constantes.LG_B_Reverse)){
+                reverseAcercar();
+            }else{
+                desactivarAcercar();
             }
 
             acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));

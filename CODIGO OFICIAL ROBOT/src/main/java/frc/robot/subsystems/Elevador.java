@@ -14,18 +14,18 @@ public class Elevador{
     static Solenoid piston1;
     static Solenoid piston2;
     int forwardChannel = 00; //PONER VALORES/
-    int reverseChannel = 00; //PONER VALORES/
+    int reverseChannel = 01; //PONER VALORES/
     int moduleNumber = 00;
 
     public Elevador(){
-        piston1 = new Solenoid(forwardChannel);
-        piston2 = new Solenoid(forwardChannel);
+        //piston1 = new Solenoid(forwardChannel);
+        //piston2 = new Solenoid(reverseChannel);
         MotorDeslizadorLineal = new WPI_TalonSRX(Constantes.MotorDeslizadorLineal);
         MotorJalar = new WPI_TalonSRX(Constantes.MotorJalar);
     }
     
     private void subirElevador(){
-        MotorDeslizadorLineal.set(ControlMode.PercentOutput,1); 
+        MotorDeslizadorLineal.set(ControlMode.PercentOutput,.4); 
     }
     
     private void bajarElevador(){
@@ -38,8 +38,8 @@ public class Elevador{
     }
 
     private void subirRobot(){
-        if (Robot.control.readJoystickButtons(8)){
-            MotorJalar.set(ControlMode.PercentOutput,1); 
+        if (Robot.control.readXboxButtons(Constantes.XB_B_X)){
+            MotorJalar.set(ControlMode.PercentOutput,.5); 
         }
         else{
             MotorJalar.set(ControlMode.PercentOutput,0);
@@ -57,14 +57,19 @@ public class Elevador{
     }
     
     public void funcionar(){
-        if (Robot.control.readJoystickButtons(Constantes.LG_B8)){
-            abrirPiston();
+        
+        if(Robot.control.readXboxButtons(Constantes.XB_B_A)){
+            subirElevador();
         }
-        if ((Robot.control.readJoystickButtons(Constantes.LG_B9) == true) && (Robot.control.readJoystickButtons(Constantes.LG_B_Reverse))){
-            cerrarPiston();
+        else if(Robot.control.readXboxButtons(Constantes.XB_B_B)){
+            bajarElevador();
         }
-        subirElevador();
+        else{
+            pararElevador();
+        }
+
         subirRobot();
+
 
     }
 

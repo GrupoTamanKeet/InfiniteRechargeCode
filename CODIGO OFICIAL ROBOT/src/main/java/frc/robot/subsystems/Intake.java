@@ -7,11 +7,12 @@ import frc.robot.Robot;
 
 public class Intake{
     static WPI_TalonSRX MotorIntake;
-    static WPI_TalonSRX MotorEntregar;
+    
 
     public Intake(){
           MotorIntake = new WPI_TalonSRX(Constantes.ConexionMotorIntake);
-          MotorEntregar = new WPI_TalonSRX(Constantes.ConexionMotorAcercar);
+          MotorIntake.setInverted(true);
+          
     }
 
     private void activarIntake(){
@@ -27,51 +28,32 @@ public class Intake{
         MotorIntake.setVoltage(0);
     }
 
-    private void activarAcercar(){
-        MotorEntregar.set(ControlMode.PercentOutput, 0.5);
-    }
-
-    private void reverseAcercar(){
-        MotorEntregar.set(ControlMode.PercentOutput, -0.5);
-    }
-
-    private void desactivarAcercar(){
-        MotorEntregar.stopMotor();
-        MotorEntregar.setVoltage(0);
-    }
+    
     
     private void dejarEnIntake(){
         //Pelota en el limbo
         //Boton 9
     }
 
-    private void secuenciaIntake(){
-        //meter y Acercar 
-        activarIntake();
-        activarAcercar();
+    // private void secuenciaIntake(){
+    //     //meter y Acercar 
+    //     activarIntake();
+    //     activarAcercar();
 
-    }
+    // }
 
     public void funcionar(){
         
-        if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
-            secuenciaIntake();
-        }else{
-            if (Robot.control.readJoystickButtons(Constantes.LG_B2)) {
+        
+            if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
                 activarIntake();
-            }else if (Robot.control.readJoystickButtons(Constantes.LG_B2) && Robot.control.readJoystickButtons(Constantes.LG_B_Reverse)){
+            }else if (Robot.control.readXboxButtons(Constantes.XB_B_Start)){
                 reverseIntake();
             }else{
                 desactivarIntake();
             }
     
-            if (Robot.control.readJoystickButtons(Constantes.LG_B8)){
-                activarAcercar();
-            }else if (Robot.control.readJoystickButtons(Constantes.LG_B8) && Robot.control.readJoystickButtons(Constantes.LG_B_Reverse)){
-                reverseAcercar();
-            }else{
-                desactivarAcercar();
-            }
-        }  
+            
+        
     }
 }

@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 //imports
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
@@ -18,6 +20,8 @@ public class DriveTSpark {
     private static double movimientoAdelanteX;
     private static double movimientoAdelanteY;
 
+    SlewRateLimiter LeftJoystick;
+    SlewRateLimiter RightJoystick;
     //variables privadas
 
     public DriveTSpark(){
@@ -34,6 +38,8 @@ public class DriveTSpark {
         motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
 
         driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
+        LeftJoystick = new SlewRateLimiter(1.75);
+        //RightJoystick= new SlewRateLimiter(2.25);
 
     }
 
@@ -42,7 +48,7 @@ public class DriveTSpark {
 
         // inputs del control para movimiento
         movimientoAdelanteY = -Robot.control.readXboxAxis(Constantes.XB_RT)
-                - Robot.control.readXboxAxis(Constantes.XB_LT); // toma el valor para ir hacia adelante o hacia atras
+                + Robot.control.readXboxAxis(Constantes.XB_LT); // toma el valor para ir hacia adelante o hacia atras
 
         movimientoAdelanteX = Robot.control.readXboxAxis(Constantes.XB_LJ_X) * movimientoAdelanteY
                 * Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el robot y que sirva mejor
@@ -58,7 +64,15 @@ public class DriveTSpark {
           else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
         }
         
-        driveTrain.arcadeDrive(movimientoAdelanteY,movimientoAdelanteX);
+        driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), RightJoystick.calculate(movimientoAdelanteX));
+
+    }
+
+    public void noAlex(){
+
+      //movimientoAdelanteY = Robot.control.readXboxAxis(Constantes.XB_LJ_Y);
+      //movimientoAdelanteX= Robot.control.readXboxAxis(Constantes.XB_RJ_X);
+      driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .75 );
 
     }
 
@@ -87,9 +101,9 @@ public class DriveTSpark {
     public void destravarse(){
         int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
         if (miliseconds%2==0){
-          driveTrain.arcadeDrive(0, 0.2);
+          driveTrain.arcadeDrive(0, 0.4);
         }else{
-          driveTrain.arcadeDrive(0, -0.2);
+          driveTrain.arcadeDrive(0, -0.4);
         }
     }
 }

@@ -36,18 +36,18 @@ public class Constantes {
     public static final int PosicionMotorDriveIzquierda1 = 3;
     public static final int PosicionMotorDriveIzquierda2 = 2;
     //Intake
-    public static final int ConexionMotorIntake = 5;
-    public static final int ConexionMotorAcercar = 6;
+    public static final int ConexionMotorIntake = 13;
+    public static final int ConexionMotorAcercar = 5;
     //Torreta
-    public static final int ConexionMotorSubir = 7;
+    public static final int ConexionMotorSubir = 10;
     public static final int ConexionPosicionEntregar = 8; //Es el mismo que acercar???
-    public static final int ConexionMotorAngulo = 0;
-    public static final int ConexionMotorSusana = 0;
-    public static final int ConexionMotorTorreta = 0;
+    public static final int ConexionMotorAngulo = 8;
+    public static final int ConexionMotorSusana = 7;
+    public static final int ConexionMotorTorreta = 9;
 
     //Colcarse
-    public static final int MotorDeslizadorLineal = 0;
-    public static final int MotorJalar = 0;
+    public static final int MotorDeslizadorLineal = 12;
+    public static final int MotorJalar = 11;
 
     public static final int ConexionCompresor = 0;
 
