@@ -47,13 +47,16 @@ public class MoveDisk{
         }
         colorSensor.leerColor();
     }
+    
+    public void PararMotor(){
+        motordisco.stopMotor();
+        motordisco.setVoltage(0);
+    }
 
     public void spin (int laps){
+        //probar cuanto tiempo es necesario
 
     }
 
-    public void PonerColor(){
-        
-    }
 
 }
