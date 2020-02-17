@@ -5,16 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.I2C;
+import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Controles;
-import frc.robot.hardware.Gyro;
 import frc.robot.hardware.MotorAcercar;
 import frc.robot.subsystems.*;
-
-import com.revrobotics.ColorSensorV3;
 
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
@@ -29,6 +25,7 @@ public class Robot extends TimedRobot {
   public static Elevador elevador;
   public static Torreta torreta;
   public static MotorAcercar motorAcercar;
+  public static ColorSensor sensorDeColor;
 
 
   //sensor de color
@@ -40,10 +37,12 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     
+    sensorDeColor = new ColorSensor();
+
     //dTrain = new DriveTSpark();
     //intake = new Intake();
     //control = new Controles();
-    elevador = new Elevador();
+    //elevador = new Elevador();
     //torreta = new Torreta();
     //motorAcercar = new MotorAcercar();
 
@@ -110,7 +109,9 @@ public class Robot extends TimedRobot {
     //dTrain.moverseConXbox(); // mueve el robot, control durante teleop
     //intake.funcionar();
     //elevador.funcionar();
-    torreta.funcionar();
+    //torreta.funcionar();
+    sensorDeColor.leerColor();
+
   }
 
   /**

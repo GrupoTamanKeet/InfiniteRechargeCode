@@ -10,7 +10,8 @@ import com.revrobotics.ColorMatch;
 public class ColorSensor{
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
-    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+    private final ColorSensorV3 m_colorSensor;
+
 
     //We need calibration 
     private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
@@ -19,7 +20,7 @@ public class ColorSensor{
     private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
     public ColorSensor (){
-        ColorSensor sensor = new ColorSensor();
+      m_colorSensor = new ColorSensorV3(i2cPort);
 
     }
 
