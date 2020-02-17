@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
@@ -45,7 +46,7 @@ public class Robot extends TimedRobot {
     dTrain = new DriveTSpark();
     intake = new Intake();
     control = new Controles();
-    elevador = new Elevador();
+    //elevador = new Elevador();
     torreta = new Torreta();
 
   }
@@ -107,10 +108,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     // Aqui el codigo donde vamos a poner toda la estructura del robot
-
-    dTrain.noAlex(); // mueve el robot, control durante teleop
+    //Elevador.piston1.set(Value.kForward);
+    dTrain.moverseConXbox(); // mueve el robot, control durante teleop
     intake.funcionar();
-    elevador.funcionar();
+    //elevador.funcionar();
     torreta.funcionar();
   }
 

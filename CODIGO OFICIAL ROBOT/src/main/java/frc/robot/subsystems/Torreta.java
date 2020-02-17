@@ -17,19 +17,22 @@ public class Torreta  {
 
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
+
         MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
         MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
         MotorSubir = new WPI_TalonSRX(Constantes.ConexionMotorSubir);
         MotorEntregar = new WPI_TalonSRX(Constantes.ConexionMotorAcercar);
         MotorDisparar.setInverted(false);
         MotorAngulo.setInverted(true);
+        
     }
 
     private void acomodarSusana(double Speed){
         if(Speed==0){
             desactivarSusana();
+            return;
         }
-        MotorSusana.set(ControlMode.PercentOutput,Speed);
+        MotorSusana.set(ControlMode.PercentOutput,Speed*2);
     }
 
     private void acomodarSusanaAutimaticamente(){

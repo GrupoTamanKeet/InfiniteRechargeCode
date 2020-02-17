@@ -49,7 +49,7 @@ public class Constantes {
     public static final int MotorDeslizadorLineal = 12;
     public static final int MotorJalar = 11;
 
-    public static final int ConexionCompresor = 0;
+    public static final int ConexionCompresor = 1;
 
 //-----------------------------------------------------
 //      _____            _             _            

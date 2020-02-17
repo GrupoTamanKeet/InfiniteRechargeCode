@@ -64,15 +64,23 @@ public class DriveTSpark {
           else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
         }
         
-        driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), RightJoystick.calculate(movimientoAdelanteX));
+        driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), movimientoAdelanteX);
 
     }
 
     public void noAlex(){
-
+      double eje;
+      if(Robot.control.readXboxButtons(Constantes.XB_B_Y)){
+        eje = 2;
+      }
+      else{
+        
+        eje = .75;
+      
+      }
       //movimientoAdelanteY = Robot.control.readXboxAxis(Constantes.XB_LJ_Y);
       //movimientoAdelanteX= Robot.control.readXboxAxis(Constantes.XB_RJ_X);
-      driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .75 );
+      driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * eje);
 
     }
 
