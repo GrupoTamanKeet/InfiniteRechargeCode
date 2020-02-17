@@ -25,9 +25,6 @@ public class ColorSensor{
 
     }
 
-    public void readSensor(){
-
-    }
 
      /**
    * A Rev Color Match object is used to register and detect known colors. This can 

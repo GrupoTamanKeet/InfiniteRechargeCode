@@ -51,6 +51,11 @@ public class Constantes {
 
     public static final int ConexionCompresor = 1;
 
+    // Control Panel
+    public static final int ConexionMotorDisco= 0;  //cambiar el valor de estas dos
+    public static final int ConexionPistonDisco=0;
+
+
 //-----------------------------------------------------
 //      _____            _             _            
 //     / ____|          | |           | |           
@@ -126,7 +131,7 @@ public static final int LG_B_Reverse = 11; //DEFINIR UNO
 
 public static final int LG_B1 = 1; //Disparar
 public static final int LG_B2 = 2; // Intake
-public static final int LG_B3 = 3;
+public static final int LG_B3 = 3; // Disco
 public static final int LG_B4 = 4;
 public static final int LG_B5 = 5; //Secuencia disparar
 public static final int LG_B6 = 6; //Secuencia intake
