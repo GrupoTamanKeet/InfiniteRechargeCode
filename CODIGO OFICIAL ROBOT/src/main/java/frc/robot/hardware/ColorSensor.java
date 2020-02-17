@@ -3,14 +3,15 @@ package frc.robot.hardware;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
+import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatch;
 
 public class ColorSensor{
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 m_colorSensor;
+    //private final ColorSensorV3 hola;
 
 
     //We need calibration 
@@ -19,7 +20,7 @@ public class ColorSensor{
     private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
     private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-    public ColorSensor (){
+    public ColorSensor(){
       m_colorSensor = new ColorSensorV3(i2cPort);
 
     }
@@ -43,7 +44,6 @@ public class ColorSensor{
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);    
   
-
     Color detectedColor = m_colorSensor.getColor();
 
     /**
