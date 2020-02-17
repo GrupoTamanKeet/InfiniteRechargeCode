@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.SlewRateLimiter;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 
@@ -11,9 +13,8 @@ public class Torreta  {
     private static WPI_TalonSRX MotorSusana;
     private static WPI_TalonSRX MotorAngulo;
     private static WPI_TalonSRX MotorSubir;
-    static WPI_TalonSRX MotorEntregar;
 
-    private static boolean readyToShoot = false;
+    private static SlewRateLimiter smooth;
 
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
@@ -21,10 +22,10 @@ public class Torreta  {
         MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
         MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
         MotorSubir = new WPI_TalonSRX(Constantes.ConexionMotorSubir);
-        MotorEntregar = new WPI_TalonSRX(Constantes.ConexionMotorAcercar);
         MotorDisparar.setInverted(false);
         MotorAngulo.setInverted(true);
-        
+
+        smooth = new SlewRateLimiter(.8);
     }
 
     private void acomodarSusana(double Speed){
@@ -45,21 +46,21 @@ public class Torreta  {
     }
 
     private void activarAcercar(){
-        MotorEntregar.set(ControlMode.PercentOutput, 0.5);
+        Robot.motorAcercar.moverMotor(0.5);
     }
 
     private void reverseAcercar(){
-        MotorEntregar.set(ControlMode.PercentOutput, -0.5);
+        Robot.motorAcercar.moverMotor(-0.5);
     }
 
     private void desactivarAcercar(){
-        MotorEntregar.stopMotor();
-        MotorEntregar.setVoltage(0);
+        Robot.motorAcercar.pararMotor();
     }
 
     private void acomodarAngulo(double Speed){
         if(Speed==0){
             desactivarAngulo();
+            return;
         }
         MotorAngulo.set(ControlMode.PercentOutput,Speed);
     }
@@ -70,22 +71,22 @@ public class Torreta  {
     
     private void desactivarAngulo(){
         MotorAngulo.stopMotor();
-        MotorAngulo.setVoltage(0);
+        //No queremos que tenga voltaje 0 para que no cambie la posición
     }
 
     private void subirPelota(){
         MotorSubir.set(ControlMode.PercentOutput, 0.4);
-
     }
+
     private void desactivarSubirPelota(){
         MotorSubir.stopMotor();
         MotorSubir.setVoltage(0);
     }
 
     private void prepararDisparo(){
-        //agregar subir
         //diferencia entre verde y subir
-        MotorDisparar.set(ControlMode.PercentOutput, 1);
+        //Lo hace con el SlowRate
+        MotorDisparar.set(ControlMode.PercentOutput, smooth.calculate(1));
     }
     
     private void desactivarDisparo(){
@@ -95,9 +96,17 @@ public class Torreta  {
 
     private void secuenciaDisparar(){
         //Activar acercar y subir
-        //Mover el robot
         //Boton 5
-        Robot.dTrain.destravarse();
+        prepararDisparo();
+        subirPelota();
+        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
+        if (miliseconds%2==0){
+            activarAcercar();
+        }else{
+            desactivarAcercar();
+        }
+        //Mover el robot
+        //Robot.dTrain.destravarse();
     }
 
     public void funcionar(){

@@ -107,11 +107,11 @@ public class DriveTSpark {
     }
 
     public void destravarse(){
-        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
-        if (miliseconds%2==0){
-          driveTrain.arcadeDrive(0, 0.4);
-        }else{
-          driveTrain.arcadeDrive(0, -0.4);
-        }
+      int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
+      if (miliseconds%2==0){
+        driveTrain.arcadeDrive(0, 0.4);
+      }else{
+        driveTrain.arcadeDrive(0, -0.4);
+      }
     }
 }

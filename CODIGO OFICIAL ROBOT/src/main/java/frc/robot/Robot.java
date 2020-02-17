@@ -11,10 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.Gyro;
-import frc.robot.subsystems.DriveTSpark;
-import frc.robot.subsystems.Elevador;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Torreta;
+import frc.robot.hardware.MotorAcercar;
+import frc.robot.subsystems.*;
 
 import com.revrobotics.ColorSensorV3;
 
@@ -30,11 +28,10 @@ public class Robot extends TimedRobot {
   public static Intake intake;
   public static Elevador elevador;
   public static Torreta torreta;
+  public static MotorAcercar motorAcercar;
 
 
   //sensor de color
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final ColorSensorV3 SensorColor = new ColorSensorV3(i2cPort);
 
 
   @Override
@@ -43,11 +40,12 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     
-    dTrain = new DriveTSpark();
-    intake = new Intake();
-    control = new Controles();
-    //elevador = new Elevador();
-    torreta = new Torreta();
+    //dTrain = new DriveTSpark();
+    //intake = new Intake();
+    //control = new Controles();
+    elevador = new Elevador();
+    //torreta = new Torreta();
+    //motorAcercar = new MotorAcercar();
 
   }
 
@@ -109,8 +107,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // Aqui el codigo donde vamos a poner toda la estructura del robot
     //Elevador.piston1.set(Value.kForward);
-    dTrain.moverseConXbox(); // mueve el robot, control durante teleop
-    intake.funcionar();
+    //dTrain.moverseConXbox(); // mueve el robot, control durante teleop
+    //intake.funcionar();
     //elevador.funcionar();
     torreta.funcionar();
   }

@@ -24,6 +24,7 @@ public class Elevador{
     public Elevador(){
         //compresora = new Compressor(Constantes.ConexionCompresor);
         //compresora.setClosedLoopControl(true);
+        //No es necesario tener la compresora
         piston1 = new DoubleSolenoid(Constantes.ConexionCompresor,forwardChannel,reverseChannel);
         MotorDeslizadorLineal = new WPI_TalonSRX(Constantes.MotorDeslizadorLineal);
         MotorJalar = new WPI_TalonSRX(Constantes.MotorJalar);
@@ -60,35 +61,32 @@ public class Elevador{
     
     private void cerrarPiston (){
         piston1.set(Value.kReverse);
-
     }
     
     public void funcionar(){
         
         if(Robot.control.readXboxButtons(Constantes.XB_B_A)){
             abierto++;
-            
-            
-            
-            subirElevador();
+            //subirElevador();
+            abrirPiston();
         }
         else if(Robot.control.readXboxButtons(Constantes.XB_B_B)){
             cerrado++;
-            bajarElevador();
-            
-        }
-        else{
-            pararElevador();
-        }
-        if(Robot.control.readXboxButtons(Constantes.XB_B_Y)==true){
-            abrirPiston();
-        }
-     
-        if(Robot.control.readXboxButtons(Constantes.XB_B_Back)){
+            //bajarElevador();
             cerrarPiston();
         }
+        // else{
+        //     pararElevador();
+        // }
+        // if(Robot.control.readXboxButtons(Constantes.XB_B_Y)==true){
+        //     abrirPiston();
+        // }
+     
+        // if(Robot.control.readXboxButtons(Constantes.XB_B_Back)){
+        //     cerrarPiston();
+        // }
         
-        subirRobot();
+        // subirRobot();
 
 
     }

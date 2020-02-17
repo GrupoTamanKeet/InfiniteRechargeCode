@@ -12,7 +12,6 @@ public class Intake{
     public Intake(){
           MotorIntake = new WPI_TalonSRX(Constantes.ConexionMotorIntake);
           MotorIntake.setInverted(true);
-          
     }
 
     private void activarIntake(){
@@ -27,24 +26,36 @@ public class Intake{
         MotorIntake.stopMotor();
         MotorIntake.setVoltage(0);
     }
-
-    
     
     private void dejarEnIntake(){
         //Pelota en el limbo
         //Boton 9
+
+        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
+        if (miliseconds%2==0){
+            MotorIntake.set(ControlMode.PercentOutput, -0.4);
+        }else{
+            MotorIntake.set(ControlMode.PercentOutput, 0);
+        }
     }
 
-    // private void secuenciaIntake(){
-    //     //meter y Acercar 
-    //     activarIntake();
-    //     activarAcercar();
+    private void activarAcercar() {
+        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
+        if (miliseconds%2==0){
+            Robot.motorAcercar.moverMotor(.4);
+          }else{
+            Robot.motorAcercar.moverMotor(0);
+          }
+    }
 
-    // }
+    private void secuenciaIntake(){
+        //meter y Acercar 
+        activarIntake();
+        activarAcercar();
+
+    }
 
     public void funcionar(){
-        
-        
             if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
                 activarIntake();
             }else if (Robot.control.readXboxButtons(Constantes.XB_B_Start)){
