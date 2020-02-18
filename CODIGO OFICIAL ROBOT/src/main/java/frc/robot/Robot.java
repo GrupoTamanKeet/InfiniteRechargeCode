@@ -11,6 +11,7 @@ import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.MotorAcercar;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
@@ -37,7 +38,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     
-    sensorDeColor = new ColorSensor();
+    //sensorDeColor = new ColorSensor();
 
     //dTrain = new DriveTSpark();
     //intake = new Intake();
@@ -104,13 +105,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    // Aqui el codigo donde vamos a poner toda la estructura del robot
+    //Aqui el codigo donde vamos a poner toda la estructura del robot
     //Elevador.piston1.set(Value.kForward);
-    //dTrain.moverseConXbox(); // mueve el robot, control durante teleop
-    //intake.funcionar();
-    //elevador.funcionar();
-    //torreta.funcionar();
-    sensorDeColor.leerColor();
+    dTrain.noAlex(); // mueve el robot, control durante teleop
+    intake.funcionar();
+    elevador.funcionar();
+    torreta.funcionar();
+    //sensorDeColor.leerColor();
 
   }
 

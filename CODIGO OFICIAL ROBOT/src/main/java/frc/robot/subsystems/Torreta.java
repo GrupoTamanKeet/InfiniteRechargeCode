@@ -75,7 +75,7 @@ public class Torreta  {
     }
 
     private void subirPelota(){
-        MotorSubir.set(ControlMode.PercentOutput, 0.4);
+        MotorSubir.set(ControlMode.PercentOutput, 0.75);
     }
 
     private void desactivarSubirPelota(){
