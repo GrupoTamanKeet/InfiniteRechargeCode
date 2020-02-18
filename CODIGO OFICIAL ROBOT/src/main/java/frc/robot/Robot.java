@@ -7,10 +7,18 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
 import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.MotorAcercar;
-import frc.robot.subsystems.*;
+
+
+import frc.robot.subsystems.Elevador;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Torreta;
+import frc.robot.subsystems.DriveTSpark;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Robot extends TimedRobot {
