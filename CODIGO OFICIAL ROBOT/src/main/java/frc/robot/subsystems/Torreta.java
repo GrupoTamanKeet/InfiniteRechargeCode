@@ -94,6 +94,14 @@ public class Torreta  {
         MotorDisparar.setVoltage(0);
     }
 
+    private void pararTodo(){
+        desactivarAcercar();
+        desactivarAngulo();
+        desactivarDisparo();
+        desactivarSubirPelota();
+        desactivarSusana();
+    }
+
     private void secuenciaDisparar(){
         //Activar acercar y subir
         //Boton 5
@@ -124,6 +132,7 @@ public class Torreta  {
             }
 
             if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
+                pararTodo();
                 Robot.dTrain.destravarse();
             }
 

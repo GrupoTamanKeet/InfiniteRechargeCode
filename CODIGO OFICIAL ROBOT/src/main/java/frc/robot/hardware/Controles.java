@@ -6,7 +6,6 @@ public class Controles {
 
     private static Joystick ControlXbox;
     private static Joystick ControlPiloto;
-    private static Joystick Botonera;
 
     // _____ _ _ _ _ _
     // |_ _| (_) (_) | (_) (_)
@@ -18,7 +17,6 @@ public class Controles {
     public Controles() {
         ControlXbox = new Joystick(Constantes.puertoXbox);
         ControlPiloto = new Joystick(Constantes.puertoJoystick);
-        Botonera = new Joystick(Constantes.puertoBottonera);
     }
 
     // -----------------------------------------------------
