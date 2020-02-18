@@ -7,20 +7,19 @@ import frc.robot.hardware.Constantes;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 
 
 public class MoveDisk{
 
-    public static DoubleSolenoid pistondisco;
+    public static Solenoid pistondisco;
     public static WPI_TalonSRX motordisco;
     private ColorSensor colorSensor;
     
     int ForwardChannel = 3;
 
     public MoveDisk (){
-        pistondisco = new DoubleSolenoid(Constantes.ConexionPistonDisco,ForwardChannel);
+        pistondisco = new Solenoid(Constantes.ConexionPistonDisco,ForwardChannel);
         motordisco = new WPI_TalonSRX(Constantes.ConexionMotorDisco);
         colorSensor = new ColorSensor();
     }
@@ -29,11 +28,11 @@ public class MoveDisk{
     }
 
     public void abrirPiston() {
-        pistondisco.set(Value.kForward);
+        pistondisco.set(true);
     }
 
     public void cerrarPiston(){
-        pistondisco.set(Value.kReverse);
+        pistondisco.set(false);
 
     }
     public void funcionar(){

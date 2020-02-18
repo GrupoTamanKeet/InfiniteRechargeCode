@@ -62,9 +62,6 @@ public class Intake{
                 reverseIntake();
             }else{
                 desactivarIntake();
-            }
-    
-            
-        
+            }    
     }
 }
