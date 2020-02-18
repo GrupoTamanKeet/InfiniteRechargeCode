@@ -6,6 +6,10 @@ import edu.wpi.first.wpilibj.SlewRateLimiter;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 
 public class Torreta  {
  
@@ -15,6 +19,11 @@ public class Torreta  {
     private static WPI_TalonSRX MotorSubir;
 
     private static SlewRateLimiter smooth;
+
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("datatable");
+    NetworkTableEntry xEntry = table.getEntry("x");
+    NetworkTableEntry yEntry = table.getEntry("y");
 
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
@@ -37,7 +46,8 @@ public class Torreta  {
     }
 
     private void acomodarSusanaAutimaticamente(){
-        System.out.println("Aun no se hace");
+        System.out.println("Casi");
+
     }
     
     private void desactivarSusana(){

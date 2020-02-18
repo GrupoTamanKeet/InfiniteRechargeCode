@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     //Aqui el codigo donde vamos a poner toda la estructura del robot
     //Elevador.piston1.set(Value.kForward);
-    dTrain.noAlex(); // mueve el robot, control durante teleop
+    dTrain.movimientoDrivetrainFinal(); // mueve el robot, control durante teleop
     intake.funcionar();
     elevador.funcionar();
     torreta.funcionar();
