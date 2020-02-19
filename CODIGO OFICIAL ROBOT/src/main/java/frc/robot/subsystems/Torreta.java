@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -40,6 +41,7 @@ public class Torreta  {
         MotorSubir = new WPI_TalonSRX(Constantes.ConexionMotorSubir);
         MotorDisparar.setInverted(false);
         MotorAngulo.setInverted(true);
+        MotorAngulo.setNeutralMode(NeutralMode.Brake);
 
         smooth = new SlewRateLimiter(.8);
 

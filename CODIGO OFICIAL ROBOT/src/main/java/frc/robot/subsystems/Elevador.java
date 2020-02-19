@@ -4,6 +4,7 @@ import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -22,13 +23,14 @@ public class Elevador{
     int reverseChannel = 2; //PONER VALORES/
 
     public Elevador(){
+        //No es necesario tener la compresora
         //compresora = new Compressor(Constantes.ConexionCompresor);
         //compresora.setClosedLoopControl(true);
-        //No es necesario tener la compresora
+        
         piston1 = new DoubleSolenoid(Constantes.ConexionCompresor,forwardChannel,reverseChannel);
         MotorDeslizadorLineal = new WPI_TalonSRX(Constantes.MotorDeslizadorLineal);
         MotorJalar = new WPI_TalonSRX(Constantes.MotorJalar);
-
+        MotorDeslizadorLineal.setNeutralMode(NeutralMode.Brake);
         //cerrarPiston();
     }
     
@@ -75,18 +77,18 @@ public class Elevador{
             //bajarElevador();
             cerrarPiston();
         }
-        // else{
-        //     pararElevador();
-        // }
-        // if(Robot.control.readXboxButtons(Constantes.XB_B_Y)==true){
-        //     abrirPiston();
-        // }
+        else{
+            pararElevador();
+        }
+        if(Robot.control.readXboxButtons(Constantes.XB_B_Y)==true){
+            abrirPiston();
+        }
      
-        // if(Robot.control.readXboxButtons(Constantes.XB_B_Back)){
-        //     cerrarPiston();
-        // }
+        if(Robot.control.readXboxButtons(Constantes.XB_B_Back)){
+            cerrarPiston();
+        }
         
-        // subirRobot();
+        subirRobot();
 
 
     }
