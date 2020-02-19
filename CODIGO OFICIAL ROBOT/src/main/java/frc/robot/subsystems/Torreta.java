@@ -6,6 +6,10 @@ import edu.wpi.first.wpilibj.SlewRateLimiter;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.AnalogGyro;
 
 public class Torreta  {
  
@@ -15,6 +19,18 @@ public class Torreta  {
     private static WPI_TalonSRX MotorSubir;
 
     private static SlewRateLimiter smooth;
+
+    private NetworkTableInstance inst;
+    private NetworkTable table;
+    private NetworkTableEntry xEntry;
+
+    private float moverse;
+    private float sensibilidad = 0.1f;
+
+    private AnalogGyro gyro;
+    private double anguloDeLaTorreta;
+    private double moverTorreta;
+    private double sensibilidadDeTorreta = 0.01;
 
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
@@ -26,6 +42,11 @@ public class Torreta  {
         MotorAngulo.setInverted(true);
 
         smooth = new SlewRateLimiter(.8);
+
+        inst = NetworkTableInstance.getDefault();
+        table = inst.getTable("Vision");
+        xEntry = table.getEntry("torretaX");
+        gyro = new AnalogGyro(0);
     }
 
     private void acomodarSusana(double Speed){
@@ -37,7 +58,21 @@ public class Torreta  {
     }
 
     private void acomodarSusanaAutimaticamente(){
-        System.out.println("Aun no se hace");
+        System.out.println("Casi");
+
+        xEntry = table.getEntry("torretaX"); // corrige esto despue s
+
+        moverse = (xEntry * sensibilidad);
+
+        acomodarSusana(moverse);
+    }
+
+    private void pidAngulo(int angulo){
+        anguloDeLaTorreta = gyro.getAngle();
+        
+        moverTorreta = (anguloDeLaTorreta - angulo) / sensibilidadDeTorreta;
+
+        acomodarAngulo(moverTorreta);
     }
     
     private void desactivarSusana(){
@@ -64,10 +99,6 @@ public class Torreta  {
         }
         MotorAngulo.set(ControlMode.PercentOutput,Speed);
     }
-
-    private void acomodarAnguloAutimaticamente(){
-        System.out.println("Aun no se hace");
-    }
     
     private void desactivarAngulo(){
         MotorAngulo.stopMotor();
@@ -75,7 +106,7 @@ public class Torreta  {
     }
 
     private void subirPelota(){
-        MotorSubir.set(ControlMode.PercentOutput, 0.4);
+        MotorSubir.set(ControlMode.PercentOutput, 0.75);
     }
 
     private void desactivarSubirPelota(){

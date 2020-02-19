@@ -18,8 +18,8 @@ public class Elevador{
     //Compressor compresora;
     int abierto = 0;
     int cerrado = 0;
-    int forwardChannel = 0; //PONER VALORES/
-    int reverseChannel = 1; //PONER VALORES/
+    int forwardChannel = 1; //PONER VALORES/
+    int reverseChannel = 2; //PONER VALORES/
 
     public Elevador(){
         //compresora = new Compressor(Constantes.ConexionCompresor);
