@@ -66,7 +66,7 @@ public class Elevador{
     }
     
     public void funcionar(){
-        
+        //Cambar al control de Logitech
         if(Robot.control.readXboxButtons(Constantes.XB_B_A)){
             abierto++;
             //subirElevador();
