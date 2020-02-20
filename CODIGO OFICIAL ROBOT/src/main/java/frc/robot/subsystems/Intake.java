@@ -14,7 +14,7 @@ public class Intake{
           MotorIntake.setInverted(true);
     }
 
-    private void activarIntake(){
+    public void activarIntake(){
         MotorIntake.set(ControlMode.PercentOutput, 0.4);
     }
 
@@ -22,7 +22,7 @@ public class Intake{
         MotorIntake.set(ControlMode.PercentOutput, -0.4);
     }
 
-    private void desactivarIntake(){
+    public void desactivarIntake(){
         MotorIntake.stopMotor();
         MotorIntake.setVoltage(0);
     }

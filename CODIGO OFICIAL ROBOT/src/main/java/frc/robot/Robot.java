@@ -34,6 +34,8 @@ public class Robot extends TimedRobot {
   public static MotorAcercar motorAcercar;
   public static ColorSensor sensorDeColor;
 
+  
+
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot {
     elevador = new Elevador();
     torreta = new Torreta();
     motorAcercar = new MotorAcercar();
+
     //sensorDeColor = new ColorSensor();
 
   }
@@ -110,6 +113,7 @@ public class Robot extends TimedRobot {
     intake.funcionar();
     elevador.funcionar();
     torreta.funcionar();
+
     //sensorDeColor.leerColor();
     
   }
