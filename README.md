@@ -7,18 +7,17 @@ Por favor, una vez que completen una tarea comentenlo con su nombre, por ejemplo
 Crear pid de drivetrain -Alex, colaborador (si alguien les ayudo).
 
      Urge:
+          Autonomos
           Arreglar problema con el elevador,  ??
           Pasar variables de ids a ids correctos
-          Crear el MoveDisk.java //Disco de colores
           Terminar imlementacion de camara
                Crear codigo de la camara
                Crear filtros de colores para solamente ver el verde 
                Pasar lineas de los strips para mejor alineacion
                Programar camara para solamente mandar valores al codigo
           Crear elevador inteligente [falta que electronica ponga los botones]
-          Hacer que el intake interno sirva de forma automatica [faltan botones]
           DIVERTIRSE -Todos
-          Autonomos
+          
 
      Implementaciones no necesarias:
           Hacer que el drivetrain sea field oriented
