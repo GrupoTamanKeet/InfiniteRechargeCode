@@ -7,19 +7,22 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Elevador{
     public static WPI_TalonSRX MotorDeslizadorLineal;
     public static WPI_TalonSRX MotorJalar;
-    public static Solenoid piston1;
+    public static DoubleSolenoid piston1;
 
     public Elevador(){
         //No es necesario declarar la compresora
         //compresora = new Compressor(Constantes.ConexionCompresor);
         //compresora.setClosedLoopControl(true);
-        
-        piston1 = new Solenoid(Constantes.ConexionCompresor,Constantes.ConexionPistonDisco);
+        int ForwardChannel = 0;
+        int BackwardChannel = 1;
+        piston1 = new DoubleSolenoid(Constantes.ConexionCompresor,ForwardChannel,BackwardChannel);
         MotorDeslizadorLineal = new WPI_TalonSRX(Constantes.MotorDeslizadorLineal);
         MotorJalar = new WPI_TalonSRX(Constantes.MotorColgar);
         
@@ -50,11 +53,11 @@ public class Elevador{
 
 
     private void abrirPiston(){
-        piston1.set(true);
+        piston1.set(Value.kForward);
     }
     
     private void cerrarPiston (){
-        piston1.set(false);
+        piston1.set(Value.kReverse);
     }
     
     public void funcionar(){

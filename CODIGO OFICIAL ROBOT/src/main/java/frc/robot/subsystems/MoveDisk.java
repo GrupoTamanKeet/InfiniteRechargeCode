@@ -16,7 +16,7 @@ public class MoveDisk{
     public static WPI_TalonSRX motordisco;
     private ColorSensor colorSensor;
     
-    int ForwardChannel = 3;
+    int ForwardChannel = 2;
 
     public MoveDisk (){
         pistondisco = new Solenoid(Constantes.ConexionPistonDisco,ForwardChannel);
