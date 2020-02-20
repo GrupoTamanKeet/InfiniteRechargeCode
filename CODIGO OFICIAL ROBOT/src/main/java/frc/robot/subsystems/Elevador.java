@@ -20,8 +20,8 @@ public class Elevador{
         //No es necesario declarar la compresora
         //compresora = new Compressor(Constantes.ConexionCompresor);
         //compresora.setClosedLoopControl(true);
-        int ForwardChannel = 1;
-        int BackwardChannel = 2;
+        int ForwardChannel = 2;
+        int BackwardChannel = 1;
         piston1 = new DoubleSolenoid(Constantes.ConexionCompresor,ForwardChannel,BackwardChannel);
         MotorDeslizadorLineal = new WPI_TalonSRX(Constantes.MotorDeslizadorLineal);
         MotorJalar = new WPI_TalonSRX(Constantes.MotorColgar);
