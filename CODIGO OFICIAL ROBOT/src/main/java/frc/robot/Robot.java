@@ -19,8 +19,6 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Torreta;
 import frc.robot.subsystems.DriveTSpark;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
@@ -36,24 +34,19 @@ public class Robot extends TimedRobot {
   public static MotorAcercar motorAcercar;
   public static ColorSensor sensorDeColor;
 
-
-  //sensor de color
-
-
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     
+    dTrain = new DriveTSpark();
+    intake = new Intake();
+    control = new Controles();
+    elevador = new Elevador();
+    torreta = new Torreta();
+    motorAcercar = new MotorAcercar();
     //sensorDeColor = new ColorSensor();
-
-    //dTrain = new DriveTSpark();
-    //intake = new Intake();
-    //control = new Controles();
-    //elevador = new Elevador();
-    //torreta = new Torreta();
-    //motorAcercar = new MotorAcercar();
 
   }
 
@@ -81,9 +74,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
     m_autoSelected = m_chooser.getSelected();
-    
+  
     // cosas de if selected has esto con nombres de cosas, si esta dentro de un loop
 
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
@@ -114,8 +106,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //Aqui el codigo donde vamos a poner toda la estructura del robot
-    //Elevador.piston1.set(Value.kForward);
-    dTrain.movimientoDrivetrainFinal(); // mueve el robot, control durante teleop
+    dTrain.moverseConXbox();
     intake.funcionar();
     elevador.funcionar();
     torreta.funcionar();

@@ -2,7 +2,6 @@ package frc.robot.hardware;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.hardware.Constantes;
 import frc.robot.subsystems.DriveTrain;
 
 public class Gyro{

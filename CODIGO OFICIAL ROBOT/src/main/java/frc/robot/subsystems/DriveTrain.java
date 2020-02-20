@@ -10,19 +10,18 @@ import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 
 public class DriveTrain { 
-    //mandar a Sofi
-    //DriveMotors
-    WPI_TalonSRX MotorDerecha1;
-    WPI_TalonSRX MotorDerecha2;
-    WPI_TalonSRX MotorIzquierda1;
-    WPI_TalonSRX MotorIzquierda2;
+  //DriveMotors
+  WPI_TalonSRX MotorDerecha1;
+  WPI_TalonSRX MotorDerecha2;
+  WPI_TalonSRX MotorIzquierda1;
+  WPI_TalonSRX MotorIzquierda2;
 
-    private static SpeedControllerGroup MotoresDriveDerecha;
-    private static SpeedControllerGroup MotoresDriveIzquierda;
-    public static DifferentialDrive MovimientoBaseCompleto;
+  private static SpeedControllerGroup MotoresDriveDerecha;
+  private static SpeedControllerGroup MotoresDriveIzquierda;
+  public static DifferentialDrive MovimientoBaseCompleto;
 
-    private static double movimientoAdelanteX;
-    private static double movimientoAdelanteY; // private double movimientoAdelanteZ;
+  private static double movimientoAdelanteX;
+  private static double movimientoAdelanteY; // private double movimientoAdelanteZ;
 
     //encoders de ambas líneas de motores
   private Encoder EncoderMotoresDerecha;

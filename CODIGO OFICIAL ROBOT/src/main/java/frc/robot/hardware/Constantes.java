@@ -16,11 +16,10 @@ public class Constantes {
 
     public static final float controlMaximaVelocidadDeGiro = .8f;
 
-
     // gyro stuff -------------------------------------------------------------------------------------------------------------------------
 
     public static double anguloTotalRobot;
-    public static double anguloRobot; 
+    public static double anguloRobot; //@Alex, puedes hacerle un mod 360
     public static int vueltasDelRobot; 
     
 //      _____                      _                         _____       _           _   
@@ -40,15 +39,13 @@ public class Constantes {
     public static final int ConexionMotorAcercar = 5;
     //Torreta
     public static final int ConexionMotorSubir = 10;
-    public static final int ConexionPosicionEntregar = 8; //Es el mismo que acercar???
     public static final int ConexionMotorAngulo = 8;
     public static final int ConexionMotorSusana = 7;
     public static final int ConexionMotorTorreta = 9;
 
-    //Colcarse
+    //Colgarse
     public static final int MotorDeslizadorLineal = 12;
-    public static final int MotorJalar = 11;
-
+    public static final int MotorColgar = 11;
     public static final int ConexionCompresor = 1;
 
     // Control Panel
@@ -66,9 +63,6 @@ public class Constantes {
 
 public static final int puertoXbox = 0;
 public static final int puertoJoystick = 1;
-public static final int puertoBottonera = 2;
-
-
 
 //-----------------------------------------------------
 //    __   __           ____            
