@@ -60,7 +60,8 @@ Para controlar la sensibilidad puedes:
 
      Multiplicar por una constante menor a uno.
      O elevar al cuadrado la sensibilidad.
-     Se hace para no descontrolar al robot .
+     Slew Rate Limiter!
+     Se hace para no descontrolar al robot.
 
 Método de Robotinit:
 
