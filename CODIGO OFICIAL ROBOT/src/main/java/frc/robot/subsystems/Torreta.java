@@ -63,10 +63,11 @@ public class Torreta  {
     }
 
     private void acomodarSusanaAutimaticamente(){
-        System.out.println("Casi");
-        float hola = 0;
-        xEntry = table.getEntry("torretaX"); // corrige esto despue s
-
+        
+        xEntry = table.getEntry("torretaX");
+        
+        System.out.println("Xpos " + xEntry.getDouble(0.0));
+        
         moverse = (float) (xEntry.getDouble(0.0) * sensibilidad);
 
         acomodarSusana(moverse);
