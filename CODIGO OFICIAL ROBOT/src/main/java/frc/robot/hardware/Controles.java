@@ -51,4 +51,8 @@ public class Controles {
     public double readXboxAxis(int axis){
         return(ControlXbox.getRawAxis(axis));
     }
+
+    public int readXboxDPad() { // obtiene el dpad, conocido tambien como pov
+        return (ControlXbox.getPOV());
+    }
 }

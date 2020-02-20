@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
+import frc.robot.hardware.Gyro;
 
 public class DriveTSpark {
 
@@ -22,6 +23,8 @@ public class DriveTSpark {
 
     SlewRateLimiter LeftJoystick;
     SlewRateLimiter RightJoystick;
+
+    private Gyro rotate;
     //variables privadas
 
     public DriveTSpark(){
@@ -39,6 +42,8 @@ public class DriveTSpark {
 
         driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
         LeftJoystick = new SlewRateLimiter(1.75);
+
+        rotate = new Gyro(this);
         //RightJoystick= new SlewRateLimiter(2.25);
 
     }
@@ -53,7 +58,7 @@ public class DriveTSpark {
         movimientoAdelanteX = Robot.control.readXboxAxis(Constantes.XB_LJ_X) * movimientoAdelanteY
                 * Constantes.controlSensivilidadDrive // toma una funcion para saber cuanto giro deberia de tener el robot y que sirva mejor
                 - Robot.control.readXboxAxis(Constantes.XB_RJ_X); // Toma input raw y lo suma a lo que va a girar para que sea solo una funcion 
-                // nota que esta separada en 2 lineas, pero en verdad es solamente 1
+                // nota que esta separada en 3 lineas, pero en verdad es solamente 1
     
         if (Robot.control.readXboxButtons(Constantes.controlDrift)){ // controla el drift del drive, para que pueda dar vueltas mas cerradas
           movimientoAdelanteX = movimientoAdelanteX * Constantes.controlSensivilidadDrift;
@@ -63,6 +68,12 @@ public class DriveTSpark {
           if (movimientoAdelanteX < 0) movimientoAdelanteX = -Constantes.controlMaximaVelocidadDeGiro;
           else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
         }
+
+        System.out.println(Robot.control.readXboxDPad()); // BORRAR
+
+        if (Robot.control.readXboxDPad() >= 0){
+          rotate.regresarAngulo(Robot.control.readXboxDPad());
+        }else rotate.leer();
         
         driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), movimientoAdelanteX);
 
@@ -110,5 +121,9 @@ public class DriveTSpark {
       }else{
         driveTrain.arcadeDrive(0, -0.4);
       }
+    }
+
+    public void driveDelArcade(double adelante, double vuelta){
+      driveTrain.arcadeDrive(adelante,vuelta);
     }
 }

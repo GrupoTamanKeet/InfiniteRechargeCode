@@ -111,7 +111,7 @@ public class Robot extends TimedRobot {
     elevador.funcionar();
     torreta.funcionar();
     //sensorDeColor.leerColor();
-
+    
   }
 
   /**
