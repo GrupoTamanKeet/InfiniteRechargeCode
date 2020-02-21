@@ -50,9 +50,8 @@ public class DriveTSpark {
 
     //Se va a ocupar esta función para el driveTrain
     public void moverseConXbox() { // funcion principal del movimiento del chasis
-
         // inputs del control para movimiento
-        movimientoAdelanteY = Robot.control.readXboxAxis(Constantes.XB_RT)
+        movimientoAdelanteY = -Robot.control.readXboxAxis(Constantes.XB_RT)
                 + Robot.control.readXboxAxis(Constantes.XB_LT); // toma el valor para ir hacia adelante o hacia atras
 
         movimientoAdelanteX = Robot.control.readXboxAxis(Constantes.XB_LJ_X) * movimientoAdelanteY
@@ -71,12 +70,11 @@ public class DriveTSpark {
 
         // System.out.println(Robot.control.readXboxDPad()); // BORRAR
 
-        // if (Robot.control.readXboxDPad() >= 0){
-        //   rotate.regresarAngulo(Robot.control.readXboxDPad());
-        // }else rotate.leer();
+        if (Robot.control.readXboxDPad() >= 0){
+          rotate.regresarAngulo(Robot.control.readXboxDPad());
+        }else rotate.leer();
         
         driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), movimientoAdelanteX);
-
     }
     public void moverseConXboxOriginal() { // funcion principal del movimiento del chasis
 
@@ -97,8 +95,6 @@ public class DriveTSpark {
         if (movimientoAdelanteX < 0) movimientoAdelanteX = -Constantes.controlMaximaVelocidadDeGiro;
         else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
       }
-
-      System.out.println(Robot.control.readXboxDPad()); // BORRAR
 
       if (Robot.control.readXboxDPad() >= 0){
         rotate.regresarAngulo(Robot.control.readXboxDPad());

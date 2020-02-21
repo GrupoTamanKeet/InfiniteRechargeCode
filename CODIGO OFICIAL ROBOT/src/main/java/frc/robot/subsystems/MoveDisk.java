@@ -36,6 +36,12 @@ public class MoveDisk{
 
     }
     public void funcionar(){
+        if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
+            abrirPiston();
+        }
+        if (Robot.control.readJoystickButtons(Constantes.LG_B5)){
+            cerrarPiston();
+        }
         if (Robot.control.readJoystickButtons(Constantes.LG_B3)){
             moverDisco();
         }else{

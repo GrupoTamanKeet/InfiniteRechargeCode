@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Elevador{
-    public static WPI_TalonSRX MotorDeslizadorLineal;
-    public static WPI_TalonSRX MotorJalar;
-    public static DoubleSolenoid piston1;
+    private static WPI_TalonSRX MotorDeslizadorLineal;
+    private static WPI_TalonSRX MotorJalar;
+    private static DoubleSolenoid piston1;
 
     public Elevador(){
         //No es necesario declarar la compresora

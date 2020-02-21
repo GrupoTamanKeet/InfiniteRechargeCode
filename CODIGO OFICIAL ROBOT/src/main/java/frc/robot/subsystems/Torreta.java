@@ -144,20 +144,18 @@ public class Torreta  {
     }
 
     private void secuenciaDisparar(){
-        //Activar acercar y subir
-        //Boton 5
-        prepararDisparo();
+
+        prepararDisparo();        
         
         int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
-        if (miliseconds%5==0){
+        
+        if (miliseconds%3==0){
             activarAcercar();
             desactivarSubirPelota();
         }else{
             desactivarAcercar();
             subirPelota();
         }
-        //Mover el robot
-        //Robot.dTrain.destravarse();
     }
 
     public void funcionar(){
@@ -168,18 +166,12 @@ public class Torreta  {
             reverseSubirPelota();
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
             reverseAcercar();
-        }else{
+        }//else if (Robot.control.readXboxButtons(Constantes.XB_B_RB) && Robot.motorAcercar.leerSwitchElevador()) {
+           // Robot.motorAcercar.moverMotor(0.3);
+        //}
+        else{
             pararTodo();
-        }
-//II Robot.motorAcercar.leerSwitchElevador
-       // if (Robot.control.readJoystickButtons(Constantes.LB_B1) ) {
-            //Robot.motorAcercar.moverMotor(0.2);
-           // MotorSubir.set(ControlMode.PercentOutput, 0.2);
-     //   }
-       // else {
-           // Robot.motorAcercar.pararMotor();
-          //  MotorSubir.set(ControlMode.PercentOutput, 0);
-      //  }
+        }   
 
         //Shake it
         if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
@@ -193,4 +185,3 @@ public class Torreta  {
     }
 
 }
-

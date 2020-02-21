@@ -16,6 +16,7 @@ import frc.robot.hardware.MotorAcercar;
 
 import frc.robot.subsystems.Elevador;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.MoveDisk;
 import frc.robot.subsystems.Torreta;
 import frc.robot.subsystems.DriveTSpark;
 
@@ -32,7 +33,7 @@ public class Robot extends TimedRobot {
   public static Elevador elevador;
   public static Torreta torreta;
   public static MotorAcercar motorAcercar;
-  public static ColorSensor sensorDeColor;
+  public static MoveDisk controlPanel;
 
   
 
@@ -48,8 +49,7 @@ public class Robot extends TimedRobot {
     elevador = new Elevador();
     torreta = new Torreta();
     motorAcercar = new MotorAcercar();
-
-    //sensorDeColor = new ColorSensor();
+    controlPanel = new MoveDisk();
 
   }
 
@@ -112,9 +112,8 @@ public class Robot extends TimedRobot {
     dTrain.moverseConXbox();
     intake.funcionar();
     elevador.funcionar();
-    torreta.funcionar();
-
-    //sensorDeColor.leerColor();
+    //torreta.funcionar();
+    controlPanel.funcionar();
     
   }
 
