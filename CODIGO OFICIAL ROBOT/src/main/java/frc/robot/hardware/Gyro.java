@@ -2,15 +2,17 @@ package frc.robot.hardware;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveTSpark;
 
 public class Gyro{
 
   // id del gyro y cosas 
   public static ADXRS450_Gyro giroscopio;
+  private DriveTSpark drivetrain;
 
-  public Gyro(){ // falta importar arcade drive
+  public Gyro(DriveTSpark DriveTrain){ // falta importar arcade drive
     giroscopio = new ADXRS450_Gyro();
+    drivetrain = DriveTrain;
   }
   //reiniciar giroscopio
   public void reiniciar() {
@@ -35,7 +37,7 @@ public class Gyro{
       SmartDashboard.putNumber("vueltas", Constantes.vueltasDelRobot);  
   }
 
-  private void regresarAngulo(int deseado){ // funcion para poder girar el robot de forma automatica a una posicion en grados
+  public void regresarAngulo(int deseado){ // funcion para poder girar el robot de forma automatica a una posicion en grados
       leer();
       int offset = 180-deseado; // convertimos los grados a 180 para asegurarnos que tome el camino mas rapido (que si esta en 359 y queremos que entre a 0, no se de toda la vuelta)
       deseado = 180;
@@ -59,7 +61,7 @@ public class Gyro{
           if (vel < 0) vel = -Constantes.controlMaximaVelocidadDeGiro;
           else vel = Constantes.controlMaximaVelocidadDeGiro;
         }
-        DriveTrain.MovimientoBaseCompleto.arcadeDrive(0, vel); //lo convertimos de mate a movimiento DIJO aLEX QUE CERO asi es dije eso
+        drivetrain.driveDelArcade(0, -vel); //lo convertimos de mate a movimiento DIJO aLEX QUE CERO asi es dije eso
       }
   }
 }
