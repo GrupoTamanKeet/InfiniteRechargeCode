@@ -19,7 +19,7 @@ public class MoveDisk{
     int ForwardChannel = 0;
 
     public MoveDisk (){
-        pistondisco = new Solenoid(Constantes.ConexionPistonDisco,ForwardChannel);
+        pistondisco = new Solenoid(Constantes.ConexionCompresor,ForwardChannel);
         motordisco = new WPI_TalonSRX(Constantes.ConexionMotorDisco);
         colorSensor = new ColorSensor();
     }
@@ -36,8 +36,10 @@ public class MoveDisk{
 
     }
     public void funcionar(){
-        if (Robot.control.readJoystickButtons(Constantes.LG_B3)== true){
+        if (Robot.control.readJoystickButtons(Constantes.LG_B3)){
             moverDisco();
+        }else{
+            pararMotor();
         }
         colorSensor.leerColor();
     }

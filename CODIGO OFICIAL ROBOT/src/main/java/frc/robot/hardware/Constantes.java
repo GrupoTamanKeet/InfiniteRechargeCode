@@ -49,7 +49,7 @@ public class Constantes {
     public static final int ConexionCompresor = 1;
 
     // Control Panel
-    public static final int ConexionMotorDisco= 0;  //cambiar el valor de estas dos
+    public static final int ConexionMotorDisco= 6;  //cambiar el valor de estas dos
     public static final int ConexionPistonDisco=0;
 
 
