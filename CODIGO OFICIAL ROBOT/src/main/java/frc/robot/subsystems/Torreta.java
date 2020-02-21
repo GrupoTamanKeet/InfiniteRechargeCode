@@ -149,18 +149,22 @@ public class Torreta  {
         
         int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
         
-        if (miliseconds%3==0){
+        if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
             activarAcercar();
-            desactivarSubirPelota();
-        }else{
-            desactivarAcercar();
             subirPelota();
         }
+        // if (miliseconds%3==0){
+        //     activarAcercar();
+        //     desactivarSubirPelota();
+        // }else{
+        //     desactivarAcercar();
+        //     subirPelota();
+        // }
     }
 
     public void funcionar(){
         //Shoot
-        if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
+        if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
             secuenciaDisparar();
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B5)){
             reverseSubirPelota();

@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
     dTrain.moverseConXbox();
     intake.funcionar();
     elevador.funcionar();
-    //torreta.funcionar();
+    torreta.funcionar();
     controlPanel.funcionar();
     
   }
