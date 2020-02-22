@@ -158,15 +158,6 @@ public class Torreta  {
 
         prepararDisparo(); 
         
-        if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
-            Constantes.hayBolaEnDisparo = true;
-            System.out.println("entro bola");
-        }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
-            Constantes.hayBolaEnDisparo = false;
-            Constantes.bolasDentro --;
-            System.out.println("salio bola");
-        }
-        
         // if (miliseconds%3==0){
         //     activarAcercar();
         //     desactivarSubirPelota();
@@ -203,6 +194,16 @@ public class Torreta  {
             pararTodo();
         }   
 
+        //contador de pelotas (por si)
+        if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
+            Constantes.hayBolaEnDisparo = true;
+            System.out.println("entro bola");
+        }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
+            Constantes.hayBolaEnDisparo = false;
+            Constantes.bolasDentro --;
+            System.out.println("salio bola");
+        }
+
         //Shake it
         if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
             pararTodo();
@@ -235,6 +236,16 @@ public class Torreta  {
         else{
             pararTodo();
         }   
+
+        //contador de pelotas (por si)
+        if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
+            Constantes.hayBolaEnDisparo = true;
+            System.out.println("entro bola");
+        }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
+            Constantes.hayBolaEnDisparo = false;
+            Constantes.bolasDentro --;
+            System.out.println("salio bola");
+        }
 
         //Shake it
         if (Robot.control.readJoystickButtons(Constantes.LG_B12)){

@@ -4,8 +4,6 @@ import frc.robot.Robot;
 import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Constantes;
 
-import sun.nio.ch.DirectBuffer;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -75,10 +73,10 @@ public class MoveDisk{
     }
 
     public void selectedColor (){
-        char colorDeseado = DriverStation.getInstance().getGameSpecificMessage().charAt(0);
-        char currentColor = colorSensor.leerColor().charAt(0);
+        Character colorDeseado = DriverStation.getInstance().getGameSpecificMessage().charAt(0);
+        Character currentColor = colorSensor.leerColor().charAt(0);
         int goToPosition = 0, myPosition = 0;
-        String [] colores = {'R','G','B','Y'};
+        Character [] colores = {'R','G','B','Y'};
         for (int x= 0; x<colores.length; x++){
             if(colorDeseado.equals(colores[x])){
                 goToPosition = x+1;

@@ -93,9 +93,12 @@ public class Intake{
             }else if (Robot.control.readXboxButtons(Constantes.XB_B_Start)){
                 //intentar dejar en el intake
                 reverseIntake();
+            }else if (Constantes.bolasDentro < 5 && leerSwitches()) {
+                activarIntake();
             }else{
                 desactivarIntake();
-            }    
+            } 
+   
     }
 
 
