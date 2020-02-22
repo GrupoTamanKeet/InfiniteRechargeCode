@@ -5,6 +5,7 @@ import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Constantes;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -13,8 +14,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class MoveDisk{
 
-    public static DoubleSolenoid pistondisco;
-    public static WPI_TalonSRX motordisco;
+    public static DoubleSolenoid pistonDisco;
+    public static WPI_TalonSRX motorDisco;
     private ColorSensor colorSensor;
     
     private int cambioDeColor;
@@ -24,28 +25,29 @@ public class MoveDisk{
     private String ultimoColorLeido;
 
     public MoveDisk (){
-        pistondisco = new DoubleSolenoid(Constantes.ConexionCompresor,ForwardChannel, BackWardChannel);
-        motordisco = new WPI_TalonSRX(Constantes.ConexionMotorDisco);
+        pistonDisco = new DoubleSolenoid(Constantes.ConexionCompresor,ForwardChannel, BackWardChannel);
+        motorDisco = new WPI_TalonSRX(Constantes.ConexionMotorDisco);
         colorSensor = new ColorSensor();
         encendido= false;
+        motorDisco.setNeutralMode(NeutralMode.Brake);
     }
 
     private void moverDisco(){
-        motordisco.set(ControlMode.PercentOutput, .5);
+        motorDisco.set(ControlMode.PercentOutput, .4);
     }
 
     private void abrirPiston() {
-        pistondisco.set(Value.kForward);
+        pistonDisco.set(Value.kForward);
     }
 
     private void cerrarPiston(){
-        pistondisco.set(Value.kReverse);
+        pistonDisco.set(Value.kReverse);
 
     }
 
     private void pararMotor(){
-        motordisco.stopMotor();
-        motordisco.setVoltage(0);
+        motorDisco.stopMotor();
+        motorDisco.setVoltage(0);
     }
     
     private void spin (){
@@ -55,7 +57,7 @@ public class MoveDisk{
             cambioDeColor ++;
             ultimoColorLeido = colorSensor.leerColor();
         }
-        if (cambioDeColor == 8){
+        if (cambioDeColor == 24){ //
             pararMotor();
             encendido = false;
         }else {
