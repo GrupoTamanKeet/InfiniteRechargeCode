@@ -129,10 +129,6 @@ public class Torreta  {
         //Lo hace con el SlowRate
         MotorDisparar.set(ControlMode.PercentOutput, smooth.calculate(1));
 
-        if (!Robot.motorAcercar.leerSwitchElevador()) {
-            activarAcercar();
-            subirPelota(); 
-        }
     }
     
     private void desactivarDisparo(){
@@ -174,9 +170,12 @@ public class Torreta  {
         //Shoot
         if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
             secuenciaDisparar();
-            if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
+            if(Robot.control.readJoystickButtons(Constantes.LG_B1) || !Robot.motorAcercar.leerSwitchElevador()){
                 activarAcercar();
                 subirPelota();
+            }else{
+                desactivarAcercar();
+                desactivarSubirPelota();
             }
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B5)){
             reverseSubirPelota();
