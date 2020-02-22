@@ -82,7 +82,7 @@ public class Intake{
             Constantes.hayBolaEnIntake = false;
         }
 
-        System.out.println (Constantes.hayBolaEnIntake);
+        System.out.println (Constantes.bolasDentro);
 
 
     }
