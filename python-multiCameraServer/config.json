@@ -1,0 +1,84 @@
+{
+    "fps": 30,
+    "height": 640,
+    "pixel format": "mjpeg",
+    "properties": [
+        {
+            "name": "connect_verbose",
+            "value": 1
+        },
+        {
+            "name": "brightness",
+            "value": 20
+        },
+        {
+            "name": "white_balance_temperature_auto",
+            "value": false
+        },
+        {
+            "name": "white_balance_temperature",
+            "value": 4500
+        },
+        {
+            "name": "exposure_auto",
+            "value": 1
+        },
+        {
+            "name": "exposure_absolute",
+            "value": 25
+        },
+        {
+            "name": "contrast",
+            "value": 100
+        },
+        {
+            "name": "saturation",
+            "value": 50
+        },
+        {
+            "name": "power_line_frequency",
+            "value": 2
+        },
+        {
+            "name": "sharpness",
+            "value": 100
+        },
+        {
+            "name": "backlight_compensation",
+            "value": 10
+        },
+        {
+            "name": "pan_absolute",
+            "value": 0
+        },
+        {
+            "name": "tilt_absolute",
+            "value": 0
+        },
+        {
+            "name": "zoom_absolute",
+            "value": 0
+        },
+        {
+            "name": "raw_brightness",
+            "value": 75
+        },
+        {
+            "name": "raw_contrast",
+            "value": 10
+        },
+        {
+            "name": "raw_saturation",
+            "value": 100
+        },
+        {
+            "name": "raw_sharpness",
+            "value": 50
+        },
+        {
+            "name": "raw_exposure_absolute",
+            "value": 5003
+        }
+    ],
+    "width": 640
+}
