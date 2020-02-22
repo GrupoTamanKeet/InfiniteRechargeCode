@@ -87,11 +87,11 @@ public class Torreta  {
     }
 
     private void activarAcercar(){
-        Robot.motorAcercar.moverMotor(0.4);
+        Robot.motorAcercar.moverMotor(0.6);
     }
 
     private void activarAcercarLento(){
-        Robot.motorAcercar.moverMotor(0.2);
+        Robot.motorAcercar.moverMotor(0.4);
     }
 
 
@@ -118,11 +118,11 @@ public class Torreta  {
     }
 
     private void subirPelota(){
-        MotorSubir.set(ControlMode.PercentOutput, 0.4);
+        MotorSubir.set(ControlMode.PercentOutput, 0.7);
     }
 
     private void subirPelotaLento(){
-        MotorSubir.set(ControlMode.PercentOutput, 0.2);
+        MotorSubir.set(ControlMode.PercentOutput, 0.4);
     }
 
     private void reverseSubirPelota(){
