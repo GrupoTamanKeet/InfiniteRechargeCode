@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
-import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.MotorAcercar;
 
@@ -30,8 +28,8 @@ public class Robot extends TimedRobot {
   public static Controles control;
   public static DriveTSpark dTrain;
   public static Intake intake;
-  public static Elevador elevador;
   public static Torreta torreta;
+  public static Elevador elevador;
   public static MotorAcercar motorAcercar;
   public static MoveDisk controlPanel;
 

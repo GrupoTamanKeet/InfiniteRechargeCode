@@ -65,6 +65,7 @@ public class Elevador{
             abrirPiston();
         }
         if(Robot.control.readJoystickButtons(Constantes.LG_B8)){
+            Robot.torreta.pararTodo();
             subirElevador();
         }else if(Robot.control.readJoystickButtons(Constantes.LG_B10)){
             bajarElevador();

@@ -135,7 +135,7 @@ public class Torreta  {
         MotorDisparar.setVoltage(0);
     }
 
-    private void pararTodo(){
+    public void pararTodo(){
         desactivarAcercar();
         desactivarAngulo();
         desactivarDisparo();
