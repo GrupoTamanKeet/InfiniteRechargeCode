@@ -171,11 +171,10 @@ public class Torreta  {
         }else if (Constantes.meterBolaAlFinal && !Robot.motorAcercar.leerSwitchElevador()) {
             activarAcercar();
             subirPelota();
-            if (Robot.motorAcercar.leerSwitchElevador()){
-                Constantes.meterBolaAlFinal = false;
-            }
-        }
-        else{
+            
+        }else if (Robot.motorAcercar.leerSwitchElevador() && Constantes.meterBolaAlFinal ){
+            Constantes.meterBolaAlFinal = false;
+        }else{
             pararTodo();
         }   
 
