@@ -154,7 +154,7 @@ public class Torreta  {
         
         if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
             Constantes.hayBolaEnDisparo = true;
-        }else if (!Robot.motorAcercar.leerSwitchElevador()){
+        }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
             Constantes.hayBolaEnDisparo = false;
             Constantes.bolasDentro --;
         }
