@@ -154,9 +154,11 @@ public class Torreta  {
         
         if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
             Constantes.hayBolaEnDisparo = true;
+            System.out.println("entro bola");
         }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
             Constantes.hayBolaEnDisparo = false;
             Constantes.bolasDentro --;
+            System.out.println("salio bola");
         }
         
         // if (miliseconds%3==0){
