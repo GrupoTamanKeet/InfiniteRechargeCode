@@ -87,7 +87,7 @@ public class Torreta  {
     }
 
     private void activarAcercar(){
-        Robot.motorAcercar.moverMotor(0.5);
+        Robot.motorAcercar.moverMotor(0.4);
     }
 
     private void reverseAcercar(){
@@ -113,7 +113,7 @@ public class Torreta  {
     }
 
     private void subirPelota(){
-        MotorSubir.set(ControlMode.PercentOutput, 0.5);
+        MotorSubir.set(ControlMode.PercentOutput, 0.4);
     }
     private void reverseSubirPelota(){
         MotorSubir.set(ControlMode.PercentOutput, -0.5);
@@ -128,6 +128,11 @@ public class Torreta  {
         //diferencia entre verde y subir
         //Lo hace con el SlowRate
         MotorDisparar.set(ControlMode.PercentOutput, smooth.calculate(1));
+
+        if (!Robot.motorAcercar.leerSwitchElevador()) {
+            activarAcercar();
+            subirPelota(); 
+        }
     }
     
     private void desactivarDisparo(){
