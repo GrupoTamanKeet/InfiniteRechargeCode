@@ -34,10 +34,10 @@ public class Constantes {
     static double kD = 1.83; 
     static double kV = 0.281; 
     static double kA = 0.0387; 
-    kIz = 0; 
-    kFF = 0; 
-    kMaxOutput = 1; 
-    kMinOutput = -1;
+    static double kIz = 0; 
+    static double kFF = 0; 
+    static double kMaxOutput = 1; 
+    static double kMinOutput = -1;
 
 //      _____                      _                         _____       _           _   
 //     / ____|                    (_)                       |  __ \     | |         | |  
@@ -152,10 +152,5 @@ public static final int LG_B9 = 9; //Intake en el limno
 public static final int LG_B10 = 10;
 public static final int LG_B11 = 11; //NO se puede ocupar
 public static final int LG_B12 = 12; //Destravarse
-
-
-
-
-
 
 }
