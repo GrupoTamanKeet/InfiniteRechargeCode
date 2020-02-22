@@ -90,6 +90,11 @@ public class Torreta  {
         Robot.motorAcercar.moverMotor(0.4);
     }
 
+    private void activarAcercarLento(){
+        Robot.motorAcercar.moverMotor(0.2);
+    }
+
+
     private void reverseAcercar(){
         Robot.motorAcercar.moverMotor(-0.5);
     }
@@ -115,6 +120,11 @@ public class Torreta  {
     private void subirPelota(){
         MotorSubir.set(ControlMode.PercentOutput, 0.4);
     }
+
+    private void subirPelotaLento(){
+        MotorSubir.set(ControlMode.PercentOutput, 0.2);
+    }
+
     private void reverseSubirPelota(){
         MotorSubir.set(ControlMode.PercentOutput, -0.5);
     }
@@ -170,9 +180,12 @@ public class Torreta  {
         //Shoot
         if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
             secuenciaDisparar();
-            if(Robot.control.readJoystickButtons(Constantes.LG_B1) || !Robot.motorAcercar.leerSwitchElevador()){
+            if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
                 activarAcercar();
                 subirPelota();
+            }else if(!Robot.motorAcercar.leerSwitchElevador()){
+                activarAcercarLento();
+                subirPelotaLento();
             }else{
                 desactivarAcercar();
                 desactivarSubirPelota();
@@ -182,9 +195,8 @@ public class Torreta  {
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
             reverseAcercar();
         }else if (Constantes.meterBolaAlFinal && !Robot.motorAcercar.leerSwitchElevador()) {
-            activarAcercar();
-            subirPelota();
-            
+            activarAcercarLento();
+            subirPelotaLento();
         }else if (Robot.motorAcercar.leerSwitchElevador() && Constantes.meterBolaAlFinal ){
             Constantes.meterBolaAlFinal = false;
         }else{

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.Robot;
 import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Constantes;
+import sun.nio.ch.DirectBuffer;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -59,7 +60,7 @@ public class MoveDisk{
         if (cambioDeColor == cambiosDeColor){ //
             pararMotor();
             encendido = false;
-        }else {
+        }else{
             moverDisco();
         }
     }
@@ -67,19 +68,24 @@ public class MoveDisk{
     public void selectedColor (){
         String colorDeseado = DriverStation.getInstance().getGameSpecificMessage();
         String currentColor = colorSensor.leerColor();
-        int goToPosition;
+        int goToPosition = 0, myPosition = 0;
         String [] colores = {"R","G","B","Y"};
         for (int x= 0; x<colores.length; x++){
             if(colorDeseado.equals(colores[x])){
-                goToPosition= x+1;
+                goToPosition = x+1;
             }
         }
         for (int x= 0; x<colores.length; x++){
-            if(colorDeseado.equals(colores[x])){
-                goToPosition= x+1;
+            if(currentColor.equals(colores[x])){
+                myPosition = x+1;
             }
         }
         
+        int direction = goToPosition-myPosition;
+        if (direction<0){
+            
+        }
+        spin(direction);
 
     }
 
