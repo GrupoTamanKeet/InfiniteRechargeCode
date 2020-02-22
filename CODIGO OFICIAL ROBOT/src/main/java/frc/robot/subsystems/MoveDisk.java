@@ -29,7 +29,7 @@ public class MoveDisk{
         pistonDisco = new DoubleSolenoid(Constantes.ConexionCompresor,ForwardChannel, BackWardChannel);
         motorDisco = new WPI_TalonSRX(Constantes.ConexionMotorDisco);
         colorSensor = new ColorSensor();
-        encendido= false;
+        encendido = false;
         motorDisco.setNeutralMode(NeutralMode.Brake);
     }
 

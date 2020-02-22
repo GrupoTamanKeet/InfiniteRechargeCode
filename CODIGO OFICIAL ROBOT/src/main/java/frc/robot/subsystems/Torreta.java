@@ -150,7 +150,14 @@ public class Torreta  {
 
     private void secuenciaDisparar(){
 
-        prepararDisparo();        
+        prepararDisparo(); 
+        
+        if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
+            Constantes.hayBolaEnDisparo = true;
+        }else if (!Robot.motorAcercar.leerSwitchElevador()){
+            Constantes.hayBolaEnDisparo = false;
+            Constantes.bolasDentro --;
+        }
         
         // if (miliseconds%3==0){
         //     activarAcercar();

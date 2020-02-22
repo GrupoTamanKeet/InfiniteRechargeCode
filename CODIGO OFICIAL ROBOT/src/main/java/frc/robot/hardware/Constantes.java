@@ -27,6 +27,7 @@ public class Constantes {
     public static int bolasDentro;
     public static boolean meterBolaAlFinal;
     public static boolean hayBolaEnIntake;
+    public static boolean hayBolaEnDisparo;
     
 
     // PID COSOS
