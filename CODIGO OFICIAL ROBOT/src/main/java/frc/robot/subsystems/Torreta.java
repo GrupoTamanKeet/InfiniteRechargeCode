@@ -168,9 +168,12 @@ public class Torreta  {
             reverseSubirPelota();
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
             reverseAcercar();
-        }//else if (Robot.control.readXboxButtons(Constantes.XB_B_RB) && Robot.motorAcercar.leerSwitchElevador()) {
-           // Robot.motorAcercar.moverMotor(0.3);
-        //}
+        }else if (Constantes.meterBolaAlFinal && !Robot.motorAcercar.leerSwitchElevador()) {
+            Robot.motorAcercar.moverMotor(0.3);
+            if (Robot.motorAcercar.leerSwitchElevador()){
+                Constantes.meterBolaAlFinal = false;
+            }
+        }
         else{
             pararTodo();
         }   

@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
@@ -51,8 +52,6 @@ public class MoveDisk{
     }
     
     private void spin (){
-        //One spin is equal to every second time you see the same color. 
-        
         if ( !(ultimoColorLeido.equalsIgnoreCase(colorSensor.leerColor())) ){
             cambioDeColor ++;
             ultimoColorLeido = colorSensor.leerColor();
@@ -63,8 +62,13 @@ public class MoveDisk{
         }else {
             moverDisco();
         }
-
     }
+
+    public void selectedColor (){
+        String colorDeseado = DriverStation.getInstance().getGameSpecificMessage();
+        
+    }
+
     public void funcionar(){
         if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
             abrirPiston();

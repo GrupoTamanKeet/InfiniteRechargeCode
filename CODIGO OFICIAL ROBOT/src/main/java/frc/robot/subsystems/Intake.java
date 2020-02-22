@@ -17,7 +17,7 @@ public class Intake{
           MotorIntake = new WPI_TalonSRX(Constantes.ConexionMotorIntake);
 
           switchIntake1 = new DigitalInput(1);
-          switchIntake1 = new DigitalInput(2);
+          switchIntake2 = new DigitalInput(2);
 
           MotorIntake.setInverted(true);
     }
@@ -72,7 +72,19 @@ public class Intake{
     }
 
     public void meterBolaYContar(){
-        System.out.println(leerSwitches());
+        if (leerSwitches() && !Constantes.hayBolaEnIntake){
+            Constantes.bolasDentro ++;
+            Constantes.hayBolaEnIntake = true;
+            if (Constantes.bolasDentro == 1){
+                Constantes.meterBolaAlFinal = true;
+            }
+        }else if (!leerSwitches()){
+            Constantes.hayBolaEnIntake = false;
+        }
+
+        System.out.println (Constantes.hayBolaEnIntake);
+
+
     }
 
     public void funcionar(){
