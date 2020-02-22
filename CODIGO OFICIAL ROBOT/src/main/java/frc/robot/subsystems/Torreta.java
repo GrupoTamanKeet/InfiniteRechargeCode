@@ -169,7 +169,8 @@ public class Torreta  {
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
             reverseAcercar();
         }else if (Constantes.meterBolaAlFinal && !Robot.motorAcercar.leerSwitchElevador()) {
-            Robot.motorAcercar.moverMotor(0.3);
+            activarAcercar();
+            subirPelota();
             if (Robot.motorAcercar.leerSwitchElevador()){
                 Constantes.meterBolaAlFinal = false;
             }
