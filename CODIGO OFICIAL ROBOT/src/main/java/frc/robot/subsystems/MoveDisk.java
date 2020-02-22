@@ -77,23 +77,8 @@ public class MoveDisk{
         Character currentColor = colorSensor.leerColor().charAt(0);
         int goToPosition = 0, myPosition = 0;
         Character [] colores = {'R','G','B','Y'};
-        for (int x= 0; x<colores.length; x++){
-            if(colorDeseado.equals(colores[x])){
-                goToPosition = x+1;
-            }
-        }
-        for (int x= 0; x<colores.length; x++){
-            if(currentColor.equals(colores[x])){
-                myPosition = x+1;
-            }
-        }
         
-        int places = goToPosition-myPosition;
-        if (places<0){
-            spin(places,false, 0.2);
-        }else{
-            spin(places,true, 0.2);
-        }
+        
     }
 
     public void funcionar(){

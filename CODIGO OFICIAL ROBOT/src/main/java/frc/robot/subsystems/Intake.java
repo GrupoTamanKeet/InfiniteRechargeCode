@@ -56,15 +56,6 @@ public class Intake{
     }
     */
 
-    /* Ya no es necesario
-    private void secuenciaIntake(){
-        //meter y Acercar 
-        activarIntake();
-        activarAcercar();
-
-    }
-    */
-
     public boolean leerSwitches(){
 
         return ((!(switchIntake1.get()) || !(switchIntake2.get())));
