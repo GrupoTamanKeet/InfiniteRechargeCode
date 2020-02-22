@@ -113,6 +113,7 @@ public class Robot extends TimedRobot {
     torreta.funcionar();
     controlPanel.funcionar();
     
+    intake.meterBolaYContar();
   }
 
   /**

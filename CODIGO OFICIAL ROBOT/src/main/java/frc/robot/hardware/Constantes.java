@@ -21,7 +21,24 @@ public class Constantes {
     public static double anguloTotalRobot;
     public static double anguloRobot; //@Alex, puedes hacerle un mod 360
     public static int vueltasDelRobot; 
+
+    // cosas cross paltaform del elevador e intake
+
+    public static int bolasDentro;
+    public static boolean meterBolaAlFinal;
     
+
+    // PID COSOS
+    static double kP = 4.06; 
+    static double kS = 0.0797;
+    static double kD = 1.83; 
+    static double kV = 0.281; 
+    static double kA = 0.0387; 
+    kIz = 0; 
+    kFF = 0; 
+    kMaxOutput = 1; 
+    kMinOutput = -1;
+
 //      _____                      _                         _____       _           _   
 //     / ____|                    (_)                       |  __ \     | |         | |  
 //    | |     ___  _ __   _____  ___  ___  _ __   ___  ___  | |__) |___ | |__   ___ | |_ 

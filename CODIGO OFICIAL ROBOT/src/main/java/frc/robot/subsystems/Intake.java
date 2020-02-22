@@ -2,15 +2,23 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.hardware.Constantes;
 import frc.robot.Robot;
 
 public class Intake{
     static WPI_TalonSRX MotorIntake;
     
+    public static DigitalInput switchIntake1;
+    public static DigitalInput switchIntake2;
 
     public Intake(){
           MotorIntake = new WPI_TalonSRX(Constantes.ConexionMotorIntake);
+
+          switchIntake1 = new DigitalInput(1);
+          switchIntake1 = new DigitalInput(2);
+
           MotorIntake.setInverted(true);
     }
 
@@ -56,6 +64,16 @@ public class Intake{
 
     }
     */
+
+    public boolean leerSwitches(){
+
+        return (switchIntake1.get()||switchIntake2.get());
+
+    }
+
+    public void meterBolaYContar(){
+        System.out.println(leerSwitches());
+    }
 
     public void funcionar(){
             if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
