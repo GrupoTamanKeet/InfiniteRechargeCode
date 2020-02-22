@@ -20,6 +20,6 @@ public class MotorAcercar {
         MotorAcercar.setVoltage(0);
     }
     public boolean leerSwitchElevador(){
-        return (switchElevador.get());
+        return (!switchElevador.get());
     }
 }

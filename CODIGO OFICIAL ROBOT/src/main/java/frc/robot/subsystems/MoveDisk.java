@@ -51,12 +51,12 @@ public class MoveDisk{
         motorDisco.setVoltage(0);
     }
     
-    private void spin (){
+    private void spin (Int cambiosDeColor){
         if ( !(ultimoColorLeido.equalsIgnoreCase(colorSensor.leerColor())) ){
             cambioDeColor ++;
             ultimoColorLeido = colorSensor.leerColor();
         }
-        if (cambioDeColor == 24){ //
+        if (cambioDeColor == cambiosDeColor){ //
             pararMotor();
             encendido = false;
         }else {
@@ -66,7 +66,21 @@ public class MoveDisk{
 
     public void selectedColor (){
         String colorDeseado = DriverStation.getInstance().getGameSpecificMessage();
+        String currentColor = colorSensor.leerColor();
+        int goToPosition;
+        String [] colores = {"R","G","B","Y"};
+        for (int x= 0; x<colores.length;; x++){
+            if(colorDeseado.equals(colores[x])){
+                goToPosition= x+1;
+            }
+        }
+        for (int x= 0; x<colores.length;; x++){
+            if(colorDeseado.equals(colores[x])){
+                goToPosition= x+1;
+            }
+        }
         
+
     }
 
     public void funcionar(){
@@ -82,7 +96,7 @@ public class MoveDisk{
             ultimoColorLeido = colorSensor.leerColor();
         }
         if (encendido){
-            spin();
+            spin(24);
         }else{
             pararMotor();
         }
