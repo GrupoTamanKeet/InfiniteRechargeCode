@@ -34,8 +34,8 @@ public class DriveTSpark {
         motorDrivetrain3 = new CANSparkMax(3,MotorType.kBrushless);
         motorDrivetrain4 = new CANSparkMax(4,MotorType.kBrushless);
 
-        motorDrivetrain2.setInverted(true);
-        motorDrivetrain4.setInverted(true);
+        motorDrivetrain1.setInverted(true);
+        motorDrivetrain3.setInverted(true);
 
         motoresDerecha = new SpeedControllerGroup(motorDrivetrain1, motorDrivetrain2);
         motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
