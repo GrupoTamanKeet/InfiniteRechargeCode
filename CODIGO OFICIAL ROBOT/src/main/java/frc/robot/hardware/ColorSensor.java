@@ -13,7 +13,6 @@ public class ColorSensor{
     private final ColorSensorV3 m_colorSensor;
     //private final ColorSensorV3 hola;
 
-
     //We need calibration 
     private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
     private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
@@ -25,14 +24,13 @@ public class ColorSensor{
 
     }
 
-
      /**
-   * A Rev Color Match object is used to register and detect known colors. This can 
-   * be calibrated ahead of time or during operation.
-   * 
-   * This object uses a simple euclidian distance to estimate the closest match
-   * with given confidence range.
-   */
+     * A Rev Color Match object is used to register and detect known colors. This can 
+     * be calibrated ahead of time or during operation.
+     * 
+     * This object uses a simple euclidian distance to estimate the closest match
+     * with given confidence range.
+     */
   private final ColorMatch m_colorMatcher = new ColorMatch();
 
   public String leerColor() {

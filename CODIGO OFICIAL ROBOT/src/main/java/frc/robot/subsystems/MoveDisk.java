@@ -3,8 +3,6 @@ package frc.robot.subsystems;
 import frc.robot.Robot;
 import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Constantes;
-import sun.nio.ch.DirectBuffer;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -34,8 +32,11 @@ public class MoveDisk{
         motorDisco.setNeutralMode(NeutralMode.Brake);
     }
 
-    private void moverDisco(){
-        motorDisco.set(ControlMode.PercentOutput, .4);
+    private void moverDisco(double speed){
+        motorDisco.set(ControlMode.PercentOutput, speed);
+    }
+    private void reverseMoverDisco(double speed){
+        motorDisco.set(ControlMode.PercentOutput, -speed);
     }
 
     private void abrirPiston() {
@@ -52,7 +53,7 @@ public class MoveDisk{
         motorDisco.setVoltage(0);
     }
     
-    private void spin (int cambiosDeColor){
+    private void spin (int cambiosDeColor, boolean forward, double speed){
         if ( !(ultimoColorLeido.equalsIgnoreCase(colorSensor.leerColor())) ){
             cambioDeColor ++;
             ultimoColorLeido = colorSensor.leerColor();
@@ -61,15 +62,20 @@ public class MoveDisk{
             pararMotor();
             encendido = false;
         }else{
-            moverDisco();
+            if(forward){
+                moverDisco(speed);
+            }else{
+                reverseMoverDisco(speed);
+            }
+            
         }
     }
 
     public void selectedColor (){
-        String colorDeseado = DriverStation.getInstance().getGameSpecificMessage();
-        String currentColor = colorSensor.leerColor();
+        char colorDeseado = DriverStation.getInstance().getGameSpecificMessage().charAt(0);
+        char currentColor = colorSensor.leerColor().charAt(0);
         int goToPosition = 0, myPosition = 0;
-        String [] colores = {"R","G","B","Y"};
+        String [] colores = {'R','G','B','Y'};
         for (int x= 0; x<colores.length; x++){
             if(colorDeseado.equals(colores[x])){
                 goToPosition = x+1;
@@ -81,12 +87,12 @@ public class MoveDisk{
             }
         }
         
-        int direction = goToPosition-myPosition;
-        if (direction<0){
-            
+        int places = goToPosition-myPosition;
+        if (places<0){
+            spin(places,false, 0.2);
+        }else{
+            spin(places,true, 0.2);
         }
-        spin(direction);
-
     }
 
     public void funcionar(){
@@ -102,7 +108,7 @@ public class MoveDisk{
             ultimoColorLeido = colorSensor.leerColor();
         }
         if (encendido){
-            spin(24);
+            spin(24, true, 0.4);
         }else{
             pararMotor();
         }
