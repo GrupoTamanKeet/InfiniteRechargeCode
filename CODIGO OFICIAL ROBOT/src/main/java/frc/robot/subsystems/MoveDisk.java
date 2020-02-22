@@ -51,7 +51,7 @@ public class MoveDisk{
         motorDisco.setVoltage(0);
     }
     
-    private void spin (Int cambiosDeColor){
+    private void spin (int cambiosDeColor){
         if ( !(ultimoColorLeido.equalsIgnoreCase(colorSensor.leerColor())) ){
             cambioDeColor ++;
             ultimoColorLeido = colorSensor.leerColor();
@@ -69,12 +69,12 @@ public class MoveDisk{
         String currentColor = colorSensor.leerColor();
         int goToPosition;
         String [] colores = {"R","G","B","Y"};
-        for (int x= 0; x<colores.length;; x++){
+        for (int x= 0; x<colores.length; x++){
             if(colorDeseado.equals(colores[x])){
                 goToPosition= x+1;
             }
         }
-        for (int x= 0; x<colores.length;; x++){
+        for (int x= 0; x<colores.length; x++){
             if(colorDeseado.equals(colores[x])){
                 goToPosition= x+1;
             }
