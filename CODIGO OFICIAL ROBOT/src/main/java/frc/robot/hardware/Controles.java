@@ -17,6 +17,7 @@ public class Controles {
     public Controles() {
         ControlXbox = new Joystick(Constantes.puertoXbox);
         ControlPiloto = new Joystick(Constantes.puertoJoystick);
+        
     }
 
     // -----------------------------------------------------
