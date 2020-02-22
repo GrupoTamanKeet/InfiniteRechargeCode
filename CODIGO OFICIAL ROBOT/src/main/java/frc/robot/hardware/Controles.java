@@ -36,6 +36,9 @@ public class Controles {
     public double readJoystickAxis(int axis) {
         return (ControlPiloto.getRawAxis(axis));
     }
+    public int readJoystickDPad() { // obtiene el dpad, conocido tambien como pov
+        return (ControlPiloto.getPOV());
+    }
     
     // -----------------------------------------------------
     // __ __ ____

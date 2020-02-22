@@ -67,4 +67,16 @@ public class Intake{
                 desactivarIntake();
             }    
     }
+
+
+    public void funcionarParaChio(){
+        if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
+            activarIntake();
+        }else if (Robot.control.readXboxButtons(Constantes.XB_B_LB)){
+            //intentar dejar en el intake
+            reverseIntake();
+        }else{
+            desactivarIntake();
+        }  
+    }
 }

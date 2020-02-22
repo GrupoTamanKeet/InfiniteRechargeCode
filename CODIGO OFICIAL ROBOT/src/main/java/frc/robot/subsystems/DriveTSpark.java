@@ -76,6 +76,7 @@ public class DriveTSpark {
         
         driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), movimientoAdelanteX);
     }
+
     public void moverseConXboxOriginal() { // funcion principal del movimiento del chasis
 
       // inputs del control para movimiento
@@ -115,6 +116,41 @@ public class DriveTSpark {
       driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * eje);
 
     }
+
+    public void moverseParaChio(){
+      // coso de giro a pos
+
+      if (Robot.control.readXboxDPad() >= 0){
+        rotate.regresarAngulo(Robot.control.readXboxDPad());
+      }else rotate.leer();
+
+      // tankdrive
+
+      driveTrain.tankDrive(-Robot.control.readXboxAxis(1), -Robot.control.readXboxAxis(5));
+    }
+
+    public void moverseParaRafa() { // funcion principal del movimiento del chasis
+      // inputs del control para movimiento
+      movimientoAdelanteY = -Robot.control.readXboxAxis(Constantes.XB_LJ_Y); // toma el valor para ir hacia adelante o hacia atras
+
+      if (Robot.control.readXboxAxis(Constantes.XB_RJ_X) != 0){
+        movimientoAdelanteX = Robot.control.readXboxAxis(Constantes.XB_RJ_X) * movimientoAdelanteY
+              * Constantes.controlSensivilidadDrive;
+      }else movimientoAdelanteX = Robot.control.readXboxAxis(Constantes.XB_RJ_X);
+  
+      if (movimientoAdelanteX > Constantes.controlMaximaVelocidadDeGiro || movimientoAdelanteX < -Constantes.controlMaximaVelocidadDeGiro) { // si va muy rapido, se desconfigura el gyroscopio, asi que no queremos eso 
+        if (movimientoAdelanteX < 0) movimientoAdelanteX = -Constantes.controlMaximaVelocidadDeGiro;
+        else movimientoAdelanteX = Constantes.controlMaximaVelocidadDeGiro;
+      }
+
+      // System.out.println(Robot.control.readXboxDPad()); // BORRAR
+
+      if (Robot.control.readXboxDPad() >= 0){
+        rotate.regresarAngulo(Robot.control.readXboxDPad());
+      }else rotate.leer();
+      
+      driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), movimientoAdelanteX);
+  }
 
     public void moverseConPiloto(){ // funcion opcional del movimiento del chasis 
 

@@ -147,12 +147,6 @@ public class Torreta  {
 
         prepararDisparo();        
         
-        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
-        
-        if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
-            activarAcercar();
-            subirPelota();
-        }
         // if (miliseconds%3==0){
         //     activarAcercar();
         //     desactivarSubirPelota();
@@ -166,6 +160,10 @@ public class Torreta  {
         //Shoot
         if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
             secuenciaDisparar();
+            if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
+                activarAcercar();
+                subirPelota();
+            }
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B5)){
             reverseSubirPelota();
         }else if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
@@ -173,6 +171,39 @@ public class Torreta  {
         }//else if (Robot.control.readXboxButtons(Constantes.XB_B_RB) && Robot.motorAcercar.leerSwitchElevador()) {
            // Robot.motorAcercar.moverMotor(0.3);
         //}
+        else{
+            pararTodo();
+        }   
+
+        //Shake it
+        if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
+            pararTodo();
+            Robot.dTrain.destravarse();
+        }
+
+        acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
+        acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
+
+    }
+
+    public boolean pasar1Atras(){
+        return (false); // en un futuro servira para poder succionar una pelota 
+    }
+
+    public void funcionarParaGulle(){
+        //Shoot
+        if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
+            secuenciaDisparar();
+            if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
+                activarAcercar();
+                subirPelota();
+            }
+        }else if (Robot.control.readJoystickDPad() == 180){
+            reverseSubirPelota();
+            reverseAcercar();
+        }//else if (Robot.control.readXboxButtons(Constantes.XB_B_RB) && Robot.motorAcercar.leerSwitchElevador()) {
+        //    Robot.motorAcercar.moverMotor(0.3);
+        // }
         else{
             pararTodo();
         }   
