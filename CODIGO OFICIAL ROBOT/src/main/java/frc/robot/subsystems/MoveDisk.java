@@ -17,24 +17,50 @@ public class MoveDisk{
     public static WPI_TalonSRX motordisco;
     private ColorSensor colorSensor;
     
-    int ForwardChannel = 0;
-    int BackWardChannel = 7;
+    private int cambioDeColor;
+    private int ForwardChannel = 0;
+    private int BackWardChannel = 7;
+    private boolean encendido;
+    private String ultimoColorLeido;
 
     public MoveDisk (){
         pistondisco = new DoubleSolenoid(Constantes.ConexionCompresor,ForwardChannel, BackWardChannel);
         motordisco = new WPI_TalonSRX(Constantes.ConexionMotorDisco);
         colorSensor = new ColorSensor();
+        encendido= false;
     }
-    public void moverDisco(){
+
+    private void moverDisco(){
         motordisco.set(ControlMode.PercentOutput, .5);
     }
 
-    public void abrirPiston() {
+    private void abrirPiston() {
         pistondisco.set(Value.kForward);
     }
 
-    public void cerrarPiston(){
+    private void cerrarPiston(){
         pistondisco.set(Value.kReverse);
+
+    }
+
+    private void pararMotor(){
+        motordisco.stopMotor();
+        motordisco.setVoltage(0);
+    }
+    
+    private void spin (){
+        //One spin is equal to every second time you see the same color. 
+        
+        if ( !(ultimoColorLeido.equalsIgnoreCase(colorSensor.leerColor())) ){
+            cambioDeColor ++;
+            ultimoColorLeido = colorSensor.leerColor();
+        }
+        if (cambioDeColor == 8){
+            pararMotor();
+            encendido = false;
+        }else {
+            moverDisco();
+        }
 
     }
     public void funcionar(){
@@ -45,22 +71,15 @@ public class MoveDisk{
             cerrarPiston();
         }
         if (Robot.control.readJoystickButtons(Constantes.LG_B3)){
-            moverDisco();
+            cambioDeColor = 0;   
+            encendido = true;
+            ultimoColorLeido = colorSensor.leerColor();
+        }
+        if (encendido){
+            spin();
         }else{
             pararMotor();
         }
         colorSensor.leerColor();
     }
-    
-    public void pararMotor(){
-        motordisco.stopMotor();
-        motordisco.setVoltage(0);
-    }
-
-    public void spin (int laps){
-        //probar cuanto tiempo es necesario
-
-    }
-
-
 }

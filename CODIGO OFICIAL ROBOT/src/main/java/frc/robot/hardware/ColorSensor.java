@@ -35,7 +35,7 @@ public class ColorSensor{
    */
   private final ColorMatch m_colorMatcher = new ColorMatch();
 
-  public void leerColor() {
+  public String leerColor() {
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
@@ -70,6 +70,8 @@ public class ColorSensor{
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
+
+    return colorString;
   }
 
 }
