@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 import frc.robot.hardware.Gyro;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel;
 
 public class DriveTSpark {
 
@@ -17,6 +19,7 @@ public class DriveTSpark {
     public static CANSparkMax motorDrivetrain1, motorDrivetrain2, motorDrivetrain3, motorDrivetrain4;
     public SpeedControllerGroup motoresDerecha, motoresIzquierda;
     public static DifferentialDrive driveTrain;
+    
 
     private static double movimientoAdelanteX;
     private static double movimientoAdelanteY;
@@ -29,29 +32,29 @@ public class DriveTSpark {
 
     public DriveTSpark(){
 
+      //derecha
       motorDrivetrain1 = new CANSparkMax(1,MotorType.kBrushless);
       motorDrivetrain2 = new CANSparkMax(2,MotorType.kBrushless);
+      
+      //izquierda
       motorDrivetrain3 = new CANSparkMax(3,MotorType.kBrushless);
       motorDrivetrain4 = new CANSparkMax(4,MotorType.kBrushless);
 
-      motorDrivetrain1.restoreFactoryDefaults();
-      motorDrivetrain2.restoreFactoryDefaults();
-      motorDrivetrain3.restoreFactoryDefaults();
-      motorDrivetrain4.restoreFactoryDefaults();
+      //el motor 2 de la derecha sigue al 1
+      motorDrivetrain2.follow(motorDrivetrain1);
 
-      //No es necesario volver a poner el tipo de motor. :)!
+      //el motor 3 de la izquierda sigue al 4
+      motorDrivetrain3.follow(motorDrivetrain4);
 
+      //inversiones
       motorDrivetrain1.setInverted(true);
       motorDrivetrain3.setInverted(true);
-
-      motoresDerecha = new SpeedControllerGroup(motorDrivetrain1, motorDrivetrain2);
-      motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
-
-      driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
-      LeftJoystick = new SlewRateLimiter(1.75);
-
+      
+      //differential drive con esclavos y maestros
+      driveTrain = new DifferentialDrive(motorDrivetrain1, motorDrivetrain4);
+      
       rotate = new Gyro(this);
-      //RightJoystick= new SlewRateLimiter(2.25);
+      
 
     }
 
@@ -81,7 +84,7 @@ public class DriveTSpark {
           rotate.regresarAngulo(Robot.control.readXboxDPad());
         }else rotate.leer();
         
-        driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), movimientoAdelanteX);
+        driveTrain.arcadeDrive(movimientoAdelanteY, movimientoAdelanteX);
     }
 
     public void moverseConXboxOriginal() { // funcion principal del movimiento del chasis
@@ -112,15 +115,9 @@ public class DriveTSpark {
 
   }
     public void movimientoDrivetrainFinal(){
-      double eje;
-      if(Robot.control.readXboxButtons(Constantes.XB_B_Y)){
-        eje = 2;
-      }
-      else{
-        eje = .75;
-      }
-     
-      driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * eje);
+      
+      
+      driveTrain.arcadeDrive(-Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);
 
     }
 

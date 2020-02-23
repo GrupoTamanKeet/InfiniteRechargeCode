@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
+import frc.robot.hardware.Controles;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -43,19 +44,16 @@ public class Elevador{
 
     private void subirRobot(){
         if (Robot.control.readXboxButtons(Constantes.XB_B_X)){
-            Robot.controlPanel.pararTodo();
-            Robot.torreta.pararTodo();
-            Robot.motorAcercar.pararMotor();
-            Robot.intake.desactivarIntake();
-            MotorJalar.setVoltage(12);
-            
-            pararElevador();
-            cerrarPiston();
-            
-            MotorJalar.set(ControlMode.PercentOutput, 0.9); 
+            MotorJalar.set(ControlMode.PercentOutput,1); 
+        }
+        else if(Robot.control.readXboxButtons(Constantes.XB_B_Y)){
+            MotorJalar.set(ControlMode.PercentOutput,-1);
         }
         else{
-            MotorJalar.set(ControlMode.PercentOutput,0);
+
+
+                MotorJalar.set(0);
+
         }
     }
 
