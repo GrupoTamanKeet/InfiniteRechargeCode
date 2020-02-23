@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 import frc.robot.hardware.Gyro;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTSpark {
 
@@ -40,7 +39,7 @@ public class DriveTSpark {
       motorDrivetrain3.restoreFactoryDefaults();
       motorDrivetrain4.restoreFactoryDefaults();
 
-      motorDrivetrain1.setMotorType(CANSparkMaxLowLevel.kBrushless);
+      //No es necesario volver a poner el tipo de motor. :)!
 
       motorDrivetrain1.setInverted(true);
       motorDrivetrain3.setInverted(true);
