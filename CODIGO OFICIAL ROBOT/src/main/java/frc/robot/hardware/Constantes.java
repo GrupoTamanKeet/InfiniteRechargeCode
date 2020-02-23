@@ -64,8 +64,7 @@ public class Constantes {
     public static final int ConexionMotorSusana = 7;
     public static final int ConexionMotorTorreta = 9;
     
-    public static final int ConexionEncoderSusana = 0; //Conexiones
-    public static final int ConexionEncoderAngulo = 0;
+    public static final int ConexionEncoderAngulo = 3;
     public static final int ConexionLuz = 3;
 
     //Colgarse

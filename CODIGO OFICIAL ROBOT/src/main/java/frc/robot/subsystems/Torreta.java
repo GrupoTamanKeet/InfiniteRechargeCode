@@ -36,10 +36,8 @@ public class Torreta  {
 
     //encoder del motor de ventana que dispara
 
-    Counter counterSusana;
     Counter counterAngulo;
 
-    private int posicionMotorSusana;
     private int posicionMotorAngulo;
 
     //comentado porque tenemos encoder
@@ -53,18 +51,14 @@ public class Torreta  {
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
 
-        posicionMotorSusana=0;
         posicionMotorAngulo=0;
 
-        counterSusana = new Counter( new DigitalInput(Constantes.ConexionEncoderSusana));
         counterAngulo = new Counter( new DigitalInput(Constantes.ConexionEncoderAngulo));
 
         //Están en pulgadas
-        double distancePerPulse = (3*Math.PI)/175;
         double distancePerPulse2 = (8*Math.PI)/175;
-        counterSusana.setDistancePerPulse(distancePerPulse);
         counterAngulo.setDistancePerPulse(distancePerPulse2);
-
+        counterAngulo.reset();
 
         MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
         MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
@@ -90,14 +84,9 @@ public class Torreta  {
         if(Speed==0){
             desactivarSusana();
             return;
-        }
-        if(Speed > 0){
-            posicionMotorSusana -= counterSusana.get();    
         }else{
-            posicionMotorSusana += counterSusana.get();
-        }
-        MotorSusana.set(ControlMode.PercentOutput,Speed*2);
-        
+            MotorSusana.set(ControlMode.PercentOutput,Speed*2);
+        }        
     }
 
     private void acomodarSusanaAutimaticamente(){
@@ -105,7 +94,6 @@ public class Torreta  {
 
         xEntry = table.getEntry("torretaX");
         
-        System.out.println("Xpos " + xEntry.getDouble(0.0));
         
         moverse = (float) (xEntry.getDouble(0.0) * sensibilidad);
 
@@ -153,7 +141,7 @@ public class Torreta  {
             posicionMotorAngulo += counterAngulo.get();
         }
         
-        
+        counterAngulo.reset();
         MotorAngulo.set(ControlMode.PercentOutput,Speed);
     }
     
@@ -259,7 +247,7 @@ public class Torreta  {
         acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
         acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
 
-        System.out.println("Distancia: " + counterAngulo.getDistance());
+        System.out.println("Distancia: " + counterAngulo.get());
 
     }
 
@@ -303,7 +291,7 @@ public class Torreta  {
 
         acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
         acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
-
+        
     }
 
 }

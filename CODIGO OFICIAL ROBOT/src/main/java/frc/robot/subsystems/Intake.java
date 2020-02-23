@@ -21,7 +21,6 @@ public class Intake{
           switchIntake1 = new DigitalInput(1);
           switchIntake2 = new DigitalInput(2);
 
-
           MotorIntake.setInverted(true);
     }
 
@@ -50,7 +49,7 @@ public class Intake{
     }
 
     private boolean leerSwitches(){
-        return (((switchIntake1.get()) || (switchIntake2.get())));
+        return ((!(switchIntake1.get()) || !(switchIntake2.get())));
     }
 
     public void pararTodo(){

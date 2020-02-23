@@ -37,9 +37,6 @@ public class AutonomoR{
      motorDerecha2 = localDrivetrain.motorDrivetrain2;
      motorIzquierda1 = localDrivetrain.motorDrivetrain3;
      motorIzquierda2 = localDrivetrain.motorDrivetrain4;
-     
-     drivetrainDerecha = localDrivetrain.motoresDerecha;
-     drivetrainIzquierda = localDrivetrain.motoresIzquierda;
 
      encoderDerecha1 = new CANEncoder(motorDerecha1);
      encoderDerecha2 = new CANEncoder(motorDerecha2);

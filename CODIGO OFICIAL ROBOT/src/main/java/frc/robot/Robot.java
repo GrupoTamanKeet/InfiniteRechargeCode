@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
   public static Elevador elevador;
   public static MotorAcercar motorAcercar;
   public static MoveDisk controlPanel;
+  public static AutonomoJ aJ;
 
   
 
@@ -48,6 +50,8 @@ public class Robot extends TimedRobot {
     torreta = new Torreta();
     motorAcercar = new MotorAcercar();
     controlPanel = new MoveDisk();
+
+    aJ = new AutonomoJ();
 
   }
 
@@ -82,19 +86,41 @@ public class Robot extends TimedRobot {
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
 
+    // encoder.reset();
+    // errorSum = 0;
+    // lastTimestamp = Timer.getFPGATimestamp();
+
   }
 
+  // final double kP = 0.5;
+  // final double kI = 5;
+  // final double kD = 0.01;
+  // final double iLImit = 1;
+
+  // double setPoint=0;
+  // double errorSum = 0;
+  // double lastTimestamp = 0;
+  // double lastError = 0;
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        //si esta diseñado con loop externo aqui
-        break;
-      case kDefaultAuto:
-      default:
-        break; // Técnicamente es inneceseario
-    }
+    // if (control.readJoystickButtons(7)){
+    //   setPoint = 3;
+    // }else if (control.readJoystickButtons(8)){
+    //   setPoint = 4;
+    // }
+    // double sensorPostion = encoder.get()*k;
+    // double error = setPoint- sensorPostion;
+    // double dt = Timer.getFPGATimestamp()-lastTimestamp;
+    // if (Matn.abs(error)<iLimit){
+    //   errorSum += error*dt;
+    // }
+    // double errorRate = (error-lastError) /dt;
+    // double outputSpeed = kP*error + kI*errorSum + kD*errorRate;
+
+    // dTrain.driveTrain(outputSpeed,0);
+
+    // lastTimestamp = Timer.getFPGATimestamp();
+    // lastError = error;
   }
 
   /**
