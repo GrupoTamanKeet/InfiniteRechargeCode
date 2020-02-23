@@ -48,6 +48,10 @@ public class Elevador{
             Robot.motorAcercar.pararMotor();
             Robot.intake.desactivarIntake();
             MotorJalar.setVoltage(12);
+            
+            pararElevador();
+            cerrarPiston();
+            
             MotorJalar.set(ControlMode.PercentOutput, 0.9); 
         }
         else{
