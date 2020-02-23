@@ -44,7 +44,7 @@ public class DriveTSpark {
       motorDrivetrain1.setInverted(true);
       motorDrivetrain3.setInverted(true);
 
-      driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
+      driveTrain = new DifferentialDrive(motorDrivetrain4, motorDrivetrain1);
       LeftJoystick = new SlewRateLimiter(1.75);
 
       rotate = new Gyro(this);
@@ -109,8 +109,22 @@ public class DriveTSpark {
 
   }
     public void movimientoDrivetrainFinal(){
-      driveTrain.arcadeDrive(-Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);
+      double giro;
 
+      if(Robot.control.readXboxAxis(Constantes.XB_LJ_Y) > Math.abs(.1)){
+      
+        driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);
+
+      } else if(Robot.control.readXboxAxis(Constantes.XB_LJ_Y) < Math.abs(.1)){
+
+        driveTrain.arcadeDrive(0, Robot.control.readXboxAxis(Constantes.XB_RJ_X));
+
+      } else{
+
+        driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);
+
+      }
+      
     }
 
     public void moverseParaChio(){

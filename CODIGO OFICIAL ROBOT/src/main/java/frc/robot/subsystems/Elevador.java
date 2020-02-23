@@ -52,10 +52,15 @@ public class Elevador{
             pararElevador();
             cerrarPiston();
             
-            MotorJalar.set(ControlMode.PercentOutput, 0.9); 
+            MotorJalar.set(ControlMode.PercentOutput, 1); 
+        }
+        else if(Robot.control.readXboxButtons(Constantes.XB_B_Y)){
+            MotorJalar.set(ControlMode.PercentOutput,-1);
         }
         else{
+
             MotorJalar.set(ControlMode.PercentOutput,0);
+
         }
     }
 

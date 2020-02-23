@@ -7,12 +7,16 @@ import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class Torreta  {
  
@@ -30,7 +34,16 @@ public class Torreta  {
     private float moverse;
     private float sensibilidad = 0.1f;
 
-    private AnalogGyro gyro;
+    //encoder del motor de ventana que dispara
+
+    Counter counterSusana;
+    Counter counterAngulo;
+
+    private int posicionMotorSusana;
+    private int posicionMotorAngulo;
+
+    //comentado porque tenemos encoder
+    //private AnalogGyro gyro;
     private double anguloDeLaTorreta;
     private double moverTorreta;
     private double sensibilidadDeTorreta = 0.01;
@@ -40,10 +53,23 @@ public class Torreta  {
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
 
+        posicionMotorSusana=0;
+        posicionMotorAngulo=0;
+
+        counterSusana = new Counter( new DigitalInput(Constantes.ConexionEncoderSusana));
+        counterAngulo = new Counter( new DigitalInput(Constantes.ConexionEncoderAngulo));
+
+        //Están en pulgadas
+        double distancePerPulse = (3*Math.PI)/175;
+        double distancePerPulse2 = (8*Math.PI)/175;
+        counterSusana.setDistancePerPulse(distancePerPulse);
+        counterAngulo.setDistancePerPulse(distancePerPulse2);
+
+
         MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
         MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
         MotorSubir = new WPI_TalonSRX(Constantes.ConexionMotorSubir);
-        
+
         MotorDisparar.setInverted(false);
         MotorAngulo.setInverted(true);
         
@@ -55,9 +81,9 @@ public class Torreta  {
         table = inst.getTable("Vision");
         xEntry = table.getEntry("torretaX");
         
-        Luz = new Solenoid(3);
+        Luz = new Solenoid(Constantes.ConexionCompresor, Constantes.ConexionLuz);
 
-        gyro = new AnalogGyro(0);
+        
     }
 
     private void acomodarSusana(double Speed){
@@ -65,7 +91,13 @@ public class Torreta  {
             desactivarSusana();
             return;
         }
+        if(Speed > 0){
+            posicionMotorSusana -= counterSusana.get();    
+        }else{
+            posicionMotorSusana += counterSusana.get();
+        }
         MotorSusana.set(ControlMode.PercentOutput,Speed*2);
+        
     }
 
     private void acomodarSusanaAutimaticamente(){
@@ -81,7 +113,8 @@ public class Torreta  {
     }
 
     private void pidAngulo(int angulo){
-        anguloDeLaTorreta = gyro.getAngle();
+        //comentado porque ahora tenemos un encoder
+        //anguloDeLaTorreta = gyro.getAngle();
         
         moverTorreta = (anguloDeLaTorreta - angulo) / sensibilidadDeTorreta;
 
@@ -101,7 +134,6 @@ public class Torreta  {
         Robot.motorAcercar.moverMotor(0.4);
     }
 
-
     private void reverseAcercar(){
         Robot.motorAcercar.moverMotor(-0.5);
     }
@@ -115,6 +147,13 @@ public class Torreta  {
             desactivarAngulo();
             return;
         }
+        if(Speed > 0){
+            posicionMotorAngulo -= counterAngulo.get();    
+        }else{
+            posicionMotorAngulo += counterAngulo.get();
+        }
+        
+        
         MotorAngulo.set(ControlMode.PercentOutput,Speed);
     }
     
@@ -219,6 +258,8 @@ public class Torreta  {
 
         acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
         acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
+
+        System.out.println("Distancia: " + counterAngulo.getDistance());
 
     }
 

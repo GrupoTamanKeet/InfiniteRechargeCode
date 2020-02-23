@@ -1,5 +1,7 @@
 package frc.robot.hardware;
 
+import edu.wpi.first.wpilibj.Counter.Mode;
+
 public class Constantes {
     // conecciones de controles -----------------------------------------------------------------------------------------------------------
 
@@ -61,6 +63,10 @@ public class Constantes {
     public static final int ConexionMotorAngulo = 8;
     public static final int ConexionMotorSusana = 7;
     public static final int ConexionMotorTorreta = 9;
+    
+    public static final int ConexionEncoderSusana = 0; //Conexiones
+    public static final int ConexionEncoderAngulo = 0;
+    public static final int ConexionLuz = 3;
 
     //Colgarse
     public static final int MotorDeslizadorLineal = 12;
@@ -154,5 +160,6 @@ public static final int LG_B9 = 9; //Intake en el limno
 public static final int LG_B10 = 10;
 public static final int LG_B11 = 11; //NO se puede ocupar
 public static final int LG_B12 = 12; //Destravarse
+
 
 }
