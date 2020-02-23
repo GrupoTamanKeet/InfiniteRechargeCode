@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 import frc.robot.hardware.Gyro;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTSpark {
 
@@ -29,22 +30,29 @@ public class DriveTSpark {
 
     public DriveTSpark(){
 
-        motorDrivetrain1 = new CANSparkMax(1,MotorType.kBrushless);
-        motorDrivetrain2 = new CANSparkMax(2,MotorType.kBrushless);
-        motorDrivetrain3 = new CANSparkMax(3,MotorType.kBrushless);
-        motorDrivetrain4 = new CANSparkMax(4,MotorType.kBrushless);
+      motorDrivetrain1 = new CANSparkMax(1,MotorType.kBrushless);
+      motorDrivetrain2 = new CANSparkMax(2,MotorType.kBrushless);
+      motorDrivetrain3 = new CANSparkMax(3,MotorType.kBrushless);
+      motorDrivetrain4 = new CANSparkMax(4,MotorType.kBrushless);
 
-        motorDrivetrain1.setInverted(true);
-        motorDrivetrain3.setInverted(true);
+      motorDrivetrain1.restoreFactoryDefaults();
+      motorDrivetrain2.restoreFactoryDefaults();
+      motorDrivetrain3.restoreFactoryDefaults();
+      motorDrivetrain4.restoreFactoryDefaults();
 
-        motoresDerecha = new SpeedControllerGroup(motorDrivetrain1, motorDrivetrain2);
-        motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
+      motorDrivetrain1.setMotorType(CANSparkMaxLowLevel.kBrushless);
 
-        driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
-        LeftJoystick = new SlewRateLimiter(1.75);
+      motorDrivetrain1.setInverted(true);
+      motorDrivetrain3.setInverted(true);
 
-        rotate = new Gyro(this);
-        //RightJoystick= new SlewRateLimiter(2.25);
+      motoresDerecha = new SpeedControllerGroup(motorDrivetrain1, motorDrivetrain2);
+      motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
+
+      driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
+      LeftJoystick = new SlewRateLimiter(1.75);
+
+      rotate = new Gyro(this);
+      //RightJoystick= new SlewRateLimiter(2.25);
 
     }
 

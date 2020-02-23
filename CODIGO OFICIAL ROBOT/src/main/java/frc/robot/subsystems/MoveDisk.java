@@ -79,6 +79,7 @@ public class MoveDisk{
         Character [] colores = {'R','G','B','Y'};
         
         
+        
     }
 
     public void funcionar(){

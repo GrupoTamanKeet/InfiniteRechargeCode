@@ -35,36 +35,24 @@ public class Intake{
         MotorIntake.setVoltage(0);
     }
     
+    // @Alex, aquí está, ish.
     private void dejarEnIntake(){
         //Pelota en el limbo
         int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
-        if (miliseconds%3==0){
-            MotorIntake.set(ControlMode.PercentOutput, -0.4);
+        if (miliseconds%10==0){
+            MotorIntake.set(ControlMode.PercentOutput, 0.4);
         }else{
             MotorIntake.set(ControlMode.PercentOutput, 0);
         }
     }
-    
-    /* Ya no es necesario
-    private void activarAcercar() {
-        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
-        if (miliseconds%2==0){
-            Robot.motorAcercar.moverMotor(.4);
-          }else{
-            Robot.motorAcercar.moverMotor(0);
-          }
-    }
-    */
 
-    public boolean leerSwitches(){
-
+    private boolean leerSwitches(){
         return ((!(switchIntake1.get()) || !(switchIntake2.get())));
-
     }
 
     public void meterBolaYContar(){
         if (leerSwitches() && !Constantes.hayBolaEnIntake){
-            Constantes.bolasDentro ++;
+            Constantes.bolasDentro++;
             Constantes.hayBolaEnIntake = true;
             if (Constantes.bolasDentro == 1){
                 Constantes.meterBolaAlFinal = true;
@@ -72,10 +60,7 @@ public class Intake{
         }else if (!leerSwitches()){
             Constantes.hayBolaEnIntake = false;
         }
-
         System.out.println (Constantes.bolasDentro);
-
-
     }
 
     public void funcionar(){
@@ -91,7 +76,6 @@ public class Intake{
             } 
    
     }
-
 
     public void funcionarParaChio(){
         if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
