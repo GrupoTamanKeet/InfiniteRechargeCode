@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SlewRateLimiter;
+import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -33,6 +35,8 @@ public class Torreta  {
     private double moverTorreta;
     private double sensibilidadDeTorreta = 0.01;
 
+    private Solenoid Luz;
+
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
 
@@ -51,6 +55,8 @@ public class Torreta  {
         table = inst.getTable("Vision");
         xEntry = table.getEntry("torretaX");
         
+        Luz = new Solenoid(3);
+
         gyro = new AnalogGyro(0);
     }
 
@@ -63,7 +69,8 @@ public class Torreta  {
     }
 
     private void acomodarSusanaAutimaticamente(){
-        
+        Luz.set(true);
+
         xEntry = table.getEntry("torretaX");
         
         System.out.println("Xpos " + xEntry.getDouble(0.0));
