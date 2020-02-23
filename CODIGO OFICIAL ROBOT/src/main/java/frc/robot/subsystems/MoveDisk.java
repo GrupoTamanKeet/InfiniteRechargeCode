@@ -79,11 +79,7 @@ public class MoveDisk{
         Character [] colores = {'R','G','B','Y'};
         
         
-    }
-
-    public void pararTodo(){
-        cerrarPiston();
-        pararMotor();
+        
     }
 
     public void funcionar(){

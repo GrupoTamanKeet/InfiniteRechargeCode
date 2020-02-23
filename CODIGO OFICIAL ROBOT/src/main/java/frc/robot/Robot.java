@@ -107,7 +107,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //Aqui el codigo donde vamos a poner toda la estructura del robot
-    dTrain.moverseConXbox();
+    dTrain.movimientoDrivetrainFinal();
     intake.funcionar();
     elevador.funcionar();
     torreta.funcionar();
