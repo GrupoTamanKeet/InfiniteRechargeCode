@@ -41,6 +41,7 @@ public class AutonomoJ{
     public double lastError = 0;
 
     double error;
+
     //Un setpoint es nuestra meta
         //Proportional: Aka. error, distance from setpoint. Determine the speed
         //Voltaje should be v= kP-error. kP can't kp>1
@@ -54,13 +55,13 @@ public class AutonomoJ{
 //Motor Output and encoder readings shall have same sign 
   //you can quickly change this in the encoder constructor
     public AutonomoJ(){
-
-        //Qué tipo de enconder tienen los SparkMax
-            //3-phase hall-effect sensors
-
-        //El segundo parámetro es counts_per_rev
-        //Hall-Sensor Encoder Resolution: 42 counts per rev.
-        //Fuente: http://www.revrobotics.com/rev-21-1650/
+        /**
+         * Qué tipo de enconder tienen los SparkMax
+         *  3-phase hall-effect sensors
+         * El segundo parámetro es counts_per_rev
+         * Hall-Sensor Encoder Resolution: 42 counts per rev.
+         *  Fuente: http://www.revrobotics.com/rev-21-1650/
+         */
 
         encoderM1= Robot.dTrain.motorDrivetrain1.getEncoder();
         encoderM2= Robot.dTrain.motorDrivetrain2.getEncoder();
@@ -88,7 +89,6 @@ public class AutonomoJ{
         
         PIDController coche = new PIDController(kP,kI,kD);
 
-        
         xSpeed = calculateSpeed();
         zRotation = 0; //para que vaya derecho
         

@@ -34,18 +34,15 @@ public class DriveTSpark {
       motorDrivetrain3 = new CANSparkMax(3,MotorType.kBrushless);
       motorDrivetrain4 = new CANSparkMax(4,MotorType.kBrushless);
 
-      motorDrivetrain1.restoreFactoryDefaults();
-      motorDrivetrain2.restoreFactoryDefaults();
-      motorDrivetrain3.restoreFactoryDefaults();
-      motorDrivetrain4.restoreFactoryDefaults();
+      //el motor 2 de la derecha sigue al 1
+      motorDrivetrain2.follow(motorDrivetrain1);
+      //el motor 3 de la izquierda sigue al 4
+      motorDrivetrain3.follow(motorDrivetrain4);
 
       //No es necesario volver a poner el tipo de motor. :)!
 
       motorDrivetrain1.setInverted(true);
       motorDrivetrain3.setInverted(true);
-
-      motoresDerecha = new SpeedControllerGroup(motorDrivetrain1, motorDrivetrain2);
-      motoresIzquierda = new SpeedControllerGroup(motorDrivetrain3, motorDrivetrain4);
 
       driveTrain = new DifferentialDrive(motoresIzquierda, motoresDerecha);
       LeftJoystick = new SlewRateLimiter(1.75);
@@ -112,15 +109,7 @@ public class DriveTSpark {
 
   }
     public void movimientoDrivetrainFinal(){
-      double eje;
-      if(Robot.control.readXboxButtons(Constantes.XB_B_Y)){
-        eje = 2;
-      }
-      else{
-        eje = .75;
-      }
-     
-      driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * eje);
+      driveTrain.arcadeDrive(-Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);
 
     }
 
