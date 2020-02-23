@@ -50,6 +50,10 @@ public class Intake{
         return ((!(switchIntake1.get()) || !(switchIntake2.get())));
     }
 
+    public void pararTodo(){
+        desactivarIntake();
+    }
+
     public void meterBolaYContar(){
         if (leerSwitches() && !Constantes.hayBolaEnIntake){
             Constantes.bolasDentro++;

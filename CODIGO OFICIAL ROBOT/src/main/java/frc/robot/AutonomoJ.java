@@ -84,7 +84,7 @@ public class AutonomoJ{
     //Cm will be constantly overwritten
 
     public void moveStraightDistance (int cm, boolean forward){
-        int target = cm;
+        int setpoint = cm;
         
         PIDController coche = new PIDController(kP,kI,kD);
 

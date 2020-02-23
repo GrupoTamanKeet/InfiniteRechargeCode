@@ -43,7 +43,12 @@ public class Elevador{
 
     private void subirRobot(){
         if (Robot.control.readXboxButtons(Constantes.XB_B_X)){
-            MotorJalar.set(ControlMode.PercentOutput,.5); 
+            Robot.controlPanel.pararTodo();
+            Robot.torreta.pararTodo();
+            Robot.motorAcercar.pararMotor();
+            Robot.intake.desactivarIntake();
+            MotorJalar.setVoltage(12);
+            MotorJalar.set(ControlMode.PercentOutput, 0.9); 
         }
         else{
             MotorJalar.set(ControlMode.PercentOutput,0);
