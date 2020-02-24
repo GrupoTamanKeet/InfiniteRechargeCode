@@ -79,12 +79,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    //ENTRA CODIGO RAFA
-
-
-    //TERMINA CODIGO RAFA
-
-
 
     m_autoSelected = m_chooser.getSelected();
   
@@ -93,49 +87,11 @@ public class Robot extends TimedRobot {
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
 
-    // encoder.reset();
-    // errorSum = 0;
-    // lastTimestamp = Timer.getFPGATimestamp();
-
   }
 
-  // final double kP = 0.5;
-  // final double kI = 5;
-  // final double kD = 0.01;
-  // final double iLImit = 1;
-
-  // double setPoint=0;
-  // double errorSum = 0;
-  // double lastTimestamp = 0;
-  // double lastError = 0;
   @Override
   public void autonomousPeriodic() {
 
-    //ENTRA CODIGO DE RAFA
-    
-    //autonomoR.AutonomoRafa();
-
-    //TERMINA CODIGO DE RAFA
-
-
-    // if (control.readJoystickButtons(7)){
-    //   setPoint = 3;
-    // }else if (control.readJoystickButtons(8)){
-    //   setPoint = 4;
-    // }
-    // double sensorPostion = encoder.get()*k;
-    // double error = setPoint- sensorPostion;
-    // double dt = Timer.getFPGATimestamp()-lastTimestamp;
-    // if (Matn.abs(error)<iLimit){
-    //   errorSum += error*dt;
-    // }
-    // double errorRate = (error-lastError) /dt;
-    // double outputSpeed = kP*error + kI*errorSum + kD*errorRate;
-
-    // dTrain.driveTrain(outputSpeed,0);
-
-    // lastTimestamp = Timer.getFPGATimestamp();
-    // lastError = error;
   }
 
   /**
