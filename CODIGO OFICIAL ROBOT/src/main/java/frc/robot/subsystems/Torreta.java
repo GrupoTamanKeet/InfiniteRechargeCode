@@ -209,10 +209,12 @@ public class Torreta  {
             if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
                 activarAcercar();
                 subirPelota();
-            }else if(!Robot.motorAcercar.leerSwitchElevador()){
-                activarAcercarLento();
-                subirPelotaLento();
-            }else{
+            }
+            // else if(!Robot.motorAcercar.leerSwitchElevador()){
+            //     activarAcercarLento();
+            //     subirPelotaLento();
+            // }
+            else{
                 desactivarAcercar();
                 desactivarSubirPelota();
             }
