@@ -120,7 +120,7 @@ public class Torreta  {
     }
 
     private void activarAcercarLento(){
-        Robot.motorAcercar.moverMotor(0.4);
+        Robot.motorAcercar.moverMotor(0.3);
     }
 
     private void reverseAcercar(){
@@ -189,7 +189,7 @@ public class Torreta  {
         desactivarSusana();
     }
 
-    private void secuenciaDisparar(){
+    public void secuenciaDisparar(){
 
         prepararDisparo(); 
         

@@ -33,7 +33,6 @@ public class Robot extends TimedRobot {
   public static Elevador elevador;
   public static MotorAcercar motorAcercar;
   public static MoveDisk controlPanel;
-  public static AutonomoJ aJ;
   public static AutonomoR autonomoR;
 
   
@@ -51,7 +50,8 @@ public class Robot extends TimedRobot {
     torreta = new Torreta();
     motorAcercar = new MotorAcercar();
     controlPanel = new MoveDisk();
-    //autonomoR = new AutonomoR();
+    
+    autonomoR = new AutonomoR();
 
   }
 
@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    autonomoR.AutonomoRafa();
   }
 
 
@@ -81,7 +82,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     m_autoSelected = m_chooser.getSelected();
-  
+    
+    
     // cosas de if selected has esto con nombres de cosas, si esta dentro de un loop
 
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
@@ -91,7 +93,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-
+    autonomoR.AutonomoRafa();
   }
 
   /**

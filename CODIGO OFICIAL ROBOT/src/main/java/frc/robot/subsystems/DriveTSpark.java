@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SlewRateLimiter;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.hardware.Constantes;
@@ -15,7 +14,6 @@ public class DriveTSpark {
 
     //variables públicas
     public static CANSparkMax motorDrivetrain1, motorDrivetrain2, motorDrivetrain3, motorDrivetrain4;
-    public SpeedControllerGroup motoresDerecha, motoresIzquierda;
     public static DifferentialDrive driveTrain;
 
     private static double movimientoAdelanteX;
@@ -79,6 +77,10 @@ public class DriveTSpark {
         }else rotate.leer();
         
         driveTrain.arcadeDrive(LeftJoystick.calculate(movimientoAdelanteY), movimientoAdelanteX);
+    }
+
+    public void girarAAnguloParaNoComplicarCosasLoHiceAqui(int angulo){
+      rotate.regresarAngulo(angulo);
     }
 
     public void moverseConXboxOriginal() { // funcion principal del movimiento del chasis
