@@ -11,7 +11,7 @@ public class AutonomoR{
 
     private DriveTSpark drivetrain;
     private CANEncoder encoderm1,encoderm4;
-    private double posicionEncoderM1, posicionEncoderM4;
+    private double posicionEncoderM1, posicionEncoderM4, posicionInicialEncoderM1, posicionInicialEncoderM4;
     private double kP;
     private double tiempoActual;
  
@@ -20,24 +20,18 @@ public class AutonomoR{
     encoderm1 = new CANEncoder(Robot.dTrain.motorDrivetrain1);
     encoderm4 = new CANEncoder(Robot.dTrain.motorDrivetrain4);
 
+    posicionInicialEncoderM1 = encoderm1.getPosition();
+    posicionInicialEncoderM4 = encoderm4.getPosition();
+
     kP = 4.06;
 
     tiempoActual = Timer.getFPGATimestamp();
-
  }
 
  public void AutonomoRafa(){
 
     posicionEncoderM1 = encoderm1.getPosition();
     posicionEncoderM4 = encoderm4.getPosition();
-
-    while(Robot.control.readJoystickButtons(Constantes.LG_B9) == true){
-        
-        System.out.println("reiniciando encoders");
-        encoderm1.setPosition(0);
-        encoderm4.setPosition(0);
-
-    }
 
     SmartDashboard.putNumber("encoderM1", posicionEncoderM1);
     SmartDashboard.putNumber("encoderM4", posicionEncoderM4);
