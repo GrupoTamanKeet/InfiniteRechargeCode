@@ -49,7 +49,7 @@ public class Intake{
     }
 
     private boolean leerSwitches(){
-        return ((!(switchIntake1.get()) || !(switchIntake2.get())));
+        return (switchIntake1.get()) || (switchIntake2.get());
     }
 
     public void pararTodo(){
@@ -70,16 +70,16 @@ public class Intake{
     }
 
     public void funcionar(){
-            if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
-                activarIntake();
-            }else if (Robot.control.readXboxButtons(Constantes.XB_B_Start)){
-                //intentar dejar en el intake
-                reverseIntake();
-            }else if (Constantes.bolasDentro < 5 && leerSwitches()) {
-                activarIntake();
-            }else{
-                desactivarIntake();
-            } 
+        if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
+            activarIntake();
+        }else if (Robot.control.readXboxButtons(Constantes.XB_B_Start)){
+            //intentar dejar en el intake
+            reverseIntake();
+        }else if (Constantes.bolasDentro < 5 && leerSwitches()) {
+            activarIntake();
+        }else{
+            desactivarIntake();
+        } 
    
     }
 
