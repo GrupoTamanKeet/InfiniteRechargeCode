@@ -94,6 +94,7 @@ public class Torreta  {
 
         xEntry = table.getEntry("torretaX");
         
+        System.out.println(xEntry.toString());
         
         moverse = (float) (xEntry.getDouble(0.0) * sensibilidad);
 
@@ -249,6 +250,12 @@ public class Torreta  {
 
         System.out.println("Distancia: " + counterAngulo.get());
 
+    }
+
+    public void funcionar_B (){
+        if(Robot.control.readJoystickButtons(Constantes.LG_B12)){
+            acomodarSusanaAutimaticamente();
+        }
     }
 
     public boolean pasar1Atras(){
