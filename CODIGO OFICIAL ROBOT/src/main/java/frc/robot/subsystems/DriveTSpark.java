@@ -14,10 +14,8 @@ import frc.robot.hardware.Gyro;
 public class DriveTSpark {
 
     //variables públicas
-    public static CANSparkMax motorDrivetrain1;
-	  public static CANSparkMax motorDrivetrain2;
-	  public static CANSparkMax motorDrivetrain3;
-	  public static CANSparkMax motorDrivetrain4;
+    public static CANSparkMax motorDrivetrain1, motorDrivetrain2, motorDrivetrain3, motorDrivetrain4;
+    public SpeedControllerGroup motoresDerecha, motoresIzquierda;
     public static DifferentialDrive driveTrain;
 
     private static double movimientoAdelanteX;
@@ -111,8 +109,7 @@ public class DriveTSpark {
 
   }
     public void movimientoDrivetrainFinal(){
-      double giro;
-
+      
       if(Robot.control.readXboxAxis(Constantes.XB_LJ_Y) > Math.abs(.1)){
       
         driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);

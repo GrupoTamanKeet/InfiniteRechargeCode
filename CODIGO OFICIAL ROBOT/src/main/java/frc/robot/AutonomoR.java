@@ -1,80 +1,59 @@
  package frc.robot;
- //imports
- import edu.wpi.first.wpilibj.SpeedControllerGroup;
- import edu.wpi.first.wpilibj.controller.PIDController;
-import frc.robot.subsystems.DriveTSpark;
+ import com.revrobotics.CANEncoder;
 
-import com.revrobotics.CANEncoder;
- import com.revrobotics.CANSparkMax;
+//imports
  import edu.wpi.first.wpilibj.Timer;
+import frc.robot.hardware.Constantes;
+import frc.robot.subsystems.DriveTSpark;
+ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutonomoR{
 
- private SpeedControllerGroup drivetrainDerecha;
- private SpeedControllerGroup drivetrainIzquierda;
-
- private PIDController PIDDrivetrainDerecha, PIDDrivetrainIzquierda;
-
- private double inputDerecha, outputDerecha;
- private double inputIzquierda, outputIzquierda;
-
- private CANEncoder encoderDerecha1, encoderDerecha2;
- private CANEncoder encoderIzquierda1, encoderIzquierda2;
-
- private CANSparkMax motorDerecha1, motorDerecha2;
- private CANSparkMax motorIzquierda1, motorIzquierda2;
-
- DriveTSpark localDrivetrain;
-
- private Timer tiempo;
-
-
- public void AutonomoR(){
-
-     localDrivetrain = new DriveTSpark();
-
-     motorDerecha1 = localDrivetrain.motorDrivetrain1;
-     motorDerecha2 = localDrivetrain.motorDrivetrain2;
-     motorIzquierda1 = localDrivetrain.motorDrivetrain3;
-     motorIzquierda2 = localDrivetrain.motorDrivetrain4;
-
-     encoderDerecha1 = new CANEncoder(motorDerecha1);
-     encoderDerecha2 = new CANEncoder(motorDerecha2);
-
-     encoderIzquierda1 = new CANEncoder(motorIzquierda1);
-     encoderIzquierda2 = new CANEncoder(motorIzquierda2);
-
-     tiempo = new Timer();
-     tiempo.start();
-
- }
-
- public void autonomoPeriodico(){
-
-     //inputs o "posicion actual del robot"
-     inputDerecha = (encoderDerecha1.getPosition() + encoderDerecha2.getPosition()) / 2;
-     inputIzquierda = (encoderIzquierda1.getPosition() + encoderIzquierda2.getPosition()) / 2;
-
- }
+    private DriveTSpark drivetrain;
+    private CANEncoder encoderm1,encoderm4;
+    private double posicionEncoderM1, posicionEncoderM4;
+    private double kP;
+    private double tiempoActual;
  
- public void autonomo1(){
+ public AutonomoR(){
 
-     double primerSetpoint = 10;
-     
-     PIDDrivetrainDerecha = new PIDController(.1, .1, .1);
-     PIDDrivetrainIzquierda = new PIDController(.1, .1, .1);
+    encoderm1 = new CANEncoder(Robot.dTrain.motorDrivetrain1);
+    encoderm4 = new CANEncoder(Robot.dTrain.motorDrivetrain4);
 
-     //el pid calcula los valores dependiendo de la posicion de los encoders
-     //hasta un "primerSetpoint"
-     outputDerecha = PIDDrivetrainDerecha.calculate(inputDerecha, primerSetpoint);
-     outputIzquierda = PIDDrivetrainIzquierda.calculate(inputIzquierda, primerSetpoint);
+    kP = 4.06;
 
-     //fijamos los motores a los valores que nos da el PID
-     drivetrainDerecha.set(outputDerecha);
-     drivetrainIzquierda.set(outputIzquierda);
-
+    tiempoActual = Timer.getFPGATimestamp();
 
  }
 
- 
+ public void AutonomoRafa(){
+
+    posicionEncoderM1 = encoderm1.getPosition();
+    posicionEncoderM4 = encoderm4.getPosition();
+
+    while(Robot.control.readJoystickButtons(Constantes.LG_B9) == true){
+        
+        System.out.println("reiniciando encoders");
+        encoderm1.setPosition(0);
+        encoderm4.setPosition(0);
+
+    }
+
+    SmartDashboard.putNumber("encoderM1", posicionEncoderM1);
+    SmartDashboard.putNumber("encoderM4", posicionEncoderM4);
+
+ }
+
+ private void autonomo1(){
+
+    double tiempo1 = 1;
+
+    while(tiempo1 - tiempoActual < 0){
+
+
+
+    }
+
+
+ }
 }

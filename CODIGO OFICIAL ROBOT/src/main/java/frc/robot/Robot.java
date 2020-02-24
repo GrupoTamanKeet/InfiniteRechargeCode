@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.MotorAcercar;
-
+import frc.robot.AutonomoR;
 
 import frc.robot.subsystems.Elevador;
 import frc.robot.subsystems.Intake;
@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   public static MotorAcercar motorAcercar;
   public static MoveDisk controlPanel;
   public static AutonomoJ aJ;
+  public static AutonomoR autonomoR;
 
   
 
@@ -50,8 +51,7 @@ public class Robot extends TimedRobot {
     torreta = new Torreta();
     motorAcercar = new MotorAcercar();
     controlPanel = new MoveDisk();
-
-    aJ = new AutonomoJ();
+    //autonomoR = new AutonomoR();
 
   }
 
@@ -79,6 +79,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    //ENTRA CODIGO RAFA
+
+
+    //TERMINA CODIGO RAFA
+
+
+
     m_autoSelected = m_chooser.getSelected();
   
     // cosas de if selected has esto con nombres de cosas, si esta dentro de un loop
@@ -103,6 +110,14 @@ public class Robot extends TimedRobot {
   // double lastError = 0;
   @Override
   public void autonomousPeriodic() {
+
+    //ENTRA CODIGO DE RAFA
+    
+    //autonomoR.AutonomoRafa();
+
+    //TERMINA CODIGO DE RAFA
+
+
     // if (control.readJoystickButtons(7)){
     //   setPoint = 3;
     // }else if (control.readJoystickButtons(8)){
@@ -138,7 +153,6 @@ public class Robot extends TimedRobot {
     elevador.funcionar();
     torreta.funcionar();
     controlPanel.funcionar();
-    
     intake.meterBolaYContar();
   }
 
