@@ -88,6 +88,19 @@ public class AutonomoR{
 
  }
 
+ private boolean funcionDeLasPelotas(){
+   if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
+      Constantes.hayBolaEnDisparo = true;
+      System.out.println("entro bola");
+   }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
+      Constantes.hayBolaEnDisparo = false;
+      Constantes.bolasDentro --;
+      System.out.println("salio bola");
+   }
+
+   
+ }
+
  public double vueltas (int lecturaEncoder){
     return lecturaEncoder/12.56;
  }
