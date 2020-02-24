@@ -28,26 +28,28 @@ public class AutonomoR{
     tiempoActual = Timer.getFPGATimestamp();
  }
 
+ double PosicionPrueba;
  public void AutonomoRafa(){
 
-    posicionEncoderM1 = encoderm1.getPosition();
-    posicionEncoderM4 = encoderm4.getPosition();
+   posicionEncoderM1 = encoderm1.getPosition();
+   posicionEncoderM4 = encoderm4.getPosition();
 
-    SmartDashboard.putNumber("encoderM1", posicionEncoderM1);
-    SmartDashboard.putNumber("encoderM4", posicionEncoderM4);
+   //420.488586
+   //433.236633 - final
+   //vuelta = 12.45
+   if(posicionInicialEncoderM1<PosicionPrueba){
+
+   }
+
+
+   SmartDashboard.putNumber("encoderM1", posicionEncoderM1);
+   SmartDashboard.putNumber("encoderM4", posicionEncoderM4);
 
  }
 
  private void autonomo1(){
 
     double tiempo1 = 1;
-
-    while(tiempo1 - tiempoActual < 0){
-
-
-
-    }
-
 
  }
 }

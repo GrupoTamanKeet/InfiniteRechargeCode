@@ -21,6 +21,6 @@ public class MotorAcercar {
         MotorAcercar.setVoltage(0);
     }
     public boolean leerSwitchElevador(){
-        return (!Robot.intake.switchSubirPelotas.get());
+        return (Robot.intake.switchSubirPelotas.get());
     }
 }

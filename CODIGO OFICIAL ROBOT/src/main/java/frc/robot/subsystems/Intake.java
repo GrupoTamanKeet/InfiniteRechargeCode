@@ -49,7 +49,7 @@ public class Intake{
     }
 
     private boolean leerSwitches(){
-        return ((!(switchIntake1.get()) || !(switchIntake2.get())));
+        return (((switchIntake1.get()) || (switchIntake2.get())));
     }
 
     public void pararTodo(){
