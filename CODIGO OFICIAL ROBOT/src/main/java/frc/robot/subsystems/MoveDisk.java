@@ -7,10 +7,9 @@ import frc.robot.hardware.Constantes;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 
 
 public class MoveDisk{
@@ -75,15 +74,6 @@ public class MoveDisk{
         }
     }
 
-    public void selectedColor (){
-        Character colorDeseado = DriverStation.getInstance().getGameSpecificMessage().charAt(0);
-        Character currentColor = colorSensor.leerColor().charAt(0);
-        int goToPosition = 0, myPosition = 0;
-        Character [] colores = {'R','G','B','Y'};
-        
-        
-    }
-
     public void pararTodo(){
         cerrarPiston();
         pararMotor();
@@ -110,7 +100,6 @@ public class MoveDisk{
                 pararMotor();
             }
         }
-
 
         if (encendido){
             spin(24, true, 0.2);
