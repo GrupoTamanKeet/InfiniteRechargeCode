@@ -1,7 +1,5 @@
 package frc.robot.hardware;
 
-import edu.wpi.first.wpilibj.Counter.Mode;
-
 public class Constantes {
     // conecciones de controles -----------------------------------------------------------------------------------------------------------
 

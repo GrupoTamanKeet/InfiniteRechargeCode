@@ -5,19 +5,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.hardware.Controles;
 import frc.robot.hardware.MotorAcercar;
-import frc.robot.AutonomoR;
 
-import frc.robot.subsystems.Elevador;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.MoveDisk;
-import frc.robot.subsystems.Torreta;
-import frc.robot.subsystems.DriveTSpark;
+import frc.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
@@ -33,7 +27,7 @@ public class Robot extends TimedRobot {
   public static Elevador elevador;
   public static MotorAcercar motorAcercar;
   public static MoveDisk controlPanel;
-
+  public Autonomo autonomo;
   
 
   @Override
@@ -49,6 +43,7 @@ public class Robot extends TimedRobot {
     torreta = new Torreta();
     motorAcercar = new MotorAcercar();
     controlPanel = new MoveDisk();
+    autonomo = new Autonomo();
 
   }
 
@@ -78,8 +73,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     m_autoSelected = m_chooser.getSelected();
-    
-    
     // cosas de if selected has esto con nombres de cosas, si esta dentro de un loop
 
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
@@ -89,16 +82,16 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-
+    autonomo.autonomoPelotasYControlPanel();
   }
 
-  /**
+  
   //  ______   ______     __         ______     ______     ______  
   // /\__  _\ /\  ___\   /\ \       /\  ___\   /\  __ \   /\  == \ 
   // \/_/\ \/ \ \  __\   \ \ \____  \ \  __\   \ \ \/\ \  \ \  _-/ 
   //    \ \_\  \ \_____\  \ \_____\  \ \_____\  \ \_____\  \ \_\   
   //     \/_/   \/_____/   \/_____/   \/_____/   \/_____/   \/_/   
-   */
+  
   @Override
   public void teleopPeriodic() {
     //Aqui el codigo donde vamos a poner toda la estructura del robot

@@ -8,20 +8,20 @@ import frc.robot.hardware.Constantes;
 import frc.robot.Robot;
 
 public class Intake{
-    static WPI_TalonSRX MotorIntake;
+    private static WPI_TalonSRX MotorIntake;
     
     public static DigitalInput switchIntake1;
     public static DigitalInput switchIntake2;
     public static DigitalInput switchSubirPelotas;
 
     public Intake(){
-          MotorIntake = new WPI_TalonSRX(Constantes.ConexionMotorIntake);
+        MotorIntake = new WPI_TalonSRX(Constantes.ConexionMotorIntake);
 
-          switchSubirPelotas = new DigitalInput(0);
-          switchIntake1 = new DigitalInput(1);
-          switchIntake2 = new DigitalInput(2);
+        switchSubirPelotas = new DigitalInput(0);
+        switchIntake1 = new DigitalInput(1);
+        switchIntake2 = new DigitalInput(2);
 
-          MotorIntake.setInverted(true);
+        MotorIntake.setInverted(true);
     }
 
     public void activarIntake(){
@@ -38,6 +38,7 @@ public class Intake{
     }
     
     // @Alex, aquí está, ish.
+    
     private void dejarEnIntake(){
         //Pelota en el limbo
         int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
@@ -69,6 +70,17 @@ public class Intake{
         System.out.println (Constantes.bolasDentro);
     }
 
+    public void funcionarParaChio(){
+        if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
+            activarIntake();
+        }else if (Robot.control.readXboxButtons(Constantes.XB_B_LB)){
+            //intentar dejar en el intake
+            reverseIntake();
+        }else{
+            desactivarIntake();
+        }  
+    }
+
     public void funcionar(){
         if (Robot.control.readXboxButtons(6)) { // hice cambios aqui jorge, todo bien 
             activarIntake();
@@ -81,16 +93,5 @@ public class Intake{
             desactivarIntake();
         } 
    
-    }
-
-    public void funcionarParaChio(){
-        if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
-            activarIntake();
-        }else if (Robot.control.readXboxButtons(Constantes.XB_B_LB)){
-            //intentar dejar en el intake
-            reverseIntake();
-        }else{
-            desactivarIntake();
-        }  
     }
 }
