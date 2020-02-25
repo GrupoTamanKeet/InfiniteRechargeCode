@@ -22,14 +22,16 @@ public class MoveDisk{
     private int cambioDeColor;
     private int ForwardChannel = 0;
     private int BackWardChannel = 7;
-    private boolean encendido;
+    private boolean encendido, girable;
     private String ultimoColorLeido;
+
 
     public MoveDisk (){
         pistonDisco = new DoubleSolenoid(Constantes.ConexionCompresor,ForwardChannel, BackWardChannel);
         motorDisco = new WPI_TalonSRX(Constantes.ConexionMotorDisco);
         colorSensor = new ColorSensor();
         encendido = false;
+        girable = false;
         motorDisco.setNeutralMode(NeutralMode.Brake);
     }
 
@@ -42,11 +44,12 @@ public class MoveDisk{
 
     private void abrirPiston() {
         pistonDisco.set(Value.kForward);
+        girable = true;
     }
 
     private void cerrarPiston(){
         pistonDisco.set(Value.kReverse);
-
+        girable = false;
     }
 
     private void pararMotor(){
@@ -98,8 +101,19 @@ public class MoveDisk{
             encendido = true;
             ultimoColorLeido = colorSensor.leerColor();
         }
+        if(girable){
+            if(Robot.control.readJoystickDPad() == 90){
+                moverDisco(0.2);
+            }else if(Robot.control.readJoystickDPad() == 270){
+                reverseMoverDisco(0.4);
+            }else{
+                pararMotor();
+            }
+        }
+
+
         if (encendido){
-            spin(24, true, 0.4);
+            spin(24, true, 0.2);
         }else{
             pararMotor();
         }
