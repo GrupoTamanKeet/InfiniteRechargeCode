@@ -35,7 +35,7 @@ public class AutonomoR{
 
  double PosicionPrueba;
  public void AutonomoRafa(){
-
+/*
    posicionEncoderM1 = encoderm1.getPosition();
    posicionEncoderM4 = encoderm4.getPosition();
 
@@ -73,7 +73,7 @@ public class AutonomoR{
          if (Torreta.)
          Robot.torreta.secuenciaDisparar();
          break;
-   }
+   }*/
    
 
 
@@ -87,7 +87,7 @@ public class AutonomoR{
     double tiempo1 = 1;
 
  }
-
+/*
  private boolean funcionDeLasPelotas(){
    if (Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
       Constantes.hayBolaEnDisparo = true;
@@ -102,7 +102,7 @@ public class AutonomoR{
       return true;
    }
  }
-
+*/
  public double vueltas (int lecturaEncoder){
     return lecturaEncoder/12.56;
  }

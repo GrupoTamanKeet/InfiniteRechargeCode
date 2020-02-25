@@ -33,7 +33,6 @@ public class Robot extends TimedRobot {
   public static Elevador elevador;
   public static MotorAcercar motorAcercar;
   public static MoveDisk controlPanel;
-  public static AutonomoR autonomoR;
 
   
 
@@ -50,8 +49,6 @@ public class Robot extends TimedRobot {
     torreta = new Torreta();
     motorAcercar = new MotorAcercar();
     controlPanel = new MoveDisk();
-    
-    autonomoR = new AutonomoR();
 
   }
 
@@ -65,7 +62,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    autonomoR.AutonomoRafa();
   }
 
 
@@ -93,7 +89,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    autonomoR.AutonomoRafa();
+
   }
 
   /**
@@ -111,7 +107,7 @@ public class Robot extends TimedRobot {
     elevador.funcionar();
     torreta.funcionar();
     controlPanel.funcionar();
-    intake.meterBolaYContar();
+    //intake.meterBolaYContar();
   }
 
   /**

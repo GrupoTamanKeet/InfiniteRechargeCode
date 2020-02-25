@@ -70,13 +70,13 @@ public class Intake{
     }
 
     public void funcionar(){
-        if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
+        if (Robot.control.readXboxButtons(6)) { // hice cambios aqui jorge, todo bien 
             activarIntake();
-        }else if (Robot.control.readXboxButtons(Constantes.XB_B_Start)){
+        }else if (Robot.control.readXboxButtons(5)){ // podemos regresar a constantes. cosas
             //intentar dejar en el intake
             reverseIntake();
-        }else if (Constantes.bolasDentro < 5 && leerSwitches()) {
-            activarIntake();
+        //}else if (Constantes.bolasDentro < 5 && leerSwitches()) {
+           // activarIntake();
         }else{
             desactivarIntake();
         } 

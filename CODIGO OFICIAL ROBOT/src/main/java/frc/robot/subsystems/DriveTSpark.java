@@ -112,17 +112,17 @@ public class DriveTSpark {
   }
     public void movimientoDrivetrainFinal(){
       
-      if(Robot.control.readXboxAxis(Constantes.XB_LJ_Y) > Math.abs(.1)){
+      if(Math.abs(Robot.control.readXboxAxis(Constantes.XB_LJ_Y)) > .1){
       
-        driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);
+        driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(2) * .8);
 
       } else if(Robot.control.readXboxAxis(Constantes.XB_LJ_Y) < Math.abs(.1)){
 
-        driveTrain.arcadeDrive(0, Robot.control.readXboxAxis(Constantes.XB_RJ_X));
+        driveTrain.arcadeDrive(0, -Robot.control.readXboxAxis(2) * .5);
 
       } else{
 
-        driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(Constantes.XB_RJ_X) * .8);
+        driveTrain.arcadeDrive(Robot.control.readXboxAxis(Constantes.XB_LJ_Y), Robot.control.readXboxAxis(Constantes.XB_LJ_Y) * Robot.control.readXboxAxis(2) * .8);
 
       }
       
