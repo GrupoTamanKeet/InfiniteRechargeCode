@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Robot;
@@ -21,7 +21,7 @@ public class Torreta  {
     private static WPI_TalonSRX MotorDisparar;
     private static WPI_TalonSRX MotorSusana;
     private static WPI_TalonSRX MotorAngulo;
-    private static WPI_TalonSRX MotorSubir;
+    private static WPI_VictorSPX MotorSubir;
 
     private static SlewRateLimiter smooth;
 
@@ -60,7 +60,7 @@ public class Torreta  {
 
         MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
         MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
-        MotorSubir = new WPI_TalonSRX(Constantes.ConexionMotorSubir);
+        MotorSubir = new WPI_VictorSPX(Constantes.ConexionMotorSubir);
 
         MotorDisparar.setInverted(false);
         MotorAngulo.setInverted(true);
@@ -122,7 +122,7 @@ public class Torreta  {
     //    \ \____/\ \__/.\_\/\____/\ \_\ \____\ \____/\/\____/
     //     \/___/  \/__/\/_/\/___/  \/_/\/____/\/___/  \/___/ 
     private void acomodarSusana(double Speed){
-        if(Speed==0){
+        if((Speed<=0.2) &&(Speed>-0.2)){
             desactivarSusana();
             return;
         }else{
@@ -185,6 +185,7 @@ public class Torreta  {
     }
 
     private void desactivarSubirPelota(){
+        
         MotorSubir.stopMotor();
         MotorSubir.setVoltage(0);
     }
