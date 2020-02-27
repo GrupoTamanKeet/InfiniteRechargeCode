@@ -29,13 +29,20 @@ public class Autonomo{
 
    smooth = new SlewRateLimiter(0.75);
 
-   PosicionPrueba = posicionInicialEncoderM1 + 12.45;
+   PosicionPrueba = posicionInicialEncoderM1 + calcularTicks(16);
    SmartDashboard.putNumber("PosicionPureba", PosicionPrueba);
    paso = 1;
    tiempoInicial = Timer.getFPGATimestamp();
 
  }
 
+ double Gr = .5; //Gear ratio
+
+ public double calcularTicks (double inches){
+   double result = 12.45*inches;
+   result = result/(4*Math.PI*Gr);
+   return result;
+ }
  
  public void autonomoPelotasYControlPanel(){
 
@@ -45,6 +52,9 @@ public class Autonomo{
    //420.488586
    //433.236633 - final
    //vuelta = 12.45
+   
+   double dist = (posicionEncoderM1/12.45) * Gr * 4 * Math.PI;
+
    
    //Pensar en Alex <3
    switch(paso){
