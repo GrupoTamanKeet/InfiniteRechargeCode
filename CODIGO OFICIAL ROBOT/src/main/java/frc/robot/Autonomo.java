@@ -40,7 +40,7 @@ public class Autonomo{
 
  public double calcularTicks (double inches){
    double result = 12.45*inches;
-   result = result/(4*Math.PI*Gr);
+   result = result/(4*Math.PI);
    return result;
  }
  
