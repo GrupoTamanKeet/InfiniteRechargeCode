@@ -2,25 +2,14 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.hardware.Constantes;
 import frc.robot.Robot;
 
 public class Intake{
     private static WPI_TalonSRX MotorIntake;
-    
-    public static DigitalInput switchIntake1;
-    public static DigitalInput switchIntake2;
-    public static DigitalInput switchSubirPelotas;
 
     public Intake(){
         MotorIntake = new WPI_TalonSRX(Constantes.ConexionMotorIntake);
-
-        switchSubirPelotas = new DigitalInput(0);
-        switchIntake1 = new DigitalInput(1);
-        switchIntake2 = new DigitalInput(2);
-
         MotorIntake.setInverted(true);
     }
 
@@ -36,49 +25,9 @@ public class Intake{
         MotorIntake.stopMotor();
         MotorIntake.setVoltage(0);
     }
-    
-    // @Alex, aquí está, ish.
-    
-    private void dejarEnIntake(){
-        //Pelota en el limbo
-        int miliseconds = (int) (System.currentTimeMillis()%10000)/100;
-        if (miliseconds%10==0){
-            MotorIntake.set(ControlMode.PercentOutput, 0.4);
-        }else{
-            MotorIntake.set(ControlMode.PercentOutput, 0);
-        }
-    }
-
-    private boolean leerSwitches(){
-        return (switchIntake1.get()) || (switchIntake2.get());
-    }
 
     public void pararTodo(){
         desactivarIntake();
-    }
-
-    public void meterBolaYContar(){
-        if (leerSwitches() && !Constantes.hayBolaEnIntake){
-            Constantes.bolasDentro++;
-            Constantes.hayBolaEnIntake = true;
-            if (Constantes.bolasDentro == 1){
-                Constantes.meterBolaAlFinal = true;
-            }
-        }else if (!leerSwitches()){
-            Constantes.hayBolaEnIntake = false;
-        }
-        System.out.println (Constantes.bolasDentro);
-    }
-
-    public void funcionarParaChio(){
-        if (Robot.control.readXboxButtons(Constantes.XB_B_RB)) {
-            activarIntake();
-        }else if (Robot.control.readXboxButtons(Constantes.XB_B_LB)){
-            //intentar dejar en el intake
-            reverseIntake();
-        }else{
-            desactivarIntake();
-        }  
     }
 
     public void funcionar(){
@@ -87,11 +36,8 @@ public class Intake{
         }else if (Robot.control.readXboxButtons(5)){ // podemos regresar a constantes. cosas
             //intentar dejar en el intake
             reverseIntake();
-        //}else if (Constantes.bolasDentro < 5 && leerSwitches()) {
-           // activarIntake();
         }else{
             desactivarIntake();
-        } 
-   
+        }
     }
 }

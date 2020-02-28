@@ -2,7 +2,6 @@ package frc.robot.hardware;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import frc.robot.subsystems.Intake;
 
 public class MotorAcercar {
     private static WPI_TalonSRX MotorAcercar;
@@ -19,10 +18,5 @@ public class MotorAcercar {
     public void pararMotor() {
         MotorAcercar.stopMotor();
         MotorAcercar.setVoltage(0);
-    }
-
-    public boolean leerSwitchElevador() {
-        System.out.println(Intake.switchSubirPelotas.get());
-        return (Intake.switchSubirPelotas.get());
     }
 }

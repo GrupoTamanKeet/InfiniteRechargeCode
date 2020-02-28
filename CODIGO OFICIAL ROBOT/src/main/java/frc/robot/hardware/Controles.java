@@ -9,15 +9,14 @@ public class Controles {
 
     // _____ _ _ _ _ _
     // |_ _| (_) (_) | (_) (_)
-    // | | _ __ _ ___ _ __ _| |_ ______ _ ___ _ ___ _ __
-    // | | | '_ \| |/ __| |/ _` | | |_ / _` |/ __| |/ _ \| '_ \
+    //  | | _ __ _ ___ _ __ _| |_ ______ _ ___ _ ___ _ __
+    //  | | | '_ \| |/ __| |/ _` | | |_ / _` |/ __| |/ _ \| '_ \
     // _| |_| | | | | (__| | (_| | | |/ / (_| | (__| | (_) | | | |
     // |_____|_| |_|_|\___|_|\__,_|_|_/___\__,_|\___|_|\___/|_| |_|
 
     public Controles() {
         ControlXbox = new Joystick(Constantes.puertoXbox);
-        ControlPiloto = new Joystick(Constantes.puertoJoystick);
-        
+        ControlPiloto = new Joystick(Constantes.puertoJoystick); 
     }
 
     // -----------------------------------------------------

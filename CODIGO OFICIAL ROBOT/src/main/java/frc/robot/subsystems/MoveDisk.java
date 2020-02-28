@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import frc.robot.Robot;
 import frc.robot.hardware.ColorSensor;
 import frc.robot.hardware.Constantes;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -16,7 +15,7 @@ public class MoveDisk{
 
     public static DoubleSolenoid pistonDisco;
     public static WPI_TalonSRX motorDisco;
-    private ColorSensor colorSensor;
+    private static ColorSensor colorSensor;
     
     private int cambioDeColor;
     private int ForwardChannel = 0;
@@ -86,26 +85,27 @@ public class MoveDisk{
         if (Robot.control.readJoystickButtons(Constantes.LG_B5)){
             cerrarPiston();
         }
-        if (Robot.control.readJoystickButtons(Constantes.LG_B3)){
-            cambioDeColor = 0;   
-            encendido = true;
-            ultimoColorLeido = colorSensor.leerColor();
-        }
         if(girable){
+            if (Robot.control.readJoystickButtons(Constantes.LG_B3)){
+                cambioDeColor = 0;   
+                encendido = true;
+                ultimoColorLeido = colorSensor.leerColor();
+            }
             if(Robot.control.readJoystickDPad() == 90){
                 moverDisco(0.2);
             }else if(Robot.control.readJoystickDPad() == 270){
-                reverseMoverDisco(0.4);
+                reverseMoverDisco(0.2);
+            }else{
+                pararMotor();
+            }
+
+            if (encendido){
+                spin(24, true, 0.2);
             }else{
                 pararMotor();
             }
         }
-
-        if (encendido){
-            spin(24, true, 0.2);
-        }else{
-            pararMotor();
-        }
+        
         colorSensor.leerColor();
     }
 }

@@ -13,8 +13,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.Counter;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Torreta  {
  
@@ -32,12 +30,6 @@ public class Torreta  {
     private float moverse;
     private float sensibilidad = 0.1f;
 
-    //encoder del motor de ventana que dispara
-
-    Counter counterAngulo;
-
-    private int posicionMotorAngulo;
-
     //comentado porque tenemos encoder
     //private AnalogGyro gyro;
     private double anguloDeLaTorreta;
@@ -49,19 +41,14 @@ public class Torreta  {
     public Torreta(){
         MotorDisparar = new WPI_TalonSRX(Constantes.ConexionMotorTorreta);
 
-        posicionMotorAngulo=0;
-
-        counterAngulo = new Counter( new DigitalInput(Constantes.ConexionEncoderAngulo));
-
         //Están en pulgadas
-        double distancePerPulse2 = (8*Math.PI)/175;
-        counterAngulo.setDistancePerPulse(distancePerPulse2);
-        counterAngulo.reset();
+        //distancePerPulse2 = (8*Math.PI)/175;
 
         MotorSusana = new WPI_TalonSRX(Constantes.ConexionMotorSusana);
         MotorAngulo = new WPI_TalonSRX(Constantes.ConexionMotorAngulo);
         MotorSubir = new WPI_VictorSPX(Constantes.ConexionMotorSubir);
 
+        MotorSubir.setInverted(true);
         MotorDisparar.setInverted(false);
         MotorAngulo.setInverted(true);
         
@@ -75,8 +62,6 @@ public class Torreta  {
         
         Luz = new Solenoid(Constantes.ConexionCompresor, Constantes.ConexionLuz);   
     }
-
-    
 
     private void acomodarSusanaAutimaticamente(){
         Luz.set(true);
@@ -99,19 +84,7 @@ public class Torreta  {
     
     public void secuenciaDisparar(){
         prepararDisparo(); 
-        activarAcercar();
         subirPelota();
-        // if (miliseconds%3==0){
-        //     activarAcercar();
-        //     desactivarSubirPelota();
-        // }else{
-        //     desactivarAcercar();
-        //     subirPelota();
-        // }
-    }
-    
-    public boolean pasar1Atras(){
-        return (false); // en un futuro servira para poder succionar una pelota 
     }
 
     //  ____                                                  
@@ -122,7 +95,7 @@ public class Torreta  {
     //    \ \____/\ \__/.\_\/\____/\ \_\ \____\ \____/\/\____/
     //     \/___/  \/__/\/_/\/___/  \/_/\/____/\/___/  \/___/ 
     private void acomodarSusana(double Speed){
-        if((Speed<=0.2) &&(Speed>-0.2)){
+        if((Speed<=0.3) && (Speed>-0.3)){
             desactivarSusana();
             return;
         }else{
@@ -135,12 +108,8 @@ public class Torreta  {
         MotorSusana.setVoltage(0);
     }
 
-    private void activarAcercar(){
-        Robot.motorAcercar.moverMotor(0.5);
-    }
-
-    private void activarAcercarLento(){
-        Robot.motorAcercar.moverMotor(0.3);
+    public void activarAcercar(){
+        Robot.motorAcercar.moverMotor(0.6);
     }
 
     private void reverseAcercar(){
@@ -152,17 +121,10 @@ public class Torreta  {
     }
 
     private void acomodarAngulo(double Speed){
-        if(Speed==0){
+        if((Speed<=0.2) && (Speed>=-0.2)){
             desactivarAngulo();
             return;
         }
-        if(Speed > 0){
-            posicionMotorAngulo -= counterAngulo.get();    
-        }else{
-            posicionMotorAngulo += counterAngulo.get();
-        }
-        System.out.println(posicionMotorAngulo);
-        counterAngulo.reset();
         MotorAngulo.set(ControlMode.PercentOutput,Speed);
     }
     
@@ -172,20 +134,14 @@ public class Torreta  {
         //BreakMode ya está
     }
 
-    private void subirPelota(){
-        MotorSubir.set(ControlMode.PercentOutput, 0.5);
+    public void subirPelota(){
+        MotorSubir.set(ControlMode.PercentOutput, 0.7);
     }
-
-    private void subirPelotaLento(){
-        MotorSubir.set(ControlMode.PercentOutput, 0.4);
-    }
-
     private void reverseSubirPelota(){
         MotorSubir.set(ControlMode.PercentOutput, -0.5);
     }
 
     private void desactivarSubirPelota(){
-        
         MotorSubir.stopMotor();
         MotorSubir.setVoltage(0);
     }
@@ -223,38 +179,16 @@ public void funcionar(){
         secuenciaDisparar();
         if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
             activarAcercar();
-            subirPelota();
-        }
-        // else if(!Robot.motorAcercar.leerSwitchElevador()){
-        //     activarAcercarLento();
-        //     subirPelotaLento();
-        // }
-        else{
+        }else{
             desactivarAcercar();
             desactivarSubirPelota();
         }
-    }else if (Robot.control.readJoystickButtons(Constantes.LG_B5)){
+    }else if (Robot.control.readJoystickButtons(Constantes.LG_B11)){
         reverseSubirPelota();
-    }else if (Robot.control.readJoystickButtons(Constantes.LG_B6)){
         reverseAcercar();
-    }else if (Constantes.meterBolaAlFinal && !Robot.motorAcercar.leerSwitchElevador()) {
-        activarAcercarLento();
-        subirPelotaLento();
-    }else if (Robot.motorAcercar.leerSwitchElevador() && Constantes.meterBolaAlFinal ){
-        Constantes.meterBolaAlFinal = false;
     }else{
         pararTodo();
     }   
-
-    //contador de pelotas (por si)
-    if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
-        Constantes.hayBolaEnDisparo = true;
-        System.out.println("entro bola");
-    }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
-        Constantes.hayBolaEnDisparo = false;
-        Constantes.bolasDentro --;
-        System.out.println("salio bola");
-    }
 
     //Shake it
     if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
@@ -265,55 +199,7 @@ public void funcionar(){
     acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
     acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
 
-    System.out.println("Distancia: " + counterAngulo.get());
-
 }
-
-public void funcionar_B (){
-    if(Robot.control.readJoystickButtons(Constantes.LG_B12)){
-        acomodarSusanaAutimaticamente();
-    }
-}                                                                    
-   
-
-    public void funcionarParaGulle(){
-        //Shoot
-        if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
-            secuenciaDisparar();
-            if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
-                activarAcercar();
-                subirPelota();
-            }
-        }else if (Robot.control.readJoystickDPad() == 180){
-            reverseSubirPelota();
-            reverseAcercar();
-        }//else if (Robot.control.readXboxButtons(Constantes.XB_B_RB) && Robot.motorAcercar.leerSwitchElevador()) {
-        //    Robot.motorAcercar.moverMotor(0.3);
-        // }
-        else{
-            pararTodo();
-        }   
-
-        //contador de pelotas (por si)
-        if (Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
-            Constantes.hayBolaEnDisparo = true;
-            System.out.println("entro bola");
-        }else if (!Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
-            Constantes.hayBolaEnDisparo = false;
-            Constantes.bolasDentro --;
-            System.out.println("salio bola");
-        }
-
-        //Shake it
-        if (Robot.control.readJoystickButtons(Constantes.LG_B12)){
-            pararTodo();
-            Robot.dTrain.destravarse();
-        }
-
-        acomodarSusana(Robot.control.readJoystickAxis(Constantes.LG_ZJ));
-        acomodarAngulo(Robot.control.readJoystickAxis(Constantes.LG_YJ));
-        
-    }
 
 }
   
