@@ -1,7 +1,6 @@
 package frc.robot;
 
 import com.revrobotics.CANEncoder;
-
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.hardware.Constantes;
@@ -29,19 +28,21 @@ public class Autonomo{
 
    smooth = new SlewRateLimiter(0.75);
 
-   PosicionPrueba = posicionInicialEncoderM1 + calcularTicks(16);
+   PosicionPrueba = posicionInicialEncoderM1 - calcularTicks(2);
    SmartDashboard.putNumber("PosicionPureba", PosicionPrueba);
    paso = 1;
-   tiempoInicial = Timer.getFPGATimestamp();
+   
 
  }
 
- double Gr = .5; //Gear ratio
-
- public double calcularTicks (double inches){
+ private double calcularTicks (double inches){
    double result = 12.45*inches;
    result = result/(4*Math.PI);
    return result;
+ }
+
+ public void reiniciarTiempo(){
+   tiempoInicial = Timer.getFPGATimestamp();
  }
  
  public void autonomoPelotasYControlPanel(){
@@ -53,9 +54,8 @@ public class Autonomo{
    //433.236633 - final
    //vuelta = 12.45
    
-   double dist = (posicionEncoderM1/12.45) * Gr * 4 * Math.PI;
+   //Formula de dist = (posicionEncoderM1/12.45) * Gr * 4 * Math.PI;
 
-   
    //Pensar en Alex <3
    switch(paso){
       case 1:
@@ -70,31 +70,42 @@ public class Autonomo{
       case 4:
          disparar();
          break;
+      default:
+         
+         break;
    }
 
    SmartDashboard.putNumber("encoderM1", posicionEncoderM1);
    SmartDashboard.putNumber("encoderM4", posicionEncoderM4);
+   System.out.println(paso);
  }
 
-//Dispara en el autónomo
+//Dispara en el autónomo y funciona
  private void disparar(){
    
    double now = Timer.getFPGATimestamp();
-   if(now-tiempoInicial> 3){
+
+   if(now-tiempoInicial < 2){
       Robot.torreta.secuenciaDisparar();
-   }else if(now-tiempoInicial> 5){
+   }else if(now-tiempoInicial < 6){
+      Robot.torreta.activarAcercar();
+      Robot.torreta.secuenciaDisparar();
+   }else if(now-tiempoInicial< 8){
       Robot.dTrain.destravarse();
       Robot.torreta.pararTodo();
-   }else if(now-tiempoInicial> 7){
+   }else if(now-tiempoInicial < 9){
+      Robot.torreta.secuenciaDisparar();
+   }else if(now-tiempoInicial< 12){
+      Robot.torreta.activarAcercar();
       Robot.torreta.secuenciaDisparar();
    }else{
       Robot.torreta.pararTodo();
+      paso++;
    }
-
  }
  private void avanzar(){
    if(posicionEncoderM1 > PosicionPrueba){
-      DriveTSpark.driveTrain.arcadeDrive(smooth.calculate(0.3), 0);
+      DriveTSpark.driveTrain.arcadeDrive(smooth.calculate(-0.5), 0);
       System.out.print("Paso: " + paso);
    }
    else{
@@ -105,8 +116,8 @@ public class Autonomo{
  }
 
  private void retroceder() {
-   if( PosicionPrueba > posicionEncoderM1){
-      DriveTSpark.driveTrain.arcadeDrive(smooth.calculate(-0.3), 0);
+   if( PosicionPrueba < posicionEncoderM1){
+      DriveTSpark.driveTrain.arcadeDrive(smooth.calculate(0.5), 0);
       Robot.intake.activarIntake();
       System.out.print("Paso: " + paso);
    }
@@ -118,30 +129,13 @@ public class Autonomo{
       paso++;
    }
  }
-
- //--------------------------------------------- BY ALEX:
- private boolean funcionDeLasPelotas(){
-   if (Robot.motorAcercar.leerSwitchElevador() && Constantes.hayBolaEnDisparo){
-      Constantes.hayBolaEnDisparo = true;
-      System.out.println("entro bola");
-   }else if (!Robot.motorAcercar.leerSwitchElevador() && !Constantes.hayBolaEnDisparo){
-      Constantes.hayBolaEnDisparo = false;
-      Constantes.bolasDentro --;
-      System.out.println("salio bola");
-   }
-   if (Constantes.hayBolaEnDisparo){
-      return true;
-   }else{
-      return false;
-   }
- }
-
+ 
  public double vueltas (int lecturaEncoder){
-    return lecturaEncoder/12.56;
- }
- public double pulgadas (int vueltas){
-    return vueltas*6*Math.PI;
- }
+   return lecturaEncoder/12.56;
+}
+public double pulgadas (int vueltas){
+   return vueltas*6*Math.PI;
+}
 
  public void mueveteAPos(int deseado){
    posicionEncoderM1 = encoderm1.getPosition();
@@ -165,5 +159,5 @@ public class Autonomo{
       }
    }
    DriveTSpark.driveTrain.arcadeDrive(0.0, 0);
- }
+   }
 }
