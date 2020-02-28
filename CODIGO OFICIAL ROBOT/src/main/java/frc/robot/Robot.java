@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
   public Autonomo autonomo;
   
 
-  @Override
+  @Override// :)
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
