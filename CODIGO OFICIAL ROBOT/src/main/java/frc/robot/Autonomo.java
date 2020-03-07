@@ -3,7 +3,6 @@ package frc.robot;
 import com.revrobotics.CANEncoder;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Timer;
-import frc.robot.hardware.Constantes;
 import frc.robot.subsystems.DriveTSpark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -87,15 +86,15 @@ public class Autonomo{
 
    if(now-tiempoInicial < 2){
       Robot.torreta.secuenciaDisparar();
-   }else if(now-tiempoInicial < 6){
+   }else if(now-tiempoInicial < 6 && now-tiempoInicial > 2){
       Robot.torreta.activarAcercar();
       Robot.torreta.secuenciaDisparar();
-   }else if(now-tiempoInicial< 8){
+   }else if(now-tiempoInicial< 8 && now-tiempoInicial > 6){
       Robot.dTrain.destravarse();
       Robot.torreta.pararTodo();
-   }else if(now-tiempoInicial < 9){
+   }else if(now-tiempoInicial < 9 && now-tiempoInicial > 8){
       Robot.torreta.secuenciaDisparar();
-   }else if(now-tiempoInicial< 12){
+   }else if(now-tiempoInicial< 12 && now-tiempoInicial > 9){
       Robot.torreta.activarAcercar();
       Robot.torreta.secuenciaDisparar();
    }else{
@@ -105,7 +104,7 @@ public class Autonomo{
  }
  private void avanzar(){
    if(posicionEncoderM1 > PosicionPrueba){
-      DriveTSpark.driveTrain.arcadeDrive(smooth.calculate(-0.5), 0);
+      DriveTSpark.driveTrain.arcadeDrive(smooth.calculate(+0.4), 0);
       System.out.print("Paso: " + paso);
    }
    else{

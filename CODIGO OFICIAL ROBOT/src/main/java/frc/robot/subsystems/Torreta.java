@@ -83,8 +83,9 @@ public class Torreta  {
     }
     
     public void secuenciaDisparar(){
-        prepararDisparo(); 
         subirPelota();
+        prepararDisparo(); 
+        
     }
 
     //  ____                                                  
@@ -109,7 +110,7 @@ public class Torreta  {
     }
 
     public void activarAcercar(){
-        Robot.motorAcercar.moverMotor(0.6);
+        Robot.motorAcercar.moverMotor(0.9);
     }
 
     private void reverseAcercar(){
@@ -174,21 +175,26 @@ public class Torreta  {
 //       \/_/   \/___/  \/_/\/_/\/____/ \/_/\/___/  \/_/\/_/\/__/\/_/ \/_/ 
                                                                         
 public void funcionar(){
+    
+    if(Robot.control.readJoystickButtons(Constantes.LG_B10)){
+        activarAcercar();
+    }else{
+        desactivarAcercar();
+    }
+    
     //Shoot
     if(Robot.control.readJoystickButtons(Constantes.LG_B2)){
-        secuenciaDisparar();
-        if(Robot.control.readJoystickButtons(Constantes.LG_B1)){
-            activarAcercar();
-        }else{
-            desactivarAcercar();
-            desactivarSubirPelota();
-        }
+        subirPelota();  
     }else if (Robot.control.readJoystickButtons(Constantes.LG_B11)){
         reverseSubirPelota();
-        reverseAcercar();
     }else{
-        pararTodo();
-    }   
+        desactivarSubirPelota();
+    } 
+    if (Robot.control.readJoystickAxis(Constantes.LG_Slider) == -1){
+        prepararDisparo();
+    }else{
+        desactivarDisparo();
+    } 
 
     //Shake it
     if (Robot.control.readJoystickButtons(Constantes.LG_B12)){

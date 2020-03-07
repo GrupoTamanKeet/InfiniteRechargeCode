@@ -16,6 +16,8 @@ public class Elevador{
     private int BackwardChannel = 1;
 
     Boolean funcional;
+    Boolean pistonAbajo;
+    int waaaaa;
     
     public Elevador(){
         //No es necesario declarar la compresora
@@ -24,15 +26,18 @@ public class Elevador{
         MotorJalar = new WPI_TalonSRX(Constantes.MotorColgar);
         
         funcional = false;
-
+        pistonAbajo = false;
+        waaaaa = 0;
         MotorDeslizadorLineal.setNeutralMode(NeutralMode.Brake);
     }
     
     private void subirElevador(){
+        waaaaa++;
         MotorDeslizadorLineal.set(ControlMode.PercentOutput,.5); 
     }
     
     private void bajarElevador(){
+        waaaaa--;
         MotorDeslizadorLineal.set(ControlMode.PercentOutput,-0.2); 
     }
     
@@ -60,42 +65,33 @@ public class Elevador{
         
         if(Robot.control.readJoystickButtons(Constantes.LG_B7)){
             abrirPiston();
-            funcional = true;
         }
         
         if(Robot.control.readJoystickButtons(Constantes.LG_B9)){
             cerrarPiston();
-            funcional = false;
         }
-     
-        if (funcional){
-            if(Robot.control.readJoystickButtons(Constantes.LG_B8)){
-                pararCasiTodo();
-                subirElevador();
-            }else if(Robot.control.readJoystickButtons(Constantes.LG_B10)){
-                pararCasiTodo();
-                bajarElevador();
-            }else{
-                pararElevador();
-            }
+        if(Robot.control.readJoystickButtons(Constantes.LG_B8)){
+            pararCasiTodo();
+            subirElevador();
+        }else if(Robot.control.readJoystickButtons(Constantes.LG_B10)){
+            pararCasiTodo();
+            bajarElevador();
+        }else{
+            pararElevador();
         }
-        if (!funcional){
-            if (Robot.control.readXboxButtons(Constantes.XB_B_X)){
-                MotorJalar.setVoltage(12);
-                pararCasiTodo();
-                pararElevador();
-                
-                MotorJalar.set(ControlMode.PercentOutput, 1); 
-            }
-            else if(Robot.control.readXboxButtons(Constantes.XB_B_Y)){
-                MotorJalar.set(ControlMode.PercentOutput,-1);
-            }
-            else{
-                MotorJalar.set(ControlMode.PercentOutput,0);
-            }
+    
+        if (Robot.control.readXboxButtons(Constantes.XB_B_X)){
+            MotorJalar.setVoltage(12);
+            pararCasiTodo();
+            pararElevador();
+            
+            MotorJalar.set(ControlMode.PercentOutput, 1); 
         }
-        
-
+        else if(Robot.control.readXboxButtons(Constantes.XB_B_Y)){
+            MotorJalar.set(ControlMode.PercentOutput,-1);
+        }
+        else{
+            MotorJalar.set(ControlMode.PercentOutput,0);
+        }
     }
-
 }
