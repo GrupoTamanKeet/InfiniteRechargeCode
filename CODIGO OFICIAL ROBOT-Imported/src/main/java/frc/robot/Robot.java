@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
 import frc.robot.hardware.Controles;
 
 import frc.robot.subsystems.*;
@@ -21,9 +20,12 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public static Controles control;
-  public static DriveTSpark dTrain;
+  public static DriveTalon dTrain;
   public static Intake intake;
-  
+  public static Turret turret;
+  public static Cameraselect cameras;
+  public static Hopper hopper;
+  public static PnuematicArm Pne;
 
   @Override// :)
   public void robotInit() {
@@ -31,11 +33,16 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     
-    dTrain = new DriveTSpark();
-
+    dTrain = new DriveTalon();
+  Pne = new PnuematicArm();
     control = new Controles();
     intake = new Intake();
-    
+    turret = new Turret();
+   cameras = new Cameraselect();
+   hopper = new Hopper();
+
+   cameras.CameraSetup();
+   Pne.PSet();
   }
 
   /**
@@ -84,8 +91,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //Aqui el codigo donde vamos a poner toda la estructura del robot
-// dTrain.movimientoDrivetrainFinal();
     intake.IntakeTest();
+    turret.turret();
+    dTrain.DriveTrainTank();
+    hopper.HopperTest();
+    Pne.Control();
+
+  
 
   }
 
